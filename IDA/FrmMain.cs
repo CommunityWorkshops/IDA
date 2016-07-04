@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IDA.Forms.Dialog;
 using IDA.Forms.Dockable;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -19,12 +20,15 @@ namespace IDA
         private bool _saveLayout = true;
         private DeserializeDockContent _deserializeDockContent;
 
+        private readonly FrmSplash _frmSplash = new FrmSplash();
         private FrmLog _frmLog = new FrmLog();
         private FrmCodeEditor _frmCodeEditor = new FrmCodeEditor();
+        
 
         public FrmMain()
         {
             InitializeComponent();
+            _frmSplash.ShowDialog();
             _frmLog.LogWindowClosing += _frmLog_LogWindowClosing;
             _frmLog.LogWindowOpening += _frmLog_LogWindowOpening;
             _deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
