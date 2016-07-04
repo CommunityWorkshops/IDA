@@ -59,6 +59,7 @@
             // 
             // flpPlatform
             // 
+            this.flpPlatform.AutoScroll = true;
             this.flpPlatform.Dock = System.Windows.Forms.DockStyle.Top;
             this.flpPlatform.Location = new System.Drawing.Point(0, 28);
             this.flpPlatform.Name = "flpPlatform";
@@ -77,6 +78,7 @@
             // 
             // flpVersion
             // 
+            this.flpVersion.AutoScroll = true;
             this.flpVersion.Dock = System.Windows.Forms.DockStyle.Top;
             this.flpVersion.Location = new System.Drawing.Point(0, 192);
             this.flpVersion.Name = "flpVersion";
