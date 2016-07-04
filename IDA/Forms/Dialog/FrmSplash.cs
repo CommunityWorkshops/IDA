@@ -17,6 +17,7 @@ namespace IDA.Forms.Dialog
         {
             InitializeComponent();
             lblVersion.Text = GetVersion();
+
         }
 
         private string GetVersion()

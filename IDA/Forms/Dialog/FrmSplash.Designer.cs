@@ -87,7 +87,7 @@
             // timerClose
             // 
             this.timerClose.Enabled = true;
-            this.timerClose.Interval = 3000;
+            this.timerClose.Interval = 5000;
             this.timerClose.Tick += new System.EventHandler(this.timerClose_Tick);
             // 
             // FrmSplash
@@ -101,7 +101,9 @@
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmSplash";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmSplash";
+            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
