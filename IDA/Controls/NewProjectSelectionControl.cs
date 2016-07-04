@@ -15,17 +15,19 @@ namespace IDA.Controls
 
         public delegate void ThisIsSelectedHandler();
         public event ThisIsSelectedHandler ThisIsSelected;
-
-
-        public Image PlatformOrVersionImage { get; set; }
-
+        
         private Color bgColour; 
         public NewProjectSelectionControl()
         {
             InitializeComponent();
             bgColour = lblName.BackColor;
-            pbSelectionImage.Image = PlatformOrVersionImage;
         }
+
+        public void SetImage(string path)
+        {
+            pbSelectionImage.Image = Image.FromFile(path);
+        }
+
 
         private void NewProjectSelectionControl_MouseEnter(object sender, EventArgs e)
         {
@@ -98,6 +100,11 @@ namespace IDA.Controls
         protected virtual void OnThisIsSelected()
         {
             ThisIsSelected?.Invoke();
+        }
+
+        public void SetTitle(string name)
+        {
+            lblName.Text = name.Normalize();
         }
     }
 }
