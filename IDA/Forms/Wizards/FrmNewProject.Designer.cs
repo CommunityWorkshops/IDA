@@ -30,17 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmNewProject));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpPlatform = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpVersion = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.lblSelectedProjectType = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.tbProjectName = new System.Windows.Forms.TextBox();
+            this.cbThisIsALibrary = new System.Windows.Forms.CheckBox();
+            this.cbThisIsOpenSource = new System.Windows.Forms.CheckBox();
             this.btnCreate = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
@@ -57,13 +57,13 @@
             this.panel1.Size = new System.Drawing.Size(825, 28);
             this.panel1.TabIndex = 0;
             // 
-            // flowLayoutPanel1
+            // flpPlatform
             // 
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 28);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(825, 136);
-            this.flowLayoutPanel1.TabIndex = 1;
+            this.flpPlatform.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flpPlatform.Location = new System.Drawing.Point(0, 28);
+            this.flpPlatform.Name = "flpPlatform";
+            this.flpPlatform.Size = new System.Drawing.Size(825, 136);
+            this.flpPlatform.TabIndex = 0;
             // 
             // panel2
             // 
@@ -75,13 +75,13 @@
             this.panel2.Size = new System.Drawing.Size(825, 28);
             this.panel2.TabIndex = 1;
             // 
-            // flowLayoutPanel2
+            // flpVersion
             // 
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 192);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(825, 136);
-            this.flowLayoutPanel2.TabIndex = 2;
+            this.flpVersion.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flpVersion.Location = new System.Drawing.Point(0, 192);
+            this.flpVersion.Name = "flpVersion";
+            this.flpVersion.Size = new System.Drawing.Size(825, 136);
+            this.flpVersion.TabIndex = 1;
             // 
             // label1
             // 
@@ -138,37 +138,37 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "Project Name";
             // 
-            // textBox1
+            // tbProjectName
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbProjectName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(125, 359);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(688, 26);
-            this.textBox1.TabIndex = 6;
+            this.tbProjectName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbProjectName.Location = new System.Drawing.Point(125, 359);
+            this.tbProjectName.Name = "tbProjectName";
+            this.tbProjectName.Size = new System.Drawing.Size(688, 26);
+            this.tbProjectName.TabIndex = 2;
             // 
-            // checkBox1
+            // cbThisIsALibrary
             // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(19, 403);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(99, 17);
-            this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "This is a Library";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cbThisIsALibrary.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cbThisIsALibrary.AutoSize = true;
+            this.cbThisIsALibrary.Location = new System.Drawing.Point(19, 403);
+            this.cbThisIsALibrary.Name = "cbThisIsALibrary";
+            this.cbThisIsALibrary.Size = new System.Drawing.Size(99, 17);
+            this.cbThisIsALibrary.TabIndex = 3;
+            this.cbThisIsALibrary.Text = "This is a Library";
+            this.cbThisIsALibrary.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // cbThisIsOpenSource
             // 
-            this.checkBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(19, 426);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(122, 17);
-            this.checkBox2.TabIndex = 8;
-            this.checkBox2.Text = "This is Open Source";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.cbThisIsOpenSource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cbThisIsOpenSource.AutoSize = true;
+            this.cbThisIsOpenSource.Location = new System.Drawing.Point(19, 426);
+            this.cbThisIsOpenSource.Name = "cbThisIsOpenSource";
+            this.cbThisIsOpenSource.Size = new System.Drawing.Size(122, 17);
+            this.cbThisIsOpenSource.TabIndex = 4;
+            this.cbThisIsOpenSource.Text = "This is Open Source";
+            this.cbThisIsOpenSource.UseVisualStyleBackColor = true;
             // 
             // btnCreate
             // 
@@ -176,7 +176,7 @@
             this.btnCreate.Location = new System.Drawing.Point(738, 426);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(75, 23);
-            this.btnCreate.TabIndex = 9;
+            this.btnCreate.TabIndex = 5;
             this.btnCreate.Text = "Create";
             this.btnCreate.UseVisualStyleBackColor = true;
             // 
@@ -186,9 +186,10 @@
             this.btnCancel.Location = new System.Drawing.Point(657, 426);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 10;
+            this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // FrmNewProject
             // 
@@ -197,19 +198,20 @@
             this.ClientSize = new System.Drawing.Size(825, 461);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnCreate);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.cbThisIsOpenSource);
+            this.Controls.Add(this.cbThisIsALibrary);
+            this.Controls.Add(this.tbProjectName);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblSelectedProjectType);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.flowLayoutPanel2);
+            this.Controls.Add(this.flpVersion);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.flpPlatform);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmNewProject";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "New Project";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -224,16 +226,16 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flpPlatform;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.FlowLayoutPanel flpVersion;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblSelectedProjectType;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.TextBox tbProjectName;
+        private System.Windows.Forms.CheckBox cbThisIsALibrary;
+        private System.Windows.Forms.CheckBox cbThisIsOpenSource;
         private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.Button btnCancel;
     }
