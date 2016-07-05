@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IDA.Models;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace IDA.Forms.Dialog
@@ -35,12 +36,15 @@ namespace IDA.Forms.Dialog
                 sw.WriteLine(tbName.Text);
                 sw.WriteLine(tbEmail.Text);
 
+                UserModel.UserName = tbName.Text;
+                UserModel.UserEmail = tbEmail.Text;
+
                 sw?.Close();
                 fs?.Close();
             }
             catch (Exception)
             {
-
+                //TODO: Pass Error on to Log
                 throw;
             }
             finally
