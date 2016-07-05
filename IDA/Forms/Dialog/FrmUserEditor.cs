@@ -30,6 +30,8 @@ namespace IDA.Forms.Dialog
 
             try
             {
+                if (!Directory.Exists("Settings")) Directory.CreateDirectory("Settings");
+
                 fs = new FileStream(Path.Combine("Settings", "User.dat"), FileMode.Create, FileAccess.Write, FileShare.None);
                 sw = new StreamWriter(fs);
 
@@ -53,7 +55,7 @@ namespace IDA.Forms.Dialog
                 fs?.Close();
             }
            
-
+            Close();
 
         }
     }
