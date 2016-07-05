@@ -8,8 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IDA.Controllers.IO;
 using IDA.Forms.Dialog;
 using IDA.Forms.Dockable;
+using IDA.Forms.Wizards;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace IDA
@@ -18,7 +20,7 @@ namespace IDA
     {
         private readonly string _configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.config");
         private bool _saveLayout = true;
-        private DeserializeDockContent _deserializeDockContent;
+        private readonly DeserializeDockContent _deserializeDockContent;
 
         private readonly FrmSplash _frmSplash = new FrmSplash();
         private FrmLog _frmLog = new FrmLog();
@@ -32,6 +34,7 @@ namespace IDA
             _frmLog.LogWindowClosing += _frmLog_LogWindowClosing;
             _frmLog.LogWindowOpening += _frmLog_LogWindowOpening;
             _deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+            UserSettingsIo.LoadUser();
         }
 
         private void _frmLog_LogWindowOpening()
@@ -122,5 +125,44 @@ namespace IDA
                 }
             }
         }
+
+        #region New Project
+        private void newToolStripButton_Click(object sender, EventArgs e)
+        {
+            NewProject();
+        }
+
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewProject();
+        }
+
+        private void NewProject()
+        {
+            FrmNewProject newProject = new FrmNewProject();
+            newProject.ShowDialog();
+        }
+        #endregion
+
+        #region Licence Editor
+        private void licenseEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmLicenceEditor newLicenceEditor = new FrmLicenceEditor();
+            newLicenceEditor.ShowDialog();
+        }
+        #endregion
+
+        #region User Editor
+        private void userEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmUserEditor userEditor = new FrmUserEditor();
+            userEditor.ShowDialog();
+        }
+        #endregion
+
+
     }
+
+   
 }

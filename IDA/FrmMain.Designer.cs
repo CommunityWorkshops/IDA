@@ -80,6 +80,8 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.vS2013BlueTheme1 = new WeifenLuo.WinFormsUI.Docking.VS2013BlueTheme();
+            this.licenseEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.userEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -164,6 +166,7 @@
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "New Project";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
@@ -375,7 +378,9 @@
             // 
             this.defaultWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.logToolStripMenuItem,
-            this.codeEditorToolStripMenuItem});
+            this.codeEditorToolStripMenuItem,
+            this.licenseEditorToolStripMenuItem,
+            this.userEditorToolStripMenuItem});
             this.defaultWindowsToolStripMenuItem.Name = "defaultWindowsToolStripMenuItem";
             this.defaultWindowsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.defaultWindowsToolStripMenuItem.Text = "Default Windows";
@@ -433,6 +438,7 @@
             this.newToolStripButton.Name = "newToolStripButton";
             this.newToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.newToolStripButton.Text = "New Project";
+            this.newToolStripButton.Click += new System.EventHandler(this.newToolStripButton_Click);
             // 
             // openToolStripButton
             // 
@@ -506,6 +512,20 @@
             this.helpToolStripButton.Name = "helpToolStripButton";
             this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.helpToolStripButton.Text = "He&lp";
+            // 
+            // licenseEditorToolStripMenuItem
+            // 
+            this.licenseEditorToolStripMenuItem.Name = "licenseEditorToolStripMenuItem";
+            this.licenseEditorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.licenseEditorToolStripMenuItem.Text = "Licence Editor";
+            this.licenseEditorToolStripMenuItem.Click += new System.EventHandler(this.licenseEditorToolStripMenuItem_Click);
+            // 
+            // userEditorToolStripMenuItem
+            // 
+            this.userEditorToolStripMenuItem.Name = "userEditorToolStripMenuItem";
+            this.userEditorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.userEditorToolStripMenuItem.Text = "User Editor";
+            this.userEditorToolStripMenuItem.Click += new System.EventHandler(this.userEditorToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
@@ -587,6 +607,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripMenuItem resetAllViewsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem codeEditorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem licenseEditorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem userEditorToolStripMenuItem;
     }
 }
 
