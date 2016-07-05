@@ -63,7 +63,7 @@
             this.flpPlatform.Dock = System.Windows.Forms.DockStyle.Top;
             this.flpPlatform.Location = new System.Drawing.Point(0, 28);
             this.flpPlatform.Name = "flpPlatform";
-            this.flpPlatform.Size = new System.Drawing.Size(825, 136);
+            this.flpPlatform.Size = new System.Drawing.Size(825, 158);
             this.flpPlatform.TabIndex = 0;
             // 
             // panel2
@@ -71,7 +71,7 @@
             this.panel2.BackColor = System.Drawing.Color.LightBlue;
             this.panel2.Controls.Add(this.label3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 164);
+            this.panel2.Location = new System.Drawing.Point(0, 186);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(825, 28);
             this.panel2.TabIndex = 1;
@@ -80,16 +80,16 @@
             // 
             this.flpVersion.AutoScroll = true;
             this.flpVersion.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flpVersion.Location = new System.Drawing.Point(0, 192);
+            this.flpVersion.Location = new System.Drawing.Point(0, 214);
             this.flpVersion.Name = "flpVersion";
-            this.flpVersion.Size = new System.Drawing.Size(825, 136);
+            this.flpVersion.Size = new System.Drawing.Size(825, 157);
             this.flpVersion.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 331);
+            this.label1.Location = new System.Drawing.Point(12, 385);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(115, 13);
             this.label1.TabIndex = 3;
@@ -99,7 +99,7 @@
             // 
             this.lblSelectedProjectType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSelectedProjectType.AutoSize = true;
-            this.lblSelectedProjectType.Location = new System.Drawing.Point(133, 331);
+            this.lblSelectedProjectType.Location = new System.Drawing.Point(133, 385);
             this.lblSelectedProjectType.Name = "lblSelectedProjectType";
             this.lblSelectedProjectType.Size = new System.Drawing.Size(16, 13);
             this.lblSelectedProjectType.TabIndex = 4;
@@ -134,7 +134,7 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(15, 362);
+            this.label4.Location = new System.Drawing.Point(15, 416);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(104, 20);
             this.label4.TabIndex = 5;
@@ -145,7 +145,7 @@
             this.tbProjectName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbProjectName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbProjectName.Location = new System.Drawing.Point(125, 359);
+            this.tbProjectName.Location = new System.Drawing.Point(125, 413);
             this.tbProjectName.Name = "tbProjectName";
             this.tbProjectName.Size = new System.Drawing.Size(688, 26);
             this.tbProjectName.TabIndex = 2;
@@ -154,7 +154,7 @@
             // 
             this.cbThisIsALibrary.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbThisIsALibrary.AutoSize = true;
-            this.cbThisIsALibrary.Location = new System.Drawing.Point(19, 403);
+            this.cbThisIsALibrary.Location = new System.Drawing.Point(19, 457);
             this.cbThisIsALibrary.Name = "cbThisIsALibrary";
             this.cbThisIsALibrary.Size = new System.Drawing.Size(99, 17);
             this.cbThisIsALibrary.TabIndex = 3;
@@ -165,7 +165,7 @@
             // 
             this.cbThisIsOpenSource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbThisIsOpenSource.AutoSize = true;
-            this.cbThisIsOpenSource.Location = new System.Drawing.Point(19, 426);
+            this.cbThisIsOpenSource.Location = new System.Drawing.Point(19, 480);
             this.cbThisIsOpenSource.Name = "cbThisIsOpenSource";
             this.cbThisIsOpenSource.Size = new System.Drawing.Size(122, 17);
             this.cbThisIsOpenSource.TabIndex = 4;
@@ -175,7 +175,7 @@
             // btnCreate
             // 
             this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreate.Location = new System.Drawing.Point(738, 426);
+            this.btnCreate.Location = new System.Drawing.Point(738, 480);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(75, 23);
             this.btnCreate.TabIndex = 5;
@@ -185,7 +185,7 @@
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(657, 426);
+            this.btnCancel.Location = new System.Drawing.Point(657, 480);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;
@@ -197,7 +197,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(825, 461);
+            this.ClientSize = new System.Drawing.Size(825, 515);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.cbThisIsOpenSource);

@@ -13,14 +13,14 @@ namespace IDA.Controls
     public partial class NewProjectSelectionControl : UserControl
     {
 
-        public delegate void ThisIsSelectedHandler();
+        public delegate void ThisIsSelectedHandler(string name);
         public event ThisIsSelectedHandler ThisIsSelected;
         
-        private Color bgColour; 
+        private readonly Color _bgColour; 
         public NewProjectSelectionControl()
         {
             InitializeComponent();
-            bgColour = lblName.BackColor;
+            _bgColour = lblName.BackColor;
         }
 
         public void SetImage(string path)
@@ -84,27 +84,30 @@ namespace IDA.Controls
             BorderStyle = System.Windows.Forms.BorderStyle.None;
         }
 
-       
-        private void mClick()
+       private void mClick()
         {
             lblName.BackColor = Color.BurlyWood;
+            Selected();
         }
 
-        private bool _IsSelected = false;
-        public void Selected(bool isSelected)
-        {
-            if (!isSelected) lblName.BackColor = bgColour;
-            OnThisIsSelected();
+        public void Selected()
+        {            
+            OnThisIsSelected(Name);
         }
 
-        protected virtual void OnThisIsSelected()
+        public void SetSelected(bool isSelected)
         {
-            ThisIsSelected?.Invoke();
+            lblName.BackColor = !isSelected ? _bgColour : Color.BurlyWood;
         }
 
         public void SetTitle(string name)
         {
             lblName.Text = name.Normalize();
+        }
+
+        protected virtual void OnThisIsSelected(string name)
+        {
+            ThisIsSelected?.Invoke(name);
         }
     }
 }
