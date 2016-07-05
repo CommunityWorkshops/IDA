@@ -30,8 +30,7 @@ namespace IDA.Controllers.IO
             }
             catch (Exception)
             {
-
-                throw;
+                //TODO: Send Details of the error to Log
             }
             finally
             {
