@@ -18,7 +18,10 @@ namespace IDA.Forms.Wizards
 
         private string _platformType = string.Empty;
         private string _versionType = string.Empty;
-        
+
+        public delegate void CreateNewProjectHandler(string name);
+        public event CreateNewProjectHandler CreateNewProject;
+
         public FrmNewProject()
         {
             InitializeComponent();
@@ -171,12 +174,20 @@ namespace IDA.Forms.Wizards
             }
 
         }
-
-       
-
+        
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            OnCreateNewProject(tbProjectName.Text);
+        }
+
+        protected virtual void OnCreateNewProject(string name)
+        {
+            CreateNewProject?.Invoke(name);
         }
     }
 }
