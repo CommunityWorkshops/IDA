@@ -28,13 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSplash));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblVersion = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.timerClose = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,12 +82,6 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "2016";
             // 
-            // timerClose
-            // 
-            this.timerClose.Enabled = true;
-            this.timerClose.Interval = 5000;
-            this.timerClose.Tick += new System.EventHandler(this.timerClose_Tick);
-            // 
             // FrmSplash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -116,6 +108,5 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblVersion;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Timer timerClose;
     }
 }

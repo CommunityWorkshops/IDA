@@ -23,11 +23,6 @@ namespace IDA.Forms.Dialog
         private string GetVersion()
         {
             return "Version: " + typeof (FrmMain).Assembly.GetName().Version.ToString();
-        }
-
-        private void timerClose_Tick(object sender, EventArgs e)
-        {
-            Close();
-        }
+        }       
     }
 }
