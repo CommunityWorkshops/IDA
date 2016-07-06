@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using IDA.Controls;
+using IDA.Models;
 
 namespace IDA.Forms.Wizards
 {
@@ -182,7 +183,9 @@ namespace IDA.Forms.Wizards
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
+            CurrentProjectModel.Name = tbProjectName.Text;
             OnCreateNewProject(tbProjectName.Text);
+            Close();
         }
 
         protected virtual void OnCreateNewProject(string name)
