@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IDA.Controllers.Hardware;
 
 namespace IDA.Forms.Dialog
 {
@@ -16,20 +17,34 @@ namespace IDA.Forms.Dialog
         public FrmComPortSelector()
         {
             InitializeComponent();
-            string[] ports = SerialPort.GetPortNames();
-            
+            List<Usb.UsbDeviceInfo> ports = Usb.GetUsbDevices().ToList();
 
-            if (ports.Length == 0)
+
+            if (ports.Count == 0)
             {
                 MessageBox.Show("No ports are used. Is your device connected?");
                 Close();
             }
 
 
-            foreach (string port in ports)
+            foreach (Usb.UsbDeviceInfo port in ports)
             {
-                lbComPorts.Items.Add(port);
+
+                DataGridViewRow row = (DataGridViewRow)dgvComPorts.Rows[0].Clone();
+                row.Cells[0].Value = port.DeviceId;
+                row.Cells[1].Value = port.Description;
+                dgvComPorts.Rows.Add(row);                   
             }
+        }
+
+        private void btnUse_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
