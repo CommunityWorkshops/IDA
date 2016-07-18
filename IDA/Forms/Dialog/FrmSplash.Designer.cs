@@ -33,6 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblVersion = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.lblAction = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,11 +83,23 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "2016";
             // 
+            // lblAction
+            // 
+            this.lblAction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAction.BackColor = System.Drawing.Color.Transparent;
+            this.lblAction.Location = new System.Drawing.Point(12, 324);
+            this.lblAction.Name = "lblAction";
+            this.lblAction.Size = new System.Drawing.Size(641, 13);
+            this.lblAction.TabIndex = 4;
+            this.lblAction.Text = "\r\n";
+            this.lblAction.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // FrmSplash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(665, 346);
+            this.Controls.Add(this.lblAction);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.label1);
@@ -108,5 +121,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblVersion;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblAction;
     }
 }

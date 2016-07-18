@@ -20,6 +20,12 @@ namespace IDA.Forms.Dialog
 
         }
 
+
+        public void SetAction(string Action)
+        {
+            lblAction.Text = Action;
+        }
+
         private string GetVersion()
         {
             return "Version: " + typeof (FrmMain).Assembly.GetName().Version.ToString();
