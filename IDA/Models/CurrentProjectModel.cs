@@ -18,6 +18,6 @@ namespace IDA.Models
         public static int MinorVersion { get; set; }
         public static int MajorBuild { get; set; }
         public static int MinorBuild { get; set; }
-
+        public static string ComPort { get; internal set; }
     }
 }
