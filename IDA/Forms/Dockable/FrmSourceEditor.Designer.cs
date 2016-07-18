@@ -72,9 +72,12 @@
             // 
             // editor
             // 
+            this.editor.AutoCIgnoreCase = true;
+            this.editor.AutomaticFold = ((ScintillaNET.AutomaticFold)((ScintillaNET.AutomaticFold.Show | ScintillaNET.AutomaticFold.Click)));
             this.editor.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.editor.CaretStyle = ScintillaNET.CaretStyle.Block;
             this.editor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.editor.EdgeColor = System.Drawing.Color.Black;
             this.editor.IdleStyling = ScintillaNET.IdleStyling.All;
             this.editor.IndentationGuides = ScintillaNET.IndentView.Real;
             this.editor.Lexer = ScintillaNET.Lexer.Cpp;
