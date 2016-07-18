@@ -45,5 +45,20 @@ namespace IDA.Controllers.Hardware
 
         }
 
+        // If Only One Device exists then it must be the one we are using.
+        // Can be changed later.
+        public static string GetUsbDevice()
+        {
+            List<UsbDeviceInfo> devices = new List<UsbDeviceInfo>();
+
+            var searcher = new ManagementObjectSearcher(@"Select * From Win32_SerialPort");
+            foreach (var device in searcher.Get())
+            {
+                var res = device.GetPropertyValue("Name");
+                if (res.ToString().Contains("Arduino") || res.ToString().Contains("Genuino"))
+                    return (string) device.GetPropertyValue("DeviceId");
+            }
+            return string.Empty;
+        }
     }
 }
