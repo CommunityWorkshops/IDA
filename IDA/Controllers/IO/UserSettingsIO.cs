@@ -24,7 +24,6 @@ namespace IDA.Controllers.IO
                 UserModel.UserName = sr.ReadLine();
                 UserModel.UserEmail = sr.ReadLine();
 
-
                 sr?.Close();
                 fs?.Close();
             }

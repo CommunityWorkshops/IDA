@@ -184,6 +184,10 @@ namespace IDA.Forms.Wizards
         private void btnCreate_Click(object sender, EventArgs e)
         {
             CurrentProjectModel.Name = tbProjectName.Text;
+            CurrentProjectModel.IsLibrary = cbThisIsALibrary.Checked;
+            CurrentProjectModel.IsOpenSource = cbThisIsOpenSource.Checked;
+            CurrentProjectModel.Platform = _platformType;
+            CurrentProjectModel.Version = _versionType;
             OnCreateNewProject(tbProjectName.Text);
             Close();
         }

@@ -30,14 +30,9 @@ namespace IDA.Forms.Dockable
             editor.Styles[Style.Default].Size = 10;
             editor.Styles[Style.Default].BackColor = Color.MidnightBlue;
             editor.StyleClearAll();
-
-
             
-
-            int w = editor.Lines.Count.ToString().Length;
-         //   editor.Margins[0].Width = (editor.Styles[Style.Default].Size * w) + (editor.Styles[Style.Default].Size / 2);
-
             editor.Lexer = Lexer.Cpp;
+            
             // Configure the CPP (C#) lexer styles
             editor.Styles[Style.Cpp.Default].ForeColor = Color.Silver;
             editor.Styles[Style.Cpp.Comment].ForeColor = Color.FromArgb(0, 128, 0); // Green
@@ -61,7 +56,7 @@ namespace IDA.Forms.Dockable
 
         private void Scintilla1_Insert(object sender, ModificationEventArgs e)
         {
-            editor.Margins[0].Width = (editor.Styles[Style.Default].Size * editor.Lines.Count.ToString().Length) + (editor.Styles[Style.Default].Size / 2);
+            
         }
 
         private void Scintilla1_CharAdded(object sender, CharAddedEventArgs e)

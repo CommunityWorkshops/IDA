@@ -14,6 +14,7 @@ using IDA.Forms.Dockable;
 using IDA.Forms.Wizards;
 using IDA.Models;
 using WeifenLuo.WinFormsUI.Docking;
+using IDA.Controllers.Hardware;
 
 namespace IDA
 {
@@ -27,21 +28,27 @@ namespace IDA
         private FrmLog _frmLog = new FrmLog();
         private FrmCodeEditor _frmCodeEditor = new FrmCodeEditor();
 
-        private Task t;
-
         public FrmMain()
         {
-          
-         _frmSplash.Show();
-         
+            InitializeComponent();
+            _frmSplash.Show();
 
             _frmLog.LogWindowClosing += _frmLog_LogWindowClosing;
             _frmLog.LogWindowOpening += _frmLog_LogWindowOpening;
+
             _deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+
             UserSettingsIo.LoadUser();
+
             toolStripMenuItemUserName.Text = UserModel.UserName;
+
+            var r = Usb.GetUsbDevice();
+            if (!string.IsNullOrEmpty(r))
+                portStripMenuItemPort.Text = Usb.GetUsbDevice();
+            else
+                portStripMenuItemPort.Text = "Port Undetected";
         }
-        
+
         #region Docking
         private IDockContent GetContentFromPersistString(string persistString)
         {
@@ -91,10 +98,10 @@ namespace IDA
         #region Main Form Events
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            
+
             if (File.Exists(_configFile))
                 dockPanel1.LoadFromXml(_configFile, _deserializeDockContent);
-           
+            _frmSplash.Close();
         }
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -198,8 +205,8 @@ namespace IDA
 
         #endregion
 
-        
+
     }
 
-   
+
 }
