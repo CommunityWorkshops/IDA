@@ -11,46 +11,61 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThemeVS2013Blue", "..\..\..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThemeVS2012Light", "..\..\..\Dependencies\dockpanelsuite-master\WinFormsUI\ThemeVS2012Light.csproj", "{4ED4FDB5-9FD0-49E6-876D-1635F727C755}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThemeVS2005Multithreading", "..\..\..\Dependencies\dockpanelsuite-master\WinFormsUI\ThemeVS2005Multithreading.csproj", "{01B09009-BD30-47F2-B318-4B583D606C61}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThemeVS2003", "..\..\..\Dependencies\dockpanelsuite-master\WinFormsUI\ThemeVS2003.csproj", "{719F0F69-66DA-438D-B5BB-2D883EF4ACE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastColoredTextBox", "..\..\..\Dependencies\FastColoredTextBox\FastColoredTextBox.csproj", "{6DD14A85-CCFC-4774-BD26-0F5772512319}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScintillaNET", "..\..\..\..\Downloads\ScintillaNET-master\ScintillaNET-master\src\ScintillaNET\ScintillaNET.csproj", "{22AE2386-60F1-476E-9303-61CDB0AAC4CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		Signed|Any CPU = Signed|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{43741E9A-810E-4CD5-A3F0-8483A2287A4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{43741E9A-810E-4CD5-A3F0-8483A2287A4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43741E9A-810E-4CD5-A3F0-8483A2287A4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43741E9A-810E-4CD5-A3F0-8483A2287A4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43741E9A-810E-4CD5-A3F0-8483A2287A4F}.Signed|Any CPU.ActiveCfg = Release|Any CPU
+		{43741E9A-810E-4CD5-A3F0-8483A2287A4F}.Signed|Any CPU.Build.0 = Release|Any CPU
 		{C75532C4-765B-418E-B09B-46D36B2ABDB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C75532C4-765B-418E-B09B-46D36B2ABDB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C75532C4-765B-418E-B09B-46D36B2ABDB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C75532C4-765B-418E-B09B-46D36B2ABDB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C75532C4-765B-418E-B09B-46D36B2ABDB1}.Signed|Any CPU.ActiveCfg = Release|Any CPU
+		{C75532C4-765B-418E-B09B-46D36B2ABDB1}.Signed|Any CPU.Build.0 = Release|Any CPU
 		{245E07F6-10D5-4CFA-B003-0DEB06B223DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{245E07F6-10D5-4CFA-B003-0DEB06B223DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{245E07F6-10D5-4CFA-B003-0DEB06B223DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{245E07F6-10D5-4CFA-B003-0DEB06B223DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{245E07F6-10D5-4CFA-B003-0DEB06B223DA}.Signed|Any CPU.ActiveCfg = Release|Any CPU
+		{245E07F6-10D5-4CFA-B003-0DEB06B223DA}.Signed|Any CPU.Build.0 = Release|Any CPU
 		{4ED4FDB5-9FD0-49E6-876D-1635F727C755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4ED4FDB5-9FD0-49E6-876D-1635F727C755}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4ED4FDB5-9FD0-49E6-876D-1635F727C755}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4ED4FDB5-9FD0-49E6-876D-1635F727C755}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01B09009-BD30-47F2-B318-4B583D606C61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01B09009-BD30-47F2-B318-4B583D606C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01B09009-BD30-47F2-B318-4B583D606C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01B09009-BD30-47F2-B318-4B583D606C61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ED4FDB5-9FD0-49E6-876D-1635F727C755}.Signed|Any CPU.ActiveCfg = Release|Any CPU
+		{4ED4FDB5-9FD0-49E6-876D-1635F727C755}.Signed|Any CPU.Build.0 = Release|Any CPU
 		{719F0F69-66DA-438D-B5BB-2D883EF4ACE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{719F0F69-66DA-438D-B5BB-2D883EF4ACE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{719F0F69-66DA-438D-B5BB-2D883EF4ACE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{719F0F69-66DA-438D-B5BB-2D883EF4ACE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{719F0F69-66DA-438D-B5BB-2D883EF4ACE2}.Signed|Any CPU.ActiveCfg = Release|Any CPU
+		{719F0F69-66DA-438D-B5BB-2D883EF4ACE2}.Signed|Any CPU.Build.0 = Release|Any CPU
 		{6DD14A85-CCFC-4774-BD26-0F5772512319}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6DD14A85-CCFC-4774-BD26-0F5772512319}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DD14A85-CCFC-4774-BD26-0F5772512319}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DD14A85-CCFC-4774-BD26-0F5772512319}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DD14A85-CCFC-4774-BD26-0F5772512319}.Signed|Any CPU.ActiveCfg = Release|Any CPU
+		{6DD14A85-CCFC-4774-BD26-0F5772512319}.Signed|Any CPU.Build.0 = Release|Any CPU
+		{22AE2386-60F1-476E-9303-61CDB0AAC4CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22AE2386-60F1-476E-9303-61CDB0AAC4CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22AE2386-60F1-476E-9303-61CDB0AAC4CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22AE2386-60F1-476E-9303-61CDB0AAC4CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22AE2386-60F1-476E-9303-61CDB0AAC4CF}.Signed|Any CPU.ActiveCfg = Signed|Any CPU
+		{22AE2386-60F1-476E-9303-61CDB0AAC4CF}.Signed|Any CPU.Build.0 = Signed|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
