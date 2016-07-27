@@ -221,7 +221,7 @@ namespace IDA
         {
             Log("Creating New Project");
             // Open Code Window
-            _frmCodeEditor = new FrmCodeEditor();
+            _frmCodeEditor = new FrmCodeEditor(name);            
             _frmCodeEditor.Show(dockPanel1, DockState.Document);
             // Load Appropriate Keywords For Code Completion
             Log("Load Code Completion");

@@ -131,6 +131,6 @@
         private System.Windows.Forms.ToolStripButton saveToolStripButton;
         private System.Windows.Forms.ToolStripButton printToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private FastColoredTextBoxNS.FastColoredTextBox fcTb;
+
     }
 }

@@ -79,3 +79,11 @@ avrdude: ser_open(): can't open device "\\.\COM3": The system cannot find the fi
 
 
 avrdude done.  Thank you.
+
+
+
+########################## MY VERSION 
+
+"C:\Program Files (x86)\Arduino\arduino-builder" -logger=human -hardware "C:\Program Files (x86)\Arduino\hardware" -tools "C:\Program Files (x86)\Arduino\tools-builder" -tools "C:\Program Files (x86)\Arduino\hardware\tools\avr" -built-in-libraries "C:\Program Files (x86)\Arduino\libraries" -libraries "C:\Users\Dave Gordon\Documents\Arduino\libraries" -fqbn=arduino:avr:uno -ide-version=10609 -build-path "C:\Users\Dave Gordon\AppData\Local\Temp\build9c9ef3bdfe2fccb480bc6e4bac749e41.tmp" -warnings=all -prefs=build.warn_data_percentage=75 -verbose "C:\Program Files (x86)\Arduino\examples\01.Basics\Blink\Blink.ino"
+
+"C:\Program Files (x86)\Arduino\hardware\tools\avr/bin/avrdude" -C "C:\Program Files (x86)\Arduino\hardware\tools\avr/etc/avrdude.conf" -v -patmega328p -carduino -PCOM5 -b115200 -D -Uflash:w:"C:\Users\Dave Gordon\AppData\Local\Temp\build9c9ef3bdfe2fccb480bc6e4bac749e41.tmp/Blink.ino.hex":i

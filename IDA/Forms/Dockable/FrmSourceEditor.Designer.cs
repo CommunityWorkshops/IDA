@@ -33,7 +33,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.editor = new ICSharpCode.TextEditor.TextEditorControl();
+            this.editor = new ScintillaNET.Scintilla();
             this.panel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -72,16 +72,30 @@
             // 
             // editor
             // 
-            this.editor.BracketMatchingStyle = ICSharpCode.TextEditor.Document.BracketMatchingStyle.Before;
-            this.editor.ConvertTabsToSpaces = true;
+            this.editor.AnnotationVisible = ScintillaNET.Annotation.Standard;
+            this.editor.AutoCIgnoreCase = true;
+            this.editor.AutomaticFold = ((ScintillaNET.AutomaticFold)((ScintillaNET.AutomaticFold.Show | ScintillaNET.AutomaticFold.Click)));
+            this.editor.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.editor.CaretForeColor = System.Drawing.Color.PaleTurquoise;
+            this.editor.CaretWidth = 2;
             this.editor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.editor.IsIconBarVisible = true;
-            this.editor.IsReadOnly = false;
+            this.editor.EdgeColor = System.Drawing.Color.Black;
+            this.editor.IdleStyling = ScintillaNET.IdleStyling.All;
+            this.editor.IndentationGuides = ScintillaNET.IndentView.LookBoth;
+            this.editor.IndentWidth = 4;
+            this.editor.Lexer = ScintillaNET.Lexer.Cpp;
+            this.editor.LineEndTypesAllowed = ScintillaNET.LineEndType.Unicode;
             this.editor.Location = new System.Drawing.Point(0, 0);
+            this.editor.Margins.Left = 20;
             this.editor.Name = "editor";
-            this.editor.ShowInvalidLines = true;
             this.editor.Size = new System.Drawing.Size(1068, 604);
             this.editor.TabIndex = 2;
+            this.editor.WrapIndentMode = ScintillaNET.WrapIndentMode.Indent;
+            this.editor.WrapMode = ScintillaNET.WrapMode.Whitespace;
+            this.editor.WrapStartIndent = 4;
+            this.editor.WrapVisualFlags = ((ScintillaNET.WrapVisualFlags)(((ScintillaNET.WrapVisualFlags.End | ScintillaNET.WrapVisualFlags.Start) 
+            | ScintillaNET.WrapVisualFlags.Margin)));
+            this.editor.TextChanged += new System.EventHandler(this.editor_TextChanged);
             // 
             // FrmCodeEditor
             // 
@@ -108,6 +122,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private ICSharpCode.TextEditor.TextEditorControl editor;
+        private ScintillaNET.Scintilla editor;
     }
 }
