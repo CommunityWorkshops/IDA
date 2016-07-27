@@ -99,7 +99,6 @@
             this.fcTb.Location = new System.Drawing.Point(0, 25);
             this.fcTb.Name = "fcTb";
             this.fcTb.Paddings = new System.Windows.Forms.Padding(0);
-            this.fcTb.ReadOnly = true;
             this.fcTb.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fcTb.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("fcTb.ServiceColors")));
             this.fcTb.Size = new System.Drawing.Size(871, 269);
@@ -131,6 +130,6 @@
         private System.Windows.Forms.ToolStripButton saveToolStripButton;
         private System.Windows.Forms.ToolStripButton printToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-
+        private FastColoredTextBoxNS.FastColoredTextBox fcTb;
     }
 }

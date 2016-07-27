@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
+
 namespace IDA.Forms.Dockable
 {
     public partial class FrmLog : DockContent
