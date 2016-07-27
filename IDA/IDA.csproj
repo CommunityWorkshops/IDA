@@ -164,6 +164,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="Binn\Compilers\Arduino\CompilerCommands.tpl" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -10546,19 +10547,19 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\Downloads\ScintillaNET-master\ScintillaNET-master\src\ScintillaNET\ScintillaNET.csproj">
+    <ProjectReference Include="..\..\..\..\Documents\Dependencies\ScintillaNET-master\ScintillaNET-master\src\ScintillaNET\ScintillaNET.csproj">
       <Project>{22AE2386-60F1-476E-9303-61CDB0AAC4CF}</Project>
       <Name>ScintillaNET</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Dependencies\dockpanelsuite-master\WinFormsUI\ThemeVS2013Blue.csproj">
+    <ProjectReference Include="..\..\..\..\Documents\Dependencies\dockpanelsuite-master\WinFormsUI\ThemeVS2013Blue.csproj">
       <Project>{245E07F6-10D5-4CFA-B003-0DEB06B223DA}</Project>
       <Name>ThemeVS2013Blue</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Dependencies\dockpanelsuite-master\WinFormsUI\WinFormsUI.csproj">
+    <ProjectReference Include="..\..\..\..\Documents\Dependencies\dockpanelsuite-master\WinFormsUI\WinFormsUI.csproj">
       <Project>{C75532C4-765B-418E-B09B-46D36B2ABDB1}</Project>
       <Name>WinFormsUI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Dependencies\FastColoredTextBox\FastColoredTextBox.csproj">
+    <ProjectReference Include="..\..\..\..\Documents\Dependencies\FastColoredTextBox\FastColoredTextBox.csproj">
       <Project>{6DD14A85-CCFC-4774-BD26-0F5772512319}</Project>
       <Name>FastColoredTextBox</Name>
     </ProjectReference>

@@ -35,12 +35,14 @@ namespace IDA
         {
 
             InitializeComponent();
+            Log("Initialising");
             _frmSplash.Show();
             _frmSplash.SetAction("Running USB Connections Detector");
             driveDetector.DeviceArrived += DriveDetector_DeviceArrived;
             driveDetector.DeviceRemoved += DriveDetector_DeviceRemoved;
             driveDetector.QueryRemove += DriveDetector_QueryRemove;
             _frmSplash.SetAction("Looking for compatible Hardware");
+            Log("Looking for Hardware Port");
             CurrentProjectModel.ComPort = Usb.GetUsbDevice();
             _frmSplash.SetAction("Opening Logging Window");
             _frmLog.LogWindowClosing += _frmLog_LogWindowClosing;
@@ -48,6 +50,7 @@ namespace IDA
             _frmSplash.SetAction("Loading Docking Settings");
             _deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
             _frmSplash.SetAction("Loading User Settings");
+            Log("Loading User Settings");
             UserSettingsIo.LoadUser();
             toolStripMenuItemUserName.Text = UserModel.UserName;
             toolStripMenuItemComPort.Text = "Port " + CurrentProjectModel.ComPort;
@@ -56,16 +59,19 @@ namespace IDA
         private void DriveDetector_QueryRemove(object sender, DriveDetectorEventArgs e)
         {
             // If we recognise this device then we should query it?
+            Log("Device Removed " + e.Drive);
         }
 
         private void DriveDetector_DeviceRemoved(object sender, DriveDetectorEventArgs e)
         {
             // If we recognise this device then we should remove it?
+            Log("Device Removed " + e.Drive);
         }
 
         private void DriveDetector_DeviceArrived(object sender, DriveDetectorEventArgs e)
         {
             // If we recognise this device then we should add it?
+            Log("Device Added " + e.Drive);
         }
 
         #region Docking
@@ -74,7 +80,7 @@ namespace IDA
             if (persistString == typeof(FrmLog).ToString())
                 return _frmLog;
             else if (persistString == typeof(FrmCodeEditor).ToString())
-                return _frmCodeEditor;
+                return null;
 
             return null;
         }
@@ -83,6 +89,7 @@ namespace IDA
         #region Code Editor
         private void codeEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Log("Opening Code Editor");
             OpenCodeEditor();
         }
 
@@ -112,7 +119,7 @@ namespace IDA
         #region Views
         private void resetAllViewsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Log("Reset All Views");
             if (File.Exists(_configFile))
                 File.Delete(_configFile);
 
@@ -123,7 +130,7 @@ namespace IDA
         #region Main Form Events
         private void FrmMain_Load(object sender, EventArgs e)
         {
-
+            Log("Loading");
             if (File.Exists(_configFile))
                 dockPanel1.LoadFromXml(_configFile, _deserializeDockContent);
             _frmSplash.Close();
@@ -132,7 +139,7 @@ namespace IDA
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            Log("Closing");
             if (_saveLayout)
                 dockPanel1.SaveAsXml(_configFile);
             else if (File.Exists(_configFile))
@@ -150,11 +157,12 @@ namespace IDA
         private void _frmLog_LogWindowOpening()
         {
             logToolStripMenuItem.Checked = true;
-            _frmLog.Log("Log Window Opening");
+            Log("Log Window Opening");
         }
 
         private void _frmLog_LogWindowClosing()
         {
+            Log("Closing Log Window");
             logToolStripMenuItem.Checked = false;
             dockPanel1.SaveAsXml(_configFile);
             _frmLog.LogWindowClosing -= _frmLog_LogWindowClosing;
@@ -176,10 +184,16 @@ namespace IDA
                 {
                     _frmLog = new FrmLog();
                     _frmLog.Show(dockPanel1, DockState.DockBottom);
-                    _frmLog.Log("Error: " + ex.Message);
+                    Log("Error: " + ex.Message);
                 }
             }
         }
+
+        private void Log(string message)
+        {
+            _frmLog.Log(message);
+        }
+
         #endregion
 
         #region New Project
@@ -196,6 +210,7 @@ namespace IDA
 
         private void NewProject()
         {
+            Log("New Project");
             FrmNewProject newProject = new FrmNewProject();
             newProject.CreateNewProject += NewProject_CreateNewProject;
             newProject.ShowDialog();
@@ -204,15 +219,19 @@ namespace IDA
 
         private void NewProject_CreateNewProject(string name)
         {
+            Log("Creating New Project");
             // Open Code Window
             _frmCodeEditor = new FrmCodeEditor();
             _frmCodeEditor.Show(dockPanel1, DockState.Document);
             // Load Appropriate Keywords For Code Completion
+            Log("Load Code Completion");
             LoadCodeCompletion.Load();
             // Load Appropriate License Header
             // Populate with License Header
+            Log("Adding Licence Header");
             _frmCodeEditor.AddLicenceHeader(LoadLicenceHeader.Load());
             // Populate with default code for the platform and version
+            Log("Adding Default Platform Code");
            _frmCodeEditor.AddPlatformCode(LoadDefaultPlatformCode.Load());
             // Load Appropriate Toolbox
             // Load Project Explorer
@@ -222,6 +241,7 @@ namespace IDA
         #region Licence Editor
         private void licenseEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Log("Loading Licence Editor");
             FrmLicenceEditor newLicenceEditor = new FrmLicenceEditor();
             newLicenceEditor.ShowDialog();
         }
@@ -230,6 +250,7 @@ namespace IDA
         #region User Editor
         private void userEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Log("Loading User Editor");
             FrmUserEditor userEditor = new FrmUserEditor();
             userEditor.ShowDialog();
         }
@@ -246,6 +267,7 @@ namespace IDA
         // COM PORT SELECTOR DIALOG
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            Log("Com port Selector Opening");
             FrmComPortSelector cps = new FrmComPortSelector();
             cps.ShowDialog();
             toolStripMenuItemComPort.Text = "Port " + CurrentProjectModel.ComPort;
