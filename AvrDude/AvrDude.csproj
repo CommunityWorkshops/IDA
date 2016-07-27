@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1616BCFD-524E-4C45-A00C-F8B6197694F5}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AvrDude</RootNamespace>
+    <AssemblyName>AvrDude</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include=".cvsignore" />
+    <None Include="App.config" />
+    <None Include="arduino.c" />
+    <None Include="arduino.h" />
+    <None Include="AUTHORS" />
+    <None Include="avr.c" />
+    <None Include="avr.h" />
+    <None Include="avr910.c" />
+    <None Include="avr910.h" />
+    <None Include="avrdude.1" />
+    <None Include="avrdude.conf.in" />
+    <None Include="avrdude.h" />
+    <None Include="avrdude.spec.in" />
+    <None Include="avrpart.c" />
+    <None Include="avrpart.h" />
+    <None Include="bitbang.c" />
+    <None Include="bitbang.h" />
+    <None Include="bootstrap" />
+    <None Include="buspirate.c" />
+    <None Include="buspirate.h" />
+    <None Include="butterfly.c" />
+    <None Include="butterfly.h" />
+    <None Include="ChangeLog" />
+    <None Include="ChangeLog-2001" />
+    <None Include="ChangeLog-2002" />
+    <None Include="ChangeLog-2003" />
+    <None Include="ChangeLog-2004-2006" />
+    <None Include="ChangeLog-2007" />
+    <None Include="ChangeLog-2008" />
+    <None Include="ChangeLog-2009" />
+    <None Include="config.c" />
+    <None Include="config.h" />
+    <None Include="configure.ac" />
+    <None Include="config_gram.y" />
+    <None Include="confwin.c" />
+    <None Include="confwin.h" />
+    <None Include="COPYING" />
+    <None Include="crc16.c" />
+    <None Include="crc16.h" />
+    <None Include="fileio.c" />
+    <None Include="fileio.h" />
+    <None Include="freebsd_ppi.h" />
+    <None Include="jtagmkI.c" />
+    <None Include="jtagmkI.h" />
+    <None Include="jtagmkII.c" />
+    <None Include="jtagmkII.h" />
+    <None Include="jtagmkII_private.h" />
+    <None Include="jtagmkI_private.h" />
+    <None Include="lexer.l" />
+    <None Include="linux_ppdev.h" />
+    <None Include="lists.c" />
+    <None Include="lists.h" />
+    <None Include="main.c" />
+    <None Include="Makefile.am" />
+    <None Include="my_ddk_hidsdi.h" />
+    <None Include="NEWS" />
+    <None Include="par.c" />
+    <None Include="par.h" />
+    <None Include="pgm.c" />
+    <None Include="pgm.h" />
+    <None Include="pindefs.h" />
+    <None Include="ppi.c" />
+    <None Include="ppi.h" />
+    <None Include="ppiwin.c" />
+    <None Include="README" />
+    <None Include="safemode.c" />
+    <None Include="safemode.h" />
+    <None Include="serbb.h" />
+    <None Include="serbb_posix.c" />
+    <None Include="serbb_win32.c" />
+    <None Include="serial.h" />
+    <None Include="ser_avrdoper.c" />
+    <None Include="ser_posix.c" />
+    <None Include="ser_win32.c" />
+    <None Include="solaris_ecpp.h" />
+    <None Include="stk500.c" />
+    <None Include="stk500.h" />
+    <None Include="stk500generic.c" />
+    <None Include="stk500generic.h" />
+    <None Include="stk500v2.c" />
+    <None Include="stk500v2.h" />
+    <None Include="stk500v2_private.h" />
+    <None Include="stk500_private.h" />
+    <None Include="term.c" />
+    <None Include="term.h" />
+    <None Include="update.c" />
+    <None Include="update.h" />
+    <None Include="usbasp.c" />
+    <None Include="usbasp.h" />
+    <None Include="usbdevs.h" />
+    <None Include="usbtiny.c" />
+    <None Include="usbtiny.h" />
+    <None Include="usb_libusb.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="doc\" />
+    <Folder Include="tools\" />
+    <Folder Include="windows\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
