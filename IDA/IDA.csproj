@@ -59,6 +59,7 @@
     <Compile Include="Controllers\IO\LoadCodeCompletion.cs" />
     <Compile Include="Controllers\IO\LoadDefaultPlatformCode.cs" />
     <Compile Include="Controllers\IO\LoadLicenceHeader.cs" />
+    <Compile Include="Controllers\IO\PathsGenerator.cs" />
     <Compile Include="Controllers\IO\UserSettingsIO.cs" />
     <Compile Include="Controllers\Project\NewProjectManager.cs" />
     <Compile Include="Controls\NewProjectSelectionControl.cs">
@@ -122,6 +123,7 @@
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\CurrentProjectModel.cs" />
+    <Compile Include="Models\SystemModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

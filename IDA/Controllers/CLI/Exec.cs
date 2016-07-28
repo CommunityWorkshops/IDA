@@ -40,7 +40,7 @@ namespace IDA.Controllers.CLI
             // -verbose                                                                                             <-- Logging output level
             // "C:\Program Files (x86)\Arduino\examples\01.Basics\Blink\Blink.ino"                                  <-- File being compiled
             
-            psi.Arguments = " -logger=machine -hardware hardware -tools hardware\\tools-builder -tools hardware\tools\avr -built-in-libraries libraries -libraries \"C:\\Users\\Dave Gordon\\Documents\\Arduino\\libraries\" -fqbn=arduino:avr:uno -ide-version=10609 -build-path \"C:\\Users\\Dave Gordon\\AppData\\Local\\Temp\\build9c9ef3bdfe2fccb480bc6e4bac749e41.tmp\" -warnings=all -prefs=build.warn_data_percentage=75 -verbose \"C:\\Program Files(x86)\\Arduino\\examples\\01.Basics\\Blink\\Blink.ino\"";
+            psi.Arguments = " -logger=machine -hardware hardware -tools hardware\\tools-builder -tools hardware\tools\avr -built-in-libraries libraries -libraries \"C:\\Users\\Dave Gordon\\Documents\\Arduino\\libraries\" -fqbn=arduino:avr:uno -ide-version=" + IDA.Models.SystemModel.IDAVersion + " -build-path \"C:\\Users\\Dave Gordon\\AppData\\Local\\Temp\\build9c9ef3bdfe2fccb480bc6e4bac749e41.tmp\" -warnings=all -prefs=build.warn_data_percentage=75 -verbose \"C:\\Program Files(x86)\\Arduino\\examples\\01.Basics\\Blink\\Blink.ino\"";
             proc.StartInfo = psi;
             proc.ErrorDataReceived += Proc_ErrorDataReceived;
             proc.Exited += Proc_Exited;

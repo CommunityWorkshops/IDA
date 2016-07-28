@@ -13,5 +13,7 @@
         public static int MajorBuild { get; set; }
         public static int MinorBuild { get; set; }
         public static string ComPort { get; internal set; }
+
+        public static string ProjectBasePath { get; set; }
     }
 }

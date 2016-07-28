@@ -226,6 +226,8 @@ namespace IDA
             // Populate with default code for the platform and version
             Log("Adding Default Platform Code");
            _frmCodeEditor.AddPlatformCode(LoadDefaultPlatformCode.Load());
+            // Create Project Base Path
+            IDA.Models.CurrentProjectModel.ProjectBasePath = PathsGenerator.CreateBasePath(name);
             // Load Appropriate Toolbox
             // Load Project Explorer
         }
