@@ -15,5 +15,6 @@
         public static string ComPort { get; internal set; }
 
         public static string ProjectBasePath { get; set; }
+        public static string ProjectBuildPath { get; set; }
     }
 }

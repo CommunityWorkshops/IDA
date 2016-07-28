@@ -267,6 +267,15 @@ namespace IDA
             cps.ShowDialog();
             toolStripMenuItemComPort.Text = "Port " + CurrentProjectModel.ComPort;
         }
+
+        private void btnCompile_Click(object sender, EventArgs e)
+        {
+            // Save the Project.
+            SaveProject.Save();
+
+            IDA.Controllers.CLI.Exec exec = new Controllers.CLI.Exec();
+            exec.ExecuteCompiler();
+        }
     }
 
 
