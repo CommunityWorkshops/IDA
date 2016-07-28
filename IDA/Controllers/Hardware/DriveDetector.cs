@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;             // required for Message
 using System.Runtime.InteropServices;   // required for Marshal
 using System.IO;
-using Microsoft.Win32.SafeHandles;     
+using Microsoft.Win32.SafeHandles;
 // DriveDetector - rev. 1, Oct. 31 2007
 
 namespace Dolinay
