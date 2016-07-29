@@ -7,6 +7,7 @@ namespace IDA.Forms.Dockable
     public partial class FrmLog : DockContent
     {
 
+        private delegate void UpdateTextDelegate(string value);
 
         public delegate void LogWindowClosingHandler();
         public event LogWindowClosingHandler LogWindowClosing;
@@ -21,7 +22,16 @@ namespace IDA.Forms.Dockable
 
         public void Log(string message)
         {
-            fcTb.InsertText(message + Environment.NewLine,true);
+            if (this.fcTb.InvokeRequired)
+            {
+                // This is a worker thread so delegate the task.
+                this.fcTb.Invoke(new UpdateTextDelegate(this.Log), message);
+            }
+            else
+            {
+                // This is the UI thread so perform the task.
+                fcTb.InsertText(message + Environment.NewLine, true);
+            }            
         }
 
         protected virtual void OnLogWindowClosing()

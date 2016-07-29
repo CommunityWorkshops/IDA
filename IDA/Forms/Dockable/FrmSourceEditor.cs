@@ -3,31 +3,42 @@ using System.Collections.Generic;
 using System.Drawing;
 using ScintillaNET;
 using WeifenLuo.WinFormsUI.Docking;
+using System.IO;
 
 namespace IDA.Forms.Dockable
 {
     public partial class FrmCodeEditor : DockContent
     {
+
+        public delegate void EditorDirtyHandler(string name);
+        public event EditorDirtyHandler EditorDirty;
+
+        public delegate void EditorCleanHandler(string name);
+        public event EditorCleanHandler EditorClean;
+
         public FrmCodeEditor()
         {
-            InitializeComponent();
-            Initialise();            
+            InitializeComponent();            
+            Initialise();
         }
 
         public FrmCodeEditor(string name)
         {
             InitializeComponent();
-            Initialise();
             Name = name;
+            Initialise();            
         }
 
         private void Initialise()
         {
+            editor.Tag = Name;
+
             editor.BeforeInsert += Scintilla1_BeforeInsert;
             editor.BeforeDelete += Scintilla1_BeforeDelete;
             editor.CharAdded += Scintilla1_CharAdded;
             editor.Insert += Scintilla1_Insert;
             editor.SavePointLeft += Editor_SavePointLeft;
+            editor.SavePointReached += Editor_SavePointReached;
 
 
             editor.StyleResetDefault();
@@ -62,34 +73,61 @@ namespace IDA.Forms.Dockable
 
         }
 
+       
+
+        public void Save()
+        {
+            FileStream fs = null;
+
+            if (File.Exists(Path.Combine(IDA.Models.CurrentProjectModel.ProjectBasePath, Tag.ToString() + ".c")))
+                fs = new FileStream(Path.Combine(IDA.Models.CurrentProjectModel.ProjectBasePath, Tag.ToString() + ".c"), FileMode.Truncate, FileAccess.Write, FileShare.None);
+            else
+                fs = new FileStream(Path.Combine(IDA.Models.CurrentProjectModel.ProjectBasePath, Tag.ToString() + ".c"), FileMode.Create, FileAccess.Write, FileShare.None);
+
+            StreamWriter sw = new StreamWriter(fs);
+
+            foreach (Line line in editor.Lines)
+            {
+                sw.WriteLine(line.Text);
+            }
+
+            sw.Close();
+            fs.Close();
+        }
+
         private void Editor_SavePointLeft(object sender, EventArgs e)
         {
-            
+            EditorDirty?.Invoke(Tag.ToString());
+        }
+
+        private void Editor_SavePointReached(object sender, EventArgs e)
+        {
+            EditorClean?.Invoke(Tag.ToString());
         }
 
         public void GotoLine(int lineNumber)
         {
-            
+
         }
 
         private void Scintilla1_Insert(object sender, ModificationEventArgs e)
         {
-            
+
         }
 
         private void Scintilla1_CharAdded(object sender, CharAddedEventArgs e)
         {
-           
+
         }
 
         private void Scintilla1_BeforeDelete(object sender, BeforeModificationEventArgs e)
         {
-            
+
         }
 
         private void Scintilla1_BeforeInsert(object sender, BeforeModificationEventArgs e)
         {
-           
+
         }
 
         public void AddLicenceHeader(List<string> licence)
@@ -98,7 +136,7 @@ namespace IDA.Forms.Dockable
 
             foreach (var line in licence)
             {
-                editor.AddText(line + Environment.NewLine);                
+                editor.AddText(line + Environment.NewLine);
             }
         }
 
@@ -115,10 +153,10 @@ namespace IDA.Forms.Dockable
                 editor.AddText(line + Environment.NewLine);
             }
 
-            
+
         }
 
-       
+
         private void editor_TextChanged(object sender, EventArgs e)
         {
             UpdateLineNumbersColumn();

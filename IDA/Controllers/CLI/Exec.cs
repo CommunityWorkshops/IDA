@@ -11,21 +11,26 @@ namespace IDA.Controllers.CLI
     class Exec
     {
 
+        public delegate void LogHandler(string name);
+        public event LogHandler Log;
+
         internal void ExecuteCompiler()
         {
             ProcessStartInfo psi = new ProcessStartInfo();
             Process proc = new Process();
 
+            psi.WorkingDirectory = Path.Combine(System.Reflection.Assembly.GetExecutingAssembly().Location.ToLower().Replace("ida.exe",""), @"Binn\Compilers\Arduino");
+            Log("Current Working Directory: " + psi.WorkingDirectory);
             psi.CreateNoWindow = true;
-            psi.ErrorDialog = true;
-            psi.FileName = "Binn\\Compilers\\Arduino\\arduino-builder.exe"; // This may need changed for other hardware types
+            psi.ErrorDialog = true;           
+            psi.FileName = @"Binn\Compilers\Arduino\arduino-builder.exe"; // This may need changed for other hardware types
             psi.RedirectStandardError = true;
             psi.RedirectStandardInput = true;
-            psi.RedirectStandardOutput = true;
-            psi.StandardErrorEncoding = Encoding.Unicode;
-            psi.StandardOutputEncoding = Encoding.Unicode;
+            psi.RedirectStandardOutput = true;            
             psi.UseShellExecute = false;
             psi.WindowStyle = ProcessWindowStyle.Hidden;
+            
+
 
             // "C:\Program Files (x86)\Arduino\arduino-builder"                                                     <-- Builder Path
             // -logger=human                                                                                        <-- Logger Type
@@ -41,47 +46,48 @@ namespace IDA.Controllers.CLI
             // -prefs=build.warn_data_percentage=75                                                                 <-- Warning about size of output?
             // -verbose                                                                                             <-- Logging output level
             // "C:\Program Files (x86)\Arduino\examples\01.Basics\Blink\Blink.ino"                                  <-- File being compiled
-            
-            psi.Arguments = " -logger=machine -hardware hardware -tools hardware\\tools-builder -tools hardware\tools\avr -built-in-libraries libraries -libraries \"C:\\Users\\Dave Gordon\\Documents\\Arduino\\libraries\" -fqbn=arduino:avr:uno -ide-version=" + IDA.Models.SystemModel.IDAVersion + " -build-path " + Path.Combine(IDA.Models.CurrentProjectModel.ProjectBasePath,"Build")  + " -warnings=all -prefs=build.warn_data_percentage=75 -verbose " + Path.Combine(IDA.Models.CurrentProjectModel.ProjectBasePath,IDA.Models.CurrentProjectModel.Name);
+
+            /*
+             * C:\Users\Dave Gordon\Source\Repos\IDA\IDA\bin\Debug\Binn\Compilers\Arduino>arduino-builder.exe -logger=machine -hardware hardware -tools tools-builder -tools hardware\tools\avr -built-in-libraries libraries -libraries "C:\\Users\\Dave Gordon\\Documents\\Arduino\\libraries" -fqbn=arduino:avr:uno -ide-version=1 -build-path "C:\Users\Dave Gordon\Documents\IDA\Projects\a\Build"  -warnings=all -prefs=build.warn_data_percentage=75 -verbose "C:\Users\Dave Gordon\Documents\IDA\Projects\a\a.c"
+             */
+
+            //" -logger=machine -hardware hardware -tools tools-builder -tools hardware\\tools\\avr -built-in-libraries libraries -libraries \"C:\\Users\\Dave Gordon\\Documents\\Arduino\\libraries\" -fqbn=arduino:avr:uno -ide-version=1.0.6054.40280 -build-path C:\\Users\\Dave Gordon\\Documents\\IDA\\Projects\\q8\\Build -warnings=all -prefs=build.warn_data_percentage=75 -verbose C:\\Users\\Dave Gordon\\Documents\\IDA\\Projects\\q8\\q8.c -logger=machine -hardware hardware -tools tools-builder -tools hardware\\tools\\avr -built-in-libraries libraries -libraries \"C:\\Users\\Dave Gordon\\Documents\\Arduino\\libraries\" -fqbn=arduino:avr:uno -ide-version=1.0.6054.40280 -build-path C:\\Users\\Dave Gordon\\Documents\\IDA\\Projects\\q8\\Build -warnings=all -prefs=build.warn_data_percentage=75 -verbose C:\\Users\\Dave Gordon\\Documents\\IDA\\Projects\\q8\\q8.c"
+
+            var target = Path.Combine(IDA.Models.CurrentProjectModel.ProjectBasePath, IDA.Models.CurrentProjectModel.Name + ".c");
+            var tmpArgs = @" -logger=machine -hardware hardware -tools tools-builder -tools hardware\tools\avr -built-in-libraries libraries -libraries ""C:\Users\Dave Gordon\Documents\Arduino\libraries"" -fqbn=arduino:avr:uno -ide-version=" + IDA.Models.SystemModel.IDAVersion + " -build-path \"" + IDA.Models.CurrentProjectModel.ProjectBuildPath + "\" -warnings=all -prefs=build.warn_data_percentage=75 -verbose \"" + target + "\"";
+
+            psi.Arguments = tmpArgs;
 
             proc.StartInfo = psi;
-            proc.ErrorDataReceived += Proc_ErrorDataReceived;
-            proc.Exited += Proc_Exited;
             proc.OutputDataReceived += Proc_OutputDataReceived;
-            
 
+            Log("Full Command = " + psi.FileName + " " + tmpArgs);
             try
             {
                 proc.Start();
+                proc.BeginOutputReadLine();
                 proc.WaitForExit();
+                
+                psi = null;
+                proc.Dispose();
             }
             catch (Exception ex)
             {
-
-                throw;
+                Log("Error: " + ex.Message);
             }
-            
-           
+            finally
+            {
+                psi = null;
+                proc?.Dispose();
+            }
 
-            while(!proc.HasExited) { }
-
-            psi = null;
-            proc.Dispose();
+            Log("Compilation Completed");
         }
 
         private void Proc_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-            throw new NotImplementedException();
-        }
-
-        private void Proc_Exited(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Proc_ErrorDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            throw new NotImplementedException();
+            if (e.Data != null)
+                Log(e.Data);
         }
     }
 }

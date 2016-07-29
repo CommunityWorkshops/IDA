@@ -45,5 +45,17 @@ namespace IDA.Controllers.IO
 
             return Path.Combine(Path.Combine(Path.Combine(MyDocuments, "IDA"), "Projects"), name);
         }
+
+        internal static string GetExePath(bool IncludeQuotationMarks = false)
+        {
+            if (IncludeQuotationMarks)
+            {
+                var res = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString().Replace(System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.Name, "");
+
+                return res;
+            }
+            else
+                return System.Reflection.Assembly.GetEntryAssembly().Location;
+        }
     }
 }

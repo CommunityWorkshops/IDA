@@ -9,6 +9,7 @@ using IDA.Forms.Dockable;
 using IDA.Forms.Wizards;
 using IDA.Models;
 using WeifenLuo.WinFormsUI.Docking;
+using System.Collections.Generic;
 
 namespace IDA
 {
@@ -22,7 +23,7 @@ namespace IDA
 
         private readonly FrmSplash _frmSplash = new FrmSplash();
         private FrmLog _frmLog = new FrmLog();
-        private FrmCodeEditor _frmCodeEditor = new FrmCodeEditor();
+
 
         public FrmMain()
         {
@@ -83,29 +84,29 @@ namespace IDA
         private void codeEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Log("Opening Code Editor");
-            OpenCodeEditor();
+            //  OpenCodeEditor();
         }
 
-        private void OpenCodeEditor()
-        {
-            if (codeEditorToolStripMenuItem.Checked)
-            {
-                _frmCodeEditor.Close();
-            }
-            else
-            {
-                try
-                {
-                    _frmCodeEditor.Show(dockPanel1, DockState.Document);
-                }
-                catch (Exception ex)
-                {
-                    _frmCodeEditor = new FrmCodeEditor();
-                    _frmCodeEditor.Show(dockPanel1, DockState.Document);
-                    _frmLog.Log("Error: " + ex.Message);
-                }
-            }
-        }
+        //private void OpenCodeEditor()
+        //{
+        //    if (codeEditorToolStripMenuItem.Checked)
+        //    {
+        //        _frmCodeEditor.Close();
+        //    }
+        //    else
+        //    {
+        //        try
+        //        {
+        //            _frmCodeEditor.Show(dockPanel1, DockState.Document);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            _frmCodeEditor = new FrmCodeEditor();
+        //            _frmCodeEditor.Show(dockPanel1, DockState.Document);
+        //            _frmLog.Log("Error: " + ex.Message);
+        //        }
+        //    }
+        //}
 
         #endregion
 
@@ -213,9 +214,20 @@ namespace IDA
         private void NewProject_CreateNewProject(string name)
         {
             Log("Creating New Project");
+
+            // Create Project Base Path
+            IDA.Models.CurrentProjectModel.ProjectBasePath = PathsGenerator.CreateBasePath(name);
+
             // Open Code Window
-            _frmCodeEditor = new FrmCodeEditor(name);            
+            var _frmCodeEditor = new FrmCodeEditor(name);
+            _frmCodeEditor.EditorDirty += _frmCodeEditor_EditorDirty;
+            _frmCodeEditor.EditorClean += _frmCodeEditor_EditorClean;
+
+
             _frmCodeEditor.Show(dockPanel1, DockState.Document);
+            _frmCodeEditor.Parent.Text = name;
+            _frmCodeEditor.Tag = name;
+
             // Load Appropriate Keywords For Code Completion
             Log("Load Code Completion");
             LoadCodeCompletion.Load();
@@ -225,12 +237,37 @@ namespace IDA
             _frmCodeEditor.AddLicenceHeader(LoadLicenceHeader.Load());
             // Populate with default code for the platform and version
             Log("Adding Default Platform Code");
-           _frmCodeEditor.AddPlatformCode(LoadDefaultPlatformCode.Load());
-            // Create Project Base Path
-            IDA.Models.CurrentProjectModel.ProjectBasePath = PathsGenerator.CreateBasePath(name);
+            _frmCodeEditor.AddPlatformCode(LoadDefaultPlatformCode.Load());
+
             // Load Appropriate Toolbox
             // Load Project Explorer
         }
+
+        private void _frmCodeEditor_EditorClean(string name)
+        {
+            foreach (Control ctrl in dockPanel1.Documents)
+            {
+                if (ctrl.Tag.ToString() == name)
+                {
+                    ctrl.Text = name;
+                    saveToolStripButton.Enabled = false;
+                }
+            }
+        }
+
+        private void _frmCodeEditor_EditorDirty(string name)
+        {
+            foreach (Control ctrl in dockPanel1.Documents)
+            {
+                if (ctrl.Tag.ToString() == name)
+                {
+                    ctrl.Text = name + " *";
+                    saveToolStripButton.Enabled = true;
+                }
+            }
+        }
+
+
         #endregion
 
         #region Licence Editor
@@ -271,10 +308,45 @@ namespace IDA
         private void btnCompile_Click(object sender, EventArgs e)
         {
             // Save the Project.
-            SaveProject.Save();
+            Log("Saving project");
+            foreach (Control ctrl in dockPanel1.Documents)
+            {
+                if (ctrl.Tag.ToString() == CurrentProjectModel.Name)
+                {
+                    FrmCodeEditor fce = (FrmCodeEditor)ctrl;
+                    fce.Save();
+                    ctrl.Text = CurrentProjectModel.Name;
+                    saveToolStripButton.Enabled = false;
+                }
+            }
 
+            // Do the transformation of the files - really should be done as we go?
+            
+            // compile the transformed files
+            Log("Starting Compilation");
             IDA.Controllers.CLI.Exec exec = new Controllers.CLI.Exec();
+            exec.Log += Exec_Log;
             exec.ExecuteCompiler();
+        }
+
+        private void Exec_Log(string message)
+        {
+            Log(message);
+        }
+
+        private void saveToolStripButton_Click(object sender, EventArgs e)
+        {
+            Log("Saving project");
+            foreach (Control ctrl in dockPanel1.Documents)
+            {
+                if (ctrl.Tag.ToString() == CurrentProjectModel.Name)
+                {
+                    FrmCodeEditor fce = (FrmCodeEditor)ctrl;
+                    fce.Save();
+                    ctrl.Text = CurrentProjectModel.Name;
+                    saveToolStripButton.Enabled = false;
+                }
+            }
         }
     }
 
