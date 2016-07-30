@@ -214,5 +214,10 @@ namespace IDA.Forms.Wizards
         {
             CreateNewProject?.Invoke(name);
         }
+
+        private void tbProjectName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

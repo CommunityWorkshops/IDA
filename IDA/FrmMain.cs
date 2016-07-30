@@ -83,36 +83,7 @@ namespace IDA
         }
         #endregion
 
-        #region Code Editor
-        private void codeEditorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Log("Opening Code Editor");
-            //  OpenCodeEditor();
-        }
-
-        //private void OpenCodeEditor()
-        //{
-        //    if (codeEditorToolStripMenuItem.Checked)
-        //    {
-        //        _frmCodeEditor.Close();
-        //    }
-        //    else
-        //    {
-        //        try
-        //        {
-        //            _frmCodeEditor.Show(dockPanel1, DockState.Document);
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            _frmCodeEditor = new FrmCodeEditor();
-        //            _frmCodeEditor.Show(dockPanel1, DockState.Document);
-        //            _frmLog.Log("Error: " + ex.Message);
-        //        }
-        //    }
-        //}
-
-        #endregion
-
+        
         #region Views
         private void resetAllViewsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -125,6 +96,7 @@ namespace IDA
         #endregion
 
         #region Main Form Events
+
         private void FrmMain_Load(object sender, EventArgs e)
         {
             Log("Loading");
@@ -151,6 +123,7 @@ namespace IDA
         #endregion
 
         #region Log
+
         private void _frmLog_LogWindowOpening()
         {
             logToolStripMenuItem.Checked = true;
@@ -194,11 +167,11 @@ namespace IDA
         #endregion
 
         #region New Project
+
         private void newToolStripButton_Click(object sender, EventArgs e)
         {
             NewProject();
         }
-
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -244,6 +217,9 @@ namespace IDA
 
             // Load Appropriate Toolbox
             // Load Project Explorer
+
+            // Save Project Configuration File
+            Controllers.IO.SaveProject.SaveProjectConfiguration();
         }
 
         private void _frmCodeEditor_EditorClean(string name)

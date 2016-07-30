@@ -150,6 +150,7 @@
             this.tbProjectName.Name = "tbProjectName";
             this.tbProjectName.Size = new System.Drawing.Size(688, 26);
             this.tbProjectName.TabIndex = 2;
+            this.tbProjectName.TextChanged += new System.EventHandler(this.tbProjectName_TextChanged);
             // 
             // cbThisIsALibrary
             // 
