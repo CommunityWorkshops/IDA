@@ -219,7 +219,16 @@ namespace IDA
             // Load Project Explorer
 
             // Save Project Configuration File
-            Controllers.IO.SaveProject.SaveProjectConfiguration();
+            Controllers.IO.SaveProject sp = new SaveProject();
+            sp.OnLog += Sp_Log;
+            sp.SaveProjectConfiguration();
+            sp.OnLog -= Sp_Log;
+            sp = null; // Not really necessary
+        }
+
+        private void Sp_Log(string message)
+        {
+            Log(message);
         }
 
         private void _frmCodeEditor_EditorClean(string name)

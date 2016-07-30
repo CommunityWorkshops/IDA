@@ -11,18 +11,13 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace IDA.Controllers.IO
 {
-    static class SaveProject
+    class SaveProject
     {
-
-        // Tell this instance of the Editor to save it's contents 
-        internal static void Save(Control control)
-        {
-            
-        }
-
-
+        public delegate void LogHandler(string message);
+        public event LogHandler OnLog;
+        
         // Project configuration file = project name + .ida
-        internal static void SaveProjectConfiguration()
+        internal void SaveProjectConfiguration()
         {
             var pc = CurrentProjectModel.Name + ".ida";
             FileStream fs = null;
@@ -33,6 +28,7 @@ namespace IDA.Controllers.IO
                 fs = new FileStream(Path.Combine(CurrentProjectModel.ProjectBasePath, pc), FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
                 sw = new StreamWriter(fs);
 
+                sw.WriteLine("#ProjectConfigurationVersion=1");
                 sw.WriteLine(CurrentProjectModel.Name);
                 sw.WriteLine(CurrentProjectModel.Platform);
                 sw.WriteLine(CurrentProjectModel.Version);
@@ -44,13 +40,16 @@ namespace IDA.Controllers.IO
                 sw.WriteLine(CurrentProjectModel.MinorBuild);
                 sw.WriteLine(CurrentProjectModel.IsLibrary);
                 sw.WriteLine(CurrentProjectModel.IsOpenSource);
-                sw.WriteLine(CurrentProjectModel.ComPort);                
+                sw.WriteLine(CurrentProjectModel.ComPort);              // Remember this can change on each load so should always be updated on loading  
 
                 sw.Close();
                 fs.Close();
+
+                OnLog?.Invoke("Project Configuration File Saved");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                OnLog?.Invoke("Error: " + ex.Message);
                 sw?.Close();
                 fs?.Close();
             }

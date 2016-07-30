@@ -421,13 +421,7 @@
             this.logToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.logToolStripMenuItem.Text = "Log";
             this.logToolStripMenuItem.Click += new System.EventHandler(this.logToolStripMenuItem_Click);
-            // 
-            // codeEditorToolStripMenuItem
-            // 
-            this.codeEditorToolStripMenuItem.Name = "codeEditorToolStripMenuItem";
-            this.codeEditorToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.codeEditorToolStripMenuItem.Text = "Code Editor";
-            this.codeEditorToolStripMenuItem.Click += new System.EventHandler(this.codeEditorToolStripMenuItem_Click);
+
             // 
             // licenseEditorToolStripMenuItem
             // 
