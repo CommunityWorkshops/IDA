@@ -22,12 +22,15 @@ namespace IDA.Forms.Wizards
             LoadFirstPlatformVersions();
         }
 
+        private bool PlatformSelected = false;
+        private bool PlatformVersionSelected = false;
+
         private bool _firstVersion = true;
         private void LoadFirstPlatformVersions()
         {
             // folder for the first Platform is platforms[0]
             string[] platforms = Directory.GetDirectories("Templates\\Platforms\\");
-            string[] versions = Directory.GetDirectories(Path.Combine(platforms[0],"versions"));
+            string[] versions = Directory.GetDirectories(Path.Combine(platforms[0], "versions"));
 
             foreach (var folder in versions)
             {
@@ -66,7 +69,19 @@ namespace IDA.Forms.Wizards
             foreach (NewProjectSelectionControl ctrl in flpVersion.Controls)
             {
                 ctrl.SetSelected(false);
-                if(string.Equals(ctrl.Name, name, StringComparison.CurrentCultureIgnoreCase)) ctrl.SetSelected(true);
+                if (string.Equals(ctrl.Name, name, StringComparison.CurrentCultureIgnoreCase)) ctrl.SetSelected(true);
+                PlatformVersionSelected = true;
+            }
+
+            EnableUI();
+        }
+
+        private void EnableUI()
+        {
+            if (PlatformSelected && PlatformVersionSelected)
+            {
+                if (!tbProjectName.Enabled) tbProjectName.Enabled = true;
+                if (tbProjectName.Enabled && !string.IsNullOrEmpty(tbProjectName.Text)) btnCreate.Enabled = false;
             }
         }
 
@@ -80,7 +95,9 @@ namespace IDA.Forms.Wizards
                 ctrl.SetSelected(false);
                 if (string.Equals(ctrl.Name, name, StringComparison.CurrentCultureIgnoreCase)) ctrl.SetSelected(true);
                 LoadVersionsFor(name);
+                PlatformSelected = true;
             }
+            EnableUI();
         }
 
         private void LoadVersionsFor(string name)
@@ -126,7 +143,7 @@ namespace IDA.Forms.Wizards
                 //TODO: Needs to be Translateable.
                 flpVersion.Text = "No Versions Available";
             }
-           
+
         }
 
         private bool _firstPlatform = true;
@@ -138,7 +155,7 @@ namespace IDA.Forms.Wizards
             {
                 NewProjectSelectionControl npsc = new NewProjectSelectionControl();
                 npsc.ThisIsSelected += Npsc_PlatformIsSelected;
-                npsc.Name = folder.Replace("\\", " ").Split(' ')[folder.Replace("\\", " ").Split(' ').Length-1].Trim(); //TODO: FIX THIS Horrible :P
+                npsc.Name = folder.Replace("\\", " ").Split(' ')[folder.Replace("\\", " ").Split(' ').Length - 1].Trim(); //TODO: FIX THIS Horrible :P
 
                 if (_firstPlatform) _platformType = npsc.Name;
 
@@ -150,7 +167,7 @@ namespace IDA.Forms.Wizards
                     var imageNames = Directory.EnumerateFiles(Path.Combine(folder, "Images"));
                     foreach (var imageName in imageNames)
                     {
-                        if(imageName.ToLower().Contains("platform")) npsc.SetImage(imageName);
+                        if (imageName.ToLower().Contains("platform")) npsc.SetImage(imageName);
                     }
 
                     _platformType = npsc.Name;
@@ -167,7 +184,7 @@ namespace IDA.Forms.Wizards
             }
 
         }
-        
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
@@ -175,13 +192,22 @@ namespace IDA.Forms.Wizards
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            CurrentProjectModel.Name = tbProjectName.Text;
-            CurrentProjectModel.IsLibrary = cbThisIsALibrary.Checked;
-            CurrentProjectModel.IsOpenSource = cbThisIsOpenSource.Checked;
-            CurrentProjectModel.Platform = _platformType;
-            CurrentProjectModel.Version = _versionType;
-            OnCreateNewProject(tbProjectName.Text);
-            Close();
+            if (string.IsNullOrEmpty(CurrentProjectModel.Name) || string.IsNullOrEmpty(CurrentProjectModel.Platform) || string.IsNullOrEmpty(CurrentProjectModel.Version))
+            {
+                if (string.IsNullOrEmpty(CurrentProjectModel.Name)) MessageBox.Show("You need to give your project a name");
+                if (string.IsNullOrEmpty(CurrentProjectModel.Platform)) MessageBox.Show("You have not selected a Platform");
+                if (string.IsNullOrEmpty(CurrentProjectModel.Version)) MessageBox.Show("You have not selected a Platform Version");
+            }
+            else
+            {
+                CurrentProjectModel.Name = tbProjectName.Text;
+                CurrentProjectModel.IsLibrary = cbThisIsALibrary.Checked;
+                CurrentProjectModel.IsOpenSource = cbThisIsOpenSource.Checked;
+                CurrentProjectModel.Platform = _platformType;
+                CurrentProjectModel.Version = _versionType;
+                OnCreateNewProject(tbProjectName.Text);
+                Close();
+            }
         }
 
         protected virtual void OnCreateNewProject(string name)
