@@ -73,6 +73,7 @@
             this.userEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.scintillaTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.projectExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.resetAllViewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemUserName = new System.Windows.Forms.ToolStripComboBox();
@@ -82,7 +83,7 @@
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnCompile = new System.Windows.Forms.ToolStripButton();
+            this.btnCompile = new System.Windows.Forms.ToolStripSplitButton();
             this.vS2013BlueTheme1 = new WeifenLuo.WinFormsUI.Docking.VS2013BlueTheme();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -408,7 +409,8 @@
             this.licenseEditorToolStripMenuItem,
             this.userEditorToolStripMenuItem,
             this.toolStripSeparator9,
-            this.scintillaTestToolStripMenuItem});
+            this.scintillaTestToolStripMenuItem,
+            this.projectExplorerToolStripMenuItem});
             this.defaultWindowsToolStripMenuItem.Name = "defaultWindowsToolStripMenuItem";
             this.defaultWindowsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.defaultWindowsToolStripMenuItem.Text = "Default Windows";
@@ -416,42 +418,49 @@
             // logToolStripMenuItem
             // 
             this.logToolStripMenuItem.Name = "logToolStripMenuItem";
-            this.logToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.logToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.logToolStripMenuItem.Text = "Log";
             this.logToolStripMenuItem.Click += new System.EventHandler(this.logToolStripMenuItem_Click);
             // 
             // codeEditorToolStripMenuItem
             // 
             this.codeEditorToolStripMenuItem.Name = "codeEditorToolStripMenuItem";
-            this.codeEditorToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.codeEditorToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.codeEditorToolStripMenuItem.Text = "Code Editor";
             this.codeEditorToolStripMenuItem.Click += new System.EventHandler(this.codeEditorToolStripMenuItem_Click);
             // 
             // licenseEditorToolStripMenuItem
             // 
             this.licenseEditorToolStripMenuItem.Name = "licenseEditorToolStripMenuItem";
-            this.licenseEditorToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.licenseEditorToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.licenseEditorToolStripMenuItem.Text = "Licence Editor";
             this.licenseEditorToolStripMenuItem.Click += new System.EventHandler(this.licenseEditorToolStripMenuItem_Click);
             // 
             // userEditorToolStripMenuItem
             // 
             this.userEditorToolStripMenuItem.Name = "userEditorToolStripMenuItem";
-            this.userEditorToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.userEditorToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.userEditorToolStripMenuItem.Text = "User Editor";
             this.userEditorToolStripMenuItem.Click += new System.EventHandler(this.userEditorToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(157, 6);
             // 
             // scintillaTestToolStripMenuItem
             // 
             this.scintillaTestToolStripMenuItem.Name = "scintillaTestToolStripMenuItem";
-            this.scintillaTestToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.scintillaTestToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.scintillaTestToolStripMenuItem.Text = "Scintilla Test";
             this.scintillaTestToolStripMenuItem.Click += new System.EventHandler(this.scintillaTestToolStripMenuItem_Click);
+            // 
+            // projectExplorerToolStripMenuItem
+            // 
+            this.projectExplorerToolStripMenuItem.Name = "projectExplorerToolStripMenuItem";
+            this.projectExplorerToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.projectExplorerToolStripMenuItem.Text = "Project Explorer";
+            this.projectExplorerToolStripMenuItem.Click += new System.EventHandler(this.projectExplorerToolStripMenuItem_Click);
             // 
             // toolStripSeparator8
             // 
@@ -490,7 +499,7 @@
             this.btnCompile});
             this.toolStrip1.Location = new System.Drawing.Point(3, 27);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(190, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(155, 25);
             this.toolStrip1.TabIndex = 1;
             // 
             // newToolStripButton
@@ -530,10 +539,8 @@
             // 
             // btnCompile
             // 
-            this.btnCompile.Image = ((System.Drawing.Image)(resources.GetObject("btnCompile.Image")));
-            this.btnCompile.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCompile.Name = "btnCompile";
-            this.btnCompile.Size = new System.Drawing.Size(72, 22);
+            this.btnCompile.Size = new System.Drawing.Size(68, 22);
             this.btnCompile.Text = "Compile";
             this.btnCompile.Click += new System.EventHandler(this.btnCompile_Click);
             // 
@@ -620,8 +627,9 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemComPort;
-        private System.Windows.Forms.ToolStripButton btnCompile;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripSplitButton btnCompile;
+        private System.Windows.Forms.ToolStripMenuItem projectExplorerToolStripMenuItem;
     }
 }
 

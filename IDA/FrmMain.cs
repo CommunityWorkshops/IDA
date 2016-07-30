@@ -23,6 +23,7 @@ namespace IDA
 
         private readonly FrmSplash _frmSplash = new FrmSplash();
         private FrmLog _frmLog = new FrmLog();
+        private FrmProjectExplorer _frmProjectExplorer = new FrmProjectExplorer();
 
 
         public FrmMain()
@@ -73,6 +74,8 @@ namespace IDA
         {
             if (persistString == typeof(FrmLog).ToString())
                 return _frmLog;
+            else if (persistString == typeof(FrmProjectExplorer).ToString())        
+                return _frmProjectExplorer;
             else if (persistString == typeof(FrmCodeEditor).ToString())
                 return null;
 
@@ -326,7 +329,19 @@ namespace IDA
             Log("Starting Compilation");
             IDA.Controllers.CLI.Exec exec = new Controllers.CLI.Exec();
             exec.Log += Exec_Log;
+            exec.CompilationCompleted += Exec_CompilationCompleted;
+            Log("Starting Compiler");
             exec.ExecuteCompiler();
+            
+        }
+
+        private void Exec_CompilationCompleted()
+        {
+            Log("Starting Serial Writer");
+            IDA.Controllers.CLI.Exec exec = new Controllers.CLI.Exec();
+            exec.Log += Exec_Log;
+            Log("Writing Embedded Code");
+            exec.ExecuteSerialWriter();
         }
 
         private void Exec_Log(string message)
@@ -347,6 +362,12 @@ namespace IDA
                     saveToolStripButton.Enabled = false;
                 }
             }
+        }
+
+        private void projectExplorerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmProjectExplorer pe = new Forms.Dockable.FrmProjectExplorer();
+            pe.Show(dockPanel1, DockState.DockRight);
         }
     }
 
