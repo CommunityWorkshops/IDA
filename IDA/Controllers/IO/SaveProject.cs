@@ -59,7 +59,6 @@ namespace IDA.Controllers.IO
                 sw?.Close();
                 fs?.Close();
             }
-
         }
 
                

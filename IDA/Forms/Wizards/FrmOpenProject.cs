@@ -26,7 +26,9 @@ namespace IDA.Forms.Wizards
         private void FrmOpenProject_Load(object sender, EventArgs e)
         {
             // Get all Directories.
-            foreach(var project in Directory.GetDirectories(SystemModel.ProjectsPath))
+            var path = Directory.GetDirectories(SystemModel.ProjectsPath);
+
+                foreach (var project in path)
             {
                 // If they contain a .ida file that is the same name as the directory then add to the list of projects
                 var ConfigurationPath = Path.Combine(SystemModel.ProjectsPath, Path.Combine(project, ".ida"));

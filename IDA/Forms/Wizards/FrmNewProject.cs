@@ -81,7 +81,10 @@ namespace IDA.Forms.Wizards
             if (PlatformSelected && PlatformVersionSelected)
             {
                 if (!tbProjectName.Enabled) tbProjectName.Enabled = true;
-                if (tbProjectName.Enabled && !string.IsNullOrEmpty(tbProjectName.Text)) btnCreate.Enabled = false;
+                if (tbProjectName.Enabled && !string.IsNullOrEmpty(tbProjectName.Text))
+                    btnCreate.Enabled = true;
+                else
+                    btnCreate.Enabled = false;
             }
         }
 
@@ -192,6 +195,13 @@ namespace IDA.Forms.Wizards
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
+
+            CurrentProjectModel.Name = tbProjectName.Text;
+            CurrentProjectModel.IsLibrary = cbThisIsALibrary.Checked;
+            CurrentProjectModel.IsOpenSource = cbThisIsOpenSource.Checked;
+            CurrentProjectModel.Platform = _platformType;
+            CurrentProjectModel.Version = _versionType;
+
             if (string.IsNullOrEmpty(CurrentProjectModel.Name) || string.IsNullOrEmpty(CurrentProjectModel.Platform) || string.IsNullOrEmpty(CurrentProjectModel.Version))
             {
                 if (string.IsNullOrEmpty(CurrentProjectModel.Name)) MessageBox.Show("You need to give your project a name");
@@ -217,7 +227,7 @@ namespace IDA.Forms.Wizards
 
         private void tbProjectName_TextChanged(object sender, EventArgs e)
         {
-
+            EnableUI();
         }
     }
 }
