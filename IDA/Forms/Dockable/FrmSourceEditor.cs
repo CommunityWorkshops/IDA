@@ -18,7 +18,7 @@ namespace IDA.Forms.Dockable
 
         public FrmCodeEditor()
         {
-            InitializeComponent();            
+            InitializeComponent();
             Initialise();
         }
 
@@ -26,7 +26,7 @@ namespace IDA.Forms.Dockable
         {
             InitializeComponent();
             Name = name;
-            Initialise();            
+            Initialise();
         }
 
         private void Initialise()
@@ -56,14 +56,14 @@ namespace IDA.Forms.Dockable
             editor.Styles[Style.Cpp.CommentLine].ForeColor = Color.FromArgb(0, 128, 0); // Green
             editor.Styles[Style.Cpp.CommentLine].Italic = true; // Italic
             editor.Styles[Style.Cpp.CommentLineDoc].ForeColor = Color.FromArgb(128, 128, 128); // Gray
-            editor.Styles[Style.Cpp.Number].ForeColor = Color.Olive;
+            editor.Styles[Style.Cpp.Number].ForeColor = Color.Yellow;
             editor.Styles[Style.Cpp.Word].ForeColor = Color.LightBlue;
             editor.Styles[Style.Cpp.Word2].ForeColor = Color.AliceBlue;
             editor.Styles[Style.Cpp.String].ForeColor = Color.FromArgb(163, 21, 21); // Red
             editor.Styles[Style.Cpp.Character].ForeColor = Color.FromArgb(163, 21, 21); // Red
             editor.Styles[Style.Cpp.Verbatim].ForeColor = Color.FromArgb(163, 21, 21); // Red
             editor.Styles[Style.Cpp.StringEol].BackColor = Color.Pink;
-            editor.Styles[Style.Cpp.Operator].ForeColor = Color.Purple;
+            editor.Styles[Style.Cpp.Operator].ForeColor = Color.Azure;
             editor.Styles[Style.Cpp.Preprocessor].ForeColor = Color.Maroon;
 
             // Set the keywords
@@ -73,7 +73,7 @@ namespace IDA.Forms.Dockable
 
         }
 
-       
+
 
         public void Save()
         {
@@ -93,11 +93,14 @@ namespace IDA.Forms.Dockable
 
             sw.Close();
             fs.Close();
+
+            editor.SetSavePoint();
         }
 
         private void Editor_SavePointLeft(object sender, EventArgs e)
         {
             EditorDirty?.Invoke(Tag.ToString());
+
         }
 
         private void Editor_SavePointReached(object sender, EventArgs e)
@@ -107,7 +110,7 @@ namespace IDA.Forms.Dockable
 
         public void GotoLine(int lineNumber)
         {
-
+            
         }
 
         private void Scintilla1_Insert(object sender, ModificationEventArgs e)

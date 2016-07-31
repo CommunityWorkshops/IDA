@@ -1,4 +1,5 @@
-﻿using IDA.Models;
+﻿using IDA.Forms.Dockable;
+using IDA.Models;
 using ScintillaNET;
 using System;
 using System.Collections.Generic;
@@ -60,5 +61,7 @@ namespace IDA.Controllers.IO
             }
 
         }
+
+               
     }
 }

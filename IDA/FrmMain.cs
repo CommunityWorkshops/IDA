@@ -51,6 +51,8 @@ namespace IDA
             toolStripMenuItemComPort.Text = "Port " + CurrentProjectModel.ComPort;
         }
 
+
+        //TODO: Use this http://www.codeproject.com/Articles/60579/A-USB-Library-to-Detect-USB-Devices
         private void DriveDetector_QueryRemove(object sender, DriveDetectorEventArgs e)
         {
             // If we recognise this device then we should query it?
@@ -74,7 +76,7 @@ namespace IDA
         {
             if (persistString == typeof(FrmLog).ToString())
                 return _frmLog;
-            else if (persistString == typeof(FrmProjectExplorer).ToString())        
+            else if (persistString == typeof(FrmProjectExplorer).ToString())
                 return _frmProjectExplorer;
             else if (persistString == typeof(FrmCodeEditor).ToString())
                 return null;
@@ -83,7 +85,7 @@ namespace IDA
         }
         #endregion
 
-        
+
         #region Views
         private void resetAllViewsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -192,7 +194,7 @@ namespace IDA
             Log("Creating New Project");
 
             // Create Project Base Path
-            IDA.Models.CurrentProjectModel.ProjectBasePath = PathsGenerator.CreateBasePath(name);
+            CurrentProjectModel.ProjectBasePath = PathsGenerator.CreateBasePath(name);
 
             // Open Code Window
             var _frmCodeEditor = new FrmCodeEditor(name);
@@ -219,7 +221,8 @@ namespace IDA
             // Load Project Explorer
 
             // Save Project Configuration File
-            Controllers.IO.SaveProject sp = new SaveProject();
+            Log("Saving Configuration File");
+            SaveProject sp = new SaveProject();
             sp.OnLog += Sp_Log;
             sp.SaveProjectConfiguration();
             sp.OnLog -= Sp_Log;
@@ -308,8 +311,8 @@ namespace IDA
                 }
             }
 
-            // Do the transformation of the files - really should be done as we go?
-            
+            // Do the transformation of the files? - really should be done as we go?
+
             // compile the transformed files
             Log("Starting Compilation");
             IDA.Controllers.CLI.Exec exec = new Controllers.CLI.Exec();
@@ -317,13 +320,13 @@ namespace IDA
             exec.CompilationCompleted += Exec_CompilationCompleted;
             Log("Starting Compiler");
             exec.ExecuteCompiler();
-            
+
         }
 
         private void Exec_CompilationCompleted()
         {
             Log("Starting Serial Writer");
-            IDA.Controllers.CLI.Exec exec = new Controllers.CLI.Exec();
+            Controllers.CLI.Exec exec = new Controllers.CLI.Exec();
             exec.Log += Exec_Log;
             Log("Writing Embedded Code");
             exec.ExecuteSerialWriter();
@@ -336,7 +339,7 @@ namespace IDA
 
         private void saveToolStripButton_Click(object sender, EventArgs e)
         {
-            Log("Saving project");
+            Log("Saving File");
             foreach (Control ctrl in dockPanel1.Documents)
             {
                 if (ctrl.Tag.ToString() == CurrentProjectModel.Name)
@@ -354,7 +357,59 @@ namespace IDA
             FrmProjectExplorer pe = new Forms.Dockable.FrmProjectExplorer();
             pe.Show(dockPanel1, DockState.DockRight);
         }
+
+        // Open a previously created project.
+        private void openToolStripButton_Click(object sender, EventArgs e)
+        {
+            // If a new project is opened... do we Save and Close this project? For now we will.
+            FrmOpenProject op = new Forms.Wizards.FrmOpenProject();
+            DialogResult dr = op.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                if (!string.IsNullOrEmpty(CurrentProjectModel.Name))
+                {
+                    SaveProject sp = new SaveProject();
+
+                    // Ask before saving.
+                    DialogResult dresult = MessageBox.Show("Save Project?", "Save Project", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                    if (dresult == DialogResult.Yes)
+                    {
+                        foreach (Control ctrl in dockPanel1.Documents)
+                        {
+                            if (ctrl.Tag.ToString() == CurrentProjectModel.Name)
+                            {
+                                FrmCodeEditor fce = (FrmCodeEditor)ctrl;
+                                fce.Save();                                
+                                ctrl.Text = CurrentProjectModel.Name;
+                                saveToolStripButton.Enabled = false;
+                            }
+                        }
+                        sp.SaveProjectConfiguration();
+                    }
+
+                    CloseDocuments();
+                    CurrentProjectModel.Reset();
+                    // Now open the project
+                    OpenProject oProj = new OpenProject();
+                    oProj.Log += OProj_Log;
+                    oProj.LoadProjectConfiguration();
+
+                    
+                }
+            }
+        }
+
+        private void OProj_Log(string message)
+        {
+            Log(message);
+        }
+
+        private void CloseDocuments()
+        {
+          foreach( var doc in dockPanel1.Documents)
+            {
+                doc.DockHandler.Close();
+            }
+        }
     }
-
-
 }

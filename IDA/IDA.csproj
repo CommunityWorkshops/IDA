@@ -59,6 +59,7 @@
     <Compile Include="Controllers\IO\LoadCodeCompletion.cs" />
     <Compile Include="Controllers\IO\LoadDefaultPlatformCode.cs" />
     <Compile Include="Controllers\IO\LoadLicenceHeader.cs" />
+    <Compile Include="Controllers\IO\OpenProject.cs" />
     <Compile Include="Controllers\IO\PathsGenerator.cs" />
     <Compile Include="Controllers\IO\SaveProject.cs" />
     <Compile Include="Controllers\IO\UserSettingsIO.cs" />
@@ -68,6 +69,12 @@
     </Compile>
     <Compile Include="Controls\NewProjectSelectionControl.Designer.cs">
       <DependentUpon>NewProjectSelectionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OpenProjectSelectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OpenProjectSelectionControl.Designer.cs">
+      <DependentUpon>OpenProjectSelectionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Dialog\FrmComPortSelector.cs">
       <SubType>Form</SubType>
@@ -123,6 +130,12 @@
     <Compile Include="Forms\Wizards\FrmNewProject.Designer.cs">
       <DependentUpon>FrmNewProject.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Wizards\FrmOpenProject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Wizards\FrmOpenProject.Designer.cs">
+      <DependentUpon>FrmOpenProject.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +149,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\NewProjectSelectionControl.resx">
       <DependentUpon>NewProjectSelectionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OpenProjectSelectionControl.resx">
+      <DependentUpon>OpenProjectSelectionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dialog\FrmComPortSelector.resx">
       <DependentUpon>FrmComPortSelector.cs</DependentUpon>
@@ -164,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Wizards\FrmNewProject.resx">
       <DependentUpon>FrmNewProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Wizards\FrmOpenProject.resx">
+      <DependentUpon>FrmOpenProject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
@@ -6926,6 +6945,7 @@
     <Content Include="Templates\Platforms\BeagleBone\Images\Platform.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Templates\Platforms\Blank\Images\circuit.png" />
     <Content Include="Templates\Platforms\Nanode\Images\Platform.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -6983,7 +7003,6 @@
     <Folder Include="Templates\Platforms\Adruino\Options\" />
     <Folder Include="Templates\Platforms\BeagleBone\Options\" />
     <Folder Include="Templates\Platforms\BeagleBone\Versions\Black\Images\" />
-    <Folder Include="Templates\Platforms\Blank\Images\" />
     <Folder Include="Templates\Platforms\Blank\Options\" />
     <Folder Include="Templates\Platforms\Raspberry Pi\Versions\" />
   </ItemGroup>

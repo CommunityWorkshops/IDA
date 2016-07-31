@@ -1,4 +1,6 @@
-﻿namespace IDA.Models
+﻿using System;
+
+namespace IDA.Models
 {
     internal static class CurrentProjectModel
     {
@@ -16,5 +18,25 @@
 
         public static string ProjectBasePath { get; set; }
         public static string ProjectBuildPath { get; set; }
+
+
+        /// <summary>
+        /// Reset all settings for the current project prior to opening a new project.
+        /// Leave ComPort set as that will probably not be changing.
+        /// </summary>
+        internal static void Reset()
+        {
+            Platform = string.Empty;
+            Version = string.Empty;
+            Name = string.Empty;
+            IsLibrary = false;
+            IsOpenSource = false;
+            MajorVersion = 0;
+            MajorBuild = 0;
+            MinorVersion = 0;
+            MinorBuild = 0;
+            ProjectBasePath = string.Empty;
+            ProjectBuildPath = string.Empty;
+        }
     }
 }

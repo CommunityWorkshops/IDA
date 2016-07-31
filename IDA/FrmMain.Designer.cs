@@ -418,34 +418,38 @@
             // logToolStripMenuItem
             // 
             this.logToolStripMenuItem.Name = "logToolStripMenuItem";
-            this.logToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.logToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.logToolStripMenuItem.Text = "Log";
             this.logToolStripMenuItem.Click += new System.EventHandler(this.logToolStripMenuItem_Click);
-
+            // 
+            // codeEditorToolStripMenuItem
+            // 
+            this.codeEditorToolStripMenuItem.Name = "codeEditorToolStripMenuItem";
+            this.codeEditorToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             // 
             // licenseEditorToolStripMenuItem
             // 
             this.licenseEditorToolStripMenuItem.Name = "licenseEditorToolStripMenuItem";
-            this.licenseEditorToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.licenseEditorToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.licenseEditorToolStripMenuItem.Text = "Licence Editor";
             this.licenseEditorToolStripMenuItem.Click += new System.EventHandler(this.licenseEditorToolStripMenuItem_Click);
             // 
             // userEditorToolStripMenuItem
             // 
             this.userEditorToolStripMenuItem.Name = "userEditorToolStripMenuItem";
-            this.userEditorToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.userEditorToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.userEditorToolStripMenuItem.Text = "User Editor";
             this.userEditorToolStripMenuItem.Click += new System.EventHandler(this.userEditorToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(157, 6);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(153, 6);
             // 
             // scintillaTestToolStripMenuItem
             // 
             this.scintillaTestToolStripMenuItem.Name = "scintillaTestToolStripMenuItem";
-            this.scintillaTestToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.scintillaTestToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.scintillaTestToolStripMenuItem.Text = "Scintilla Test";
             this.scintillaTestToolStripMenuItem.Click += new System.EventHandler(this.scintillaTestToolStripMenuItem_Click);
             // 
@@ -493,7 +497,7 @@
             this.btnCompile});
             this.toolStrip1.Location = new System.Drawing.Point(3, 27);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(155, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(186, 25);
             this.toolStrip1.TabIndex = 1;
             // 
             // newToolStripButton
@@ -514,6 +518,7 @@
             this.openToolStripButton.Name = "openToolStripButton";
             this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.openToolStripButton.Text = "&Open";
+            this.openToolStripButton.Click += new System.EventHandler(this.openToolStripButton_Click);
             // 
             // saveToolStripButton
             // 

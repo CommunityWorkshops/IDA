@@ -10,6 +10,7 @@ namespace IDA.Models
     {
 
         public static string IDAVersion = GetVersion();
+        internal static string ProjectsPath = @"C:\Users\Dave Gordon\Documents\IDA\Projects";
 
         private static string GetVersion()
         {
