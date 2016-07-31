@@ -211,9 +211,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Binn\Compilers\Arduino\CompilerCommands.tpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Binn\Compilers\Arduino\hardware\arduino\avr\bootloaders\atmega8\ATmegaBOOT-prod-firmware-2009-11-07.hex">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

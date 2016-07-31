@@ -363,6 +363,7 @@ namespace IDA
         {
             // If a new project is opened... do we Save and Close this project? For now we will.
             FrmOpenProject op = new Forms.Wizards.FrmOpenProject();
+            op.Log += Op_Log;
             DialogResult dr = op.ShowDialog();
             if (dr == DialogResult.OK)
             {
@@ -379,24 +380,35 @@ namespace IDA
                             if (ctrl.Tag.ToString() == CurrentProjectModel.Name)
                             {
                                 FrmCodeEditor fce = (FrmCodeEditor)ctrl;
-                                fce.Save();                                
+                                fce.Save();
                                 ctrl.Text = CurrentProjectModel.Name;
                                 saveToolStripButton.Enabled = false;
                             }
                         }
                         sp.SaveProjectConfiguration();
                     }
-
-                    CloseDocuments();
-                    CurrentProjectModel.Reset();
-                    // Now open the project
-                    OpenProject oProj = new OpenProject();
-                    oProj.Log += OProj_Log;
-                    oProj.LoadProjectConfiguration();
-
-                    
                 }
+
+                CloseDocuments();
+                CurrentProjectModel.Reset();
+
+                // Now open the project
+                CurrentProjectModel.ProjectBasePath = op.ProjectBasePath;
+                CurrentProjectModel.Name = GetProjectName(CurrentProjectModel.ProjectBasePath);
+                OpenProject oProj = new OpenProject();
+                oProj.Log += OProj_Log;
+                oProj.LoadProjectConfiguration();
             }
+        }
+
+        private string GetProjectName(string projectName)
+        {
+            return projectName.Split('\\')[projectName.Split('\\').Length -1];
+        }
+
+        private void Op_Log(string message)
+        {
+            Log(message);
         }
 
         private void OProj_Log(string message)
@@ -406,7 +418,7 @@ namespace IDA
 
         private void CloseDocuments()
         {
-          foreach( var doc in dockPanel1.Documents)
+            foreach (var doc in dockPanel1.Documents)
             {
                 doc.DockHandler.Close();
             }

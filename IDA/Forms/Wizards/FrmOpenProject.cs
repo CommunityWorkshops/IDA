@@ -15,6 +15,8 @@ namespace IDA.Forms.Wizards
 {
     public partial class FrmOpenProject : Form
     {
+        public string ProjectBasePath { get; internal set; }
+
         public delegate void LogHandler(string message);
         public event LogHandler Log;
 
@@ -65,11 +67,25 @@ namespace IDA.Forms.Wizards
         private void Psc_SelectedProject(string ProjectName)
         {
             DoLog("Selected Project " + ProjectName);
+            ProjectBasePath = ProjectName; 
         }
 
         private void DoLog(string message)
         {
             Log?.Invoke(message);
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            DoLog("Nothing Selected");
+            Close();
+        }
+
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            Close();
         }
     }
 }

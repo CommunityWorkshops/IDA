@@ -33,8 +33,8 @@ namespace IDA.Controls
             Log("Adding previous Project " + ProjectName);
             pbPlatformIcon.Image = GetPlatformImage(Platform);
             pbProjectIcon.Image = GetProjectIcon(ProjectName);
-            lblName.Text = ProjectName;
-            _ProjectName = ProjectName;
+            lblName.Text = GetProjectName(ProjectName);
+            _ProjectName = ProjectName; 
         }
 
         private Image GetPlatformImage(string platform)
@@ -50,10 +50,17 @@ namespace IDA.Controls
             }
         }
 
+        private string GetProjectName(string projectName)
+        {
+            return projectName.Split('\\')[projectName.Split('\\').Count() - 1];
+        }
+
+
         private Image GetProjectIcon(string projectName)
         {
             Log("Getting Project Icon " + projectName);
-            var projectImageLocation = Path.Combine(Path.Combine(SystemModel.ProjectsPath, projectName), projectName, ".jpg");
+            var pImage = projectName.Split('\\')[projectName.Split('\\').Count() -1] + ".jpg";
+            var projectImageLocation = Path.Combine(projectName,  pImage); 
 
             if (File.Exists(projectImageLocation))
             {
@@ -88,6 +95,7 @@ namespace IDA.Controls
 
         private void IsSelected()
         {
+            BackColor = Color.Chartreuse;
             SelectedProject?.Invoke(_ProjectName);
         }
 
