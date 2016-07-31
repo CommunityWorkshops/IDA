@@ -59,7 +59,7 @@ namespace IDA.Controllers.IO
 
         internal string LoadProjectPlatform(string projectName)
         {
-            var pc = Path.Combine(Path.Combine(SystemModel.ProjectsPath, projectName),projectName,".ida");
+            
             var result = string.Empty;
 
             FileStream fs = null;
@@ -67,7 +67,7 @@ namespace IDA.Controllers.IO
 
             try
             {
-                fs = new FileStream(Path.Combine(CurrentProjectModel.ProjectBasePath, pc), FileMode.Open, FileAccess.Read, FileShare.None);
+                fs = new FileStream(projectName, FileMode.Open, FileAccess.Read, FileShare.None);
                 sr = new StreamReader(fs);
 
                 sr.ReadLine(); // sw.WriteLine("#ProjectConfigurationVersion=1");

@@ -28,17 +28,26 @@ namespace IDA.Forms.Wizards
             // Get all Directories.
             var path = Directory.GetDirectories(SystemModel.ProjectsPath);
 
-                foreach (var project in path)
+            foreach (var project in path)
             {
                 // If they contain a .ida file that is the same name as the directory then add to the list of projects
-                var ConfigurationPath = Path.Combine(SystemModel.ProjectsPath, Path.Combine(project, ".ida"));
+                var projName = project.Split('\\')[project.Split('\\').Count() - 1];
+                var configName = projName + ".ida";
+                var ConfigurationPath = Path.Combine(project, configName);
                 if (File.Exists(ConfigurationPath))
                 {
                     OpenProjectSelectionControl psc = new IDA.Controls.OpenProjectSelectionControl();
                     psc.SelectedProject += Psc_SelectedProject;
-                    psc.ProjectSelection(GetPlatform(project), project);
+                    psc.DoLog += Psc_DoLog;
+                    psc.ProjectSelection(GetPlatform(ConfigurationPath), project);
+                    flpPreviousProjects.Controls.Add(psc);
                 }
             }
+        }
+
+        private void Psc_DoLog(string message)
+        {
+            DoLog(message);
         }
 
         private string GetPlatform(string project)

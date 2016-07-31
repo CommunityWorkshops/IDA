@@ -37,7 +37,6 @@
             // 
             // pbProjectIcon
             // 
-            this.pbProjectIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbProjectIcon.Location = new System.Drawing.Point(4, 4);
             this.pbProjectIcon.Name = "pbProjectIcon";
             this.pbProjectIcon.Size = new System.Drawing.Size(142, 109);
@@ -49,7 +48,9 @@
             // pbPlatformIcon
             // 
             this.pbPlatformIcon.Location = new System.Drawing.Point(4, 4);
+            this.pbPlatformIcon.Margin = new System.Windows.Forms.Padding(3, 3, 5, 5);
             this.pbPlatformIcon.Name = "pbPlatformIcon";
+            this.pbPlatformIcon.Padding = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.pbPlatformIcon.Size = new System.Drawing.Size(47, 50);
             this.pbPlatformIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbPlatformIcon.TabIndex = 1;

@@ -6948,19 +6948,21 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="circuit.ico" />
-    <Content Include="Templates\Platforms\Adruino\Images\Platform.jpg">
+    <Content Include="Templates\Platforms\Arduino\Images\Platform.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Platforms\Adruino\Versions\Mega\Images\Version.PNG">
+    <Content Include="Templates\Platforms\Arduino\Versions\Mega\Images\Version.PNG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Platforms\Adruino\Versions\Uno\Images\Version.jpg">
+    <Content Include="Templates\Platforms\Arduino\Versions\Uno\Images\Version.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Platforms\BeagleBone\Images\Platform.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Platforms\Blank\Images\circuit.png" />
+    <Content Include="Templates\Platforms\Blank\Images\circuit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\Platforms\Nanode\Images\Platform.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -7015,7 +7017,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Templates\Platforms\Adruino\Options\" />
+    <Folder Include="Templates\Platforms\Arduino\Options\" />
     <Folder Include="Templates\Platforms\BeagleBone\Options\" />
     <Folder Include="Templates\Platforms\BeagleBone\Versions\Black\Images\" />
     <Folder Include="Templates\Platforms\Blank\Options\" />

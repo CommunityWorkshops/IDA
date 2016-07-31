@@ -39,7 +39,7 @@ namespace IDA.Controls
 
         private Image GetPlatformImage(string platform)
         {
-            Log("Getting Platform Image");
+            Log("Getting Platform Image " + platform);
             switch (platform.ToLowerInvariant())
             {
                 case "arduino":
@@ -52,7 +52,7 @@ namespace IDA.Controls
 
         private Image GetProjectIcon(string projectName)
         {
-            Log("Getting Project Icon");
+            Log("Getting Project Icon " + projectName);
             var projectImageLocation = Path.Combine(Path.Combine(SystemModel.ProjectsPath, projectName), projectName, ".jpg");
 
             if (File.Exists(projectImageLocation))
