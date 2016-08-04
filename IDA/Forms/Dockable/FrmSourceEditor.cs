@@ -179,10 +179,10 @@ namespace IDA.Forms.Dockable
             this.maxLineNumberCharLength = maxLineNumberCharLength;
         }
 
-        internal void Open(string projectBasePath)
+        internal void OpenProjectMain(string projectBasePath)
         {
-            var projSourceName = projectBasePath.Split('\\')[projectBasePath.Split('\\').Length - 1] + ".c";
-            var sourceLocation = Path.Combine(projectBasePath, projSourceName);
+            var projSourceName = projectBasePath.Split('\\')[projectBasePath.Split('\\').Length - 1];
+            var sourceLocation = Path.Combine(projectBasePath, projSourceName + ".c");
             
             IDA.Controllers.IO.LoadSourceFile lsf = new Controllers.IO.LoadSourceFile(sourceLocation);
 
@@ -200,6 +200,28 @@ namespace IDA.Forms.Dockable
                     firstBlank = true;
                     editor.AddText(line + Environment.NewLine);
                 }                
+            }
+        }
+
+        internal void Open(string name)
+        {
+           
+            IDA.Controllers.IO.LoadSourceFile lsf = new Controllers.IO.LoadSourceFile(name);
+
+            var lines = lsf.LoadSource();
+            var firstBlank = true;
+            foreach (var line in lines)
+            {
+                if (string.IsNullOrEmpty(line) && firstBlank)
+                {
+                    // Ignore extra lines.
+                    firstBlank = false;
+                }
+                else
+                {
+                    firstBlank = true;
+                    editor.AddText(line + Environment.NewLine);
+                }
             }
         }
     }

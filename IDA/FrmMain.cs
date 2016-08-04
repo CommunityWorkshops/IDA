@@ -38,6 +38,7 @@ namespace IDA
             InitializeComponent();
 
             SplashOne();
+            ProjectExplorerEvents(_frmProjectExplorer);
             UsbEventSubscription();
             SplashTwo();
             LogWindowEventSubscriptions();
@@ -303,19 +304,20 @@ namespace IDA
             _frmCodeEditor.Show(dockPanel1, DockState.Document);
             _frmCodeEditor.EditorDirty += _frmCodeEditor_EditorDirty;
             _frmCodeEditor.EditorClean += _frmCodeEditor_EditorClean;
-            _frmCodeEditor.Parent.Text = name;
+            _frmCodeEditor.Parent.Text = GetProjectName(name);
             _frmCodeEditor.Tag = name;
+            _frmCodeEditor.Open(name);
 
-            // Load Appropriate Keywords For Code Completion
-            Log("Load Code Completion");
-            LoadCodeCompletion.Load();
-            // Load Appropriate License Header
-            // Populate with License Header
-            Log("Adding Licence Header");
-            _frmCodeEditor.AddLicenceHeader(LoadLicenceHeader.Load());
-            // Populate with default code for the platform and version
-            Log("Adding Default Platform Code");
-            _frmCodeEditor.AddPlatformCode(LoadDefaultPlatformCode.Load());
+            //// Load Appropriate Keywords For Code Completion
+            //Log("Load Code Completion");
+            //LoadCodeCompletion.Load();
+            //// Load Appropriate License Header
+            //// Populate with License Header
+            //Log("Adding Licence Header");
+            //_frmCodeEditor.AddLicenceHeader(LoadLicenceHeader.Load());
+            //// Populate with default code for the platform and version
+            //Log("Adding Default Platform Code");
+            //_frmCodeEditor.AddPlatformCode(LoadDefaultPlatformCode.Load());
         }
 
         private void _frmCodeEditor_EditorClean(string name)
@@ -562,8 +564,8 @@ namespace IDA
                 // Now open the project
                 if (!string.IsNullOrEmpty(op.ProjectBasePath))
                 {
-                    CurrentProjectModel.ProjectBasePath = op.ProjectBasePath;
-                    CurrentProjectModel.Name = GetProjectName(CurrentProjectModel.ProjectBasePath);
+                    CurrentProjectModel.ProjectBasePath =  op.ProjectBasePath.Replace(op.ProjectBasePath.Split('\\')[op.ProjectBasePath.Split('\\').Length-1],"");
+                    CurrentProjectModel.ProjectConfigurationPath = op.ProjectBasePath;
                     OpenProject oProj = new OpenProject();
                     oProj.Log += OProj_Log;
                     oProj.LoadProjectConfiguration();
@@ -571,9 +573,9 @@ namespace IDA
                     codeEditor.Show(dockPanel1, DockState.Document);
                     codeEditor.EditorDirty += _frmCodeEditor_EditorDirty;
                     codeEditor.EditorClean += _frmCodeEditor_EditorClean;
-                    codeEditor.Tag = CurrentProjectModel.Name;
-                    codeEditor.Open(CurrentProjectModel.ProjectBasePath);
-                    codeEditor.Parent.Text = CurrentProjectModel.Name;
+                    codeEditor.Tag = CurrentProjectModel.ProjectBasePath;
+                    codeEditor.OpenProjectMain(CurrentProjectModel.ProjectBasePath);
+                    codeEditor.Parent.Text =  CurrentProjectModel.Name;
                     // Load Project Explorer
                     _frmProjectExplorer.LoadProject(CurrentProjectModel.ProjectBasePath);                    
                 }

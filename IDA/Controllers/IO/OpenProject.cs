@@ -16,13 +16,12 @@ namespace IDA.Controllers.IO
 
         internal void LoadProjectConfiguration()
         {
-            var pc = CurrentProjectModel.Name + ".ida";
             FileStream fs = null;
             StreamReader sr = null;
 
             try
             {
-                fs = new FileStream(Path.Combine(CurrentProjectModel.ProjectBasePath, pc), FileMode.Open, FileAccess.Read, FileShare.None);
+                fs = new FileStream(CurrentProjectModel.ProjectConfigurationPath, FileMode.Open, FileAccess.Read, FileShare.None);
                 sr = new StreamReader(fs);
 
                 sr.ReadLine(); // sw.WriteLine("#ProjectConfigurationVersion=1");

@@ -34,7 +34,9 @@ namespace IDA.Controls
             pbPlatformIcon.Image = GetPlatformImage(Platform);
             pbProjectIcon.Image = GetProjectIcon(ProjectName);
             lblName.Text = GetProjectName(ProjectName);
-            _ProjectName = ProjectName; 
+            _ProjectName = Path.Combine(ProjectName,lblName.Text +  ".ida");
+            Tag = _ProjectName;
+
         }
 
         private Image GetPlatformImage(string platform)
@@ -99,9 +101,15 @@ namespace IDA.Controls
             SelectedProject?.Invoke(_ProjectName);
         }
 
+        /// <summary>
+        /// Returns the Project *.ida full path
+        /// </summary>
+        /// <param name="message">
+        /// string: fully qualified path to the projects configuration (*.ida) file
+        /// </param>
         private void Log(string message)
         {
-            DoLog?.Invoke(message);
+            DoLog?.Invoke(message + ".ida");
         }
     }
 }

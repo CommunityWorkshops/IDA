@@ -96,7 +96,7 @@ namespace IDA.Forms.Dockable
         private void ProjectView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             Log("Opening File " + e.Node.Tag);
-            ProjectExplorerOpenDocument(e.Node.Tag.ToString());
+            ProjectExplorerOpenDocument?.Invoke(e.Node.Tag.ToString());
         }
 
         private void ProjectView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -119,9 +119,24 @@ namespace IDA.Forms.Dockable
             Log("After Select " + e.Node.Tag);
         }
 
+        /// <summary>
+        /// Allows the user to change the files name from the explorer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ProjectView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             Log("After Label Edit " + e.Node.Tag);
+            // Warn about changing extension
+            // Cancel change if required
+
+            var newname = e.Label;
+            // Tell Main to 
+            // Change file name on File system
+            // If Document Change Project configuration
+            // Change appropriate tags
+
+
         }
 
 
@@ -142,14 +157,19 @@ namespace IDA.Forms.Dockable
 
             var directoryNode = tNode;
             foreach (var directory in directoryInfo.GetDirectories())
-            {                
+            {
                 directoryNode.Nodes.Add(CreateDirectoryNode(directory));
             }
             foreach (var file in directoryInfo.GetFiles())
             {
                 var nNode = new TreeNode(file.Name);
                 nNode.Tag = file.FullName;
-                nNode.ImageKey = "TxtImage";
+
+                if (file.FullName.ToLowerInvariant().EndsWith(".ida"))
+                    nNode.ImageKey = "IdaImage";
+
+                else
+                    nNode.ImageKey = "TxtImage";
                 directoryNode.Nodes.Add(nNode);
             }
             return directoryNode;

@@ -159,6 +159,7 @@
             this.ilTreeview.Images.SetKeyName(1, "FolderImage");
             this.ilTreeview.Images.SetKeyName(2, "TxtImage");
             this.ilTreeview.Images.SetKeyName(3, "GreenArrowImage.png");
+            this.ilTreeview.Images.SetKeyName(4, "IdaImage");
             // 
             // ProjectWatcher
             // 

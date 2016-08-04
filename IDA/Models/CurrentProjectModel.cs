@@ -18,6 +18,7 @@ namespace IDA.Models
 
         public static string ProjectBasePath { get; set; }
         public static string ProjectBuildPath { get; set; }
+        public static string ProjectConfigurationPath { get; internal set; }
 
 
         /// <summary>

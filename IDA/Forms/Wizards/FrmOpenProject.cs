@@ -42,8 +42,7 @@ namespace IDA.Forms.Wizards
                     psc.SelectedProject += Psc_SelectedProject;
                     psc.DoLog += Psc_DoLog;
                     psc.ProjectSelection(GetPlatform(ConfigurationPath), project);
-                    flpPreviousProjects.Controls.Add(psc);
-                    psc.Tag = CurrentProjectModel.Name;
+                    flpPreviousProjects.Controls.Add(psc);                    
                 }
             }
         }
