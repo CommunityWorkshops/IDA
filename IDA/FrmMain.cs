@@ -18,7 +18,7 @@ namespace IDA
         #region Docking Properties
         private readonly string _configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.config");
         private bool _saveLayout = true;
-        private  DeserializeDockContent _deserializeDockContent;
+        private DeserializeDockContent _deserializeDockContent;
         #endregion
 
         #region USB Properties
@@ -31,7 +31,7 @@ namespace IDA
         private FrmProjectExplorer _frmProjectExplorer = new FrmProjectExplorer();
         #endregion
 
-        
+
         public FrmMain()
         {
 
@@ -109,7 +109,7 @@ namespace IDA
 
         private void DeserialiseContent()
         {
-        _deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+            _deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
         }
 
 
@@ -235,11 +235,6 @@ namespace IDA
             Log(message);
         }
 
-        private void _frmProjectExplorer_ProjectExplorerLog1(string message)
-        {
-            Log(message);
-        }
-
         private void Op_Log(string message)
         {
             Log(message);
@@ -281,6 +276,28 @@ namespace IDA
             CurrentProjectModel.ProjectBasePath = PathsGenerator.CreateBasePath(name);
 
             // Open Code Window
+            OpenCodeEditor(name);
+
+
+            // Load Appropriate Toolbox
+            // Load Project Explorer
+            PopulateProjectExplorer();
+
+
+
+            // Save Project Configuration File
+            Log("Saving Configuration File");
+            SaveProject sp = new SaveProject();
+            sp.OnLog += Sp_Log;
+            sp.SaveProjectConfiguration();
+            sp.OnLog -= Sp_Log;
+            sp = null; // Not really necessary
+        }
+
+
+
+        private void OpenCodeEditor(string name)
+        {
             var _frmCodeEditor = new FrmCodeEditor(name);
 
             _frmCodeEditor.Show(dockPanel1, DockState.Document);
@@ -299,22 +316,7 @@ namespace IDA
             // Populate with default code for the platform and version
             Log("Adding Default Platform Code");
             _frmCodeEditor.AddPlatformCode(LoadDefaultPlatformCode.Load());
-
-            // Load Appropriate Toolbox
-            // Load Project Explorer
-            _frmProjectExplorer.LoadProject(CurrentProjectModel.ProjectBasePath);
-            _frmProjectExplorer.ProjectExplorerLog += _frmProjectExplorer_ProjectExplorerLog;
-
-            // Save Project Configuration File
-            Log("Saving Configuration File");
-            SaveProject sp = new SaveProject();
-            sp.OnLog += Sp_Log;
-            sp.SaveProjectConfiguration();
-            sp.OnLog -= Sp_Log;
-            sp = null; // Not really necessary
         }
-
-
 
         private void _frmCodeEditor_EditorClean(string name)
         {
@@ -372,7 +374,7 @@ namespace IDA
 
         private void LoadUser()
         {
-Log("Loading User Settings");
+            Log("Loading User Settings");
             UserSettingsIo.LoadUser();
             toolStripMenuItemUserName.Text = UserModel.UserName;
         }
@@ -391,7 +393,7 @@ Log("Loading User Settings");
 
         private void DisplaySelectedComPort()
         {
-toolStripMenuItemComPort.Text = "Port " + CurrentProjectModel.ComPort;
+            toolStripMenuItemComPort.Text = "Port " + CurrentProjectModel.ComPort;
         }
 
         // COM PORT SELECTOR DIALOG
@@ -443,28 +445,76 @@ toolStripMenuItemComPort.Text = "Port " + CurrentProjectModel.ComPort;
         #endregion
 
         #region Save Project
+
+        /// <summary>
+        /// Save the current active Document
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void saveToolStripButton_Click(object sender, EventArgs e)
         {
-            Log("Saving File");
+            Log("Attempting Saving File");
             foreach (Control ctrl in dockPanel1.Documents)
             {
-                if (ctrl.Tag.ToString() == CurrentProjectModel.Name)
-                {
+                if(dockPanel1.ActiveDocument == ctrl)
+                {                 
                     FrmCodeEditor fce = (FrmCodeEditor)ctrl;
                     fce.Save();
                     ctrl.Text = CurrentProjectModel.Name;
                     saveToolStripButton.Enabled = false;
+                    Log("File Saved");
                 }
             }
         }
         #endregion
 
         #region Project Explorer
+
+        /// <summary>
+        /// Subscribe to all the Project Explorer Events
+        /// </summary>
+        /// <param name="pe">
+        /// FrmProjectExplorer: The Project Explorer Form that the events belong to.
+        /// </param>
+        private void ProjectExplorerEvents(FrmProjectExplorer pe)
+        {
+            pe.ProjectExplorerOpenDocument += _frmProjectExplorer_ProjectExplorerOpenDocument;
+            pe.ProjectExplorerLog += _frmProjectExplorer_ProjectExplorerLog;
+        }
+
+        /// <summary>
+        /// Project Explorer raised event to open a new document
+        /// </summary>
+        /// <param name="path">
+        /// string: Fully qualified Path to the document to open
+        /// </param>
+        private void _frmProjectExplorer_ProjectExplorerOpenDocument(string path)
+        {
+            Log("Opening file " + path);
+            OpenCodeEditor(path);
+        }
+
+        /// <summary>
+        /// Populate the Project Explorer with the current Project
+        /// </summary>
+        private void PopulateProjectExplorer()
+        {
+            _frmProjectExplorer.LoadProject(CurrentProjectModel.ProjectBasePath);          
+        }
+        
+        /// <summary>
+        /// Open Project Explorer Window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void projectExplorerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmProjectExplorer pe = new Forms.Dockable.FrmProjectExplorer();
+            ProjectExplorerEvents(pe);
             pe.Show(dockPanel1, DockState.DockRight);
         }
+
+
         #endregion
 
         #region Open Project
@@ -525,8 +575,7 @@ toolStripMenuItemComPort.Text = "Port " + CurrentProjectModel.ComPort;
                     codeEditor.Open(CurrentProjectModel.ProjectBasePath);
                     codeEditor.Parent.Text = CurrentProjectModel.Name;
                     // Load Project Explorer
-                    _frmProjectExplorer.LoadProject(CurrentProjectModel.ProjectBasePath);
-                    _frmProjectExplorer.ProjectExplorerLog += _frmProjectExplorer_ProjectExplorerLog1;
+                    _frmProjectExplorer.LoadProject(CurrentProjectModel.ProjectBasePath);                    
                 }
             }
         }
