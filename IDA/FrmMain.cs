@@ -15,43 +15,76 @@ namespace IDA
 {
     public partial class FrmMain : Form
     {
+        #region Docking Properties
         private readonly string _configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.config");
         private bool _saveLayout = true;
-        private readonly DeserializeDockContent _deserializeDockContent;
+        private  DeserializeDockContent _deserializeDockContent;
+        #endregion
 
+        #region USB Properties
         private DriveDetector driveDetector = new DriveDetector();
+        #endregion
 
+        #region Forms
         private readonly FrmSplash _frmSplash = new FrmSplash();
         private FrmLog _frmLog = new FrmLog();
         private FrmProjectExplorer _frmProjectExplorer = new FrmProjectExplorer();
+        #endregion
 
-
+        
         public FrmMain()
         {
 
             InitializeComponent();
+
+            SplashOne();
+            UsbEventSubscription();
+            SplashTwo();
+            LogWindowEventSubscriptions();
+            DeserialiseContent();
+            SplashFour();
+            LoadUser();
+            DisplaySelectedComPort();
+        }
+
+        #region SPLASH
+
+        private void SplashOne()
+        {
             Log("Initialising");
             _frmSplash.Show();
             _frmSplash.SetAction("Running USB Connections Detector");
+        }
+
+        private void SplashTwo()
+        {
+            _frmSplash.SetAction("Opening Logging Window");
+        }
+
+        private void SplashThree()
+        {
+            _frmSplash.SetAction("Loading Docking Settings");
+        }
+
+        private void SplashFour()
+        {
+            _frmSplash.SetAction("Loading User Settings");
+        }
+        #endregion
+
+        #region USB
+
+        private void UsbEventSubscription()
+        {
             driveDetector.DeviceArrived += DriveDetector_DeviceArrived;
             driveDetector.DeviceRemoved += DriveDetector_DeviceRemoved;
             driveDetector.QueryRemove += DriveDetector_QueryRemove;
+
             _frmSplash.SetAction("Looking for compatible Hardware");
             Log("Looking for Hardware Port");
             CurrentProjectModel.ComPort = Usb.GetUsbDevice();
-            _frmSplash.SetAction("Opening Logging Window");
-            _frmLog.LogWindowClosing += _frmLog_LogWindowClosing;
-            _frmLog.LogWindowOpening += _frmLog_LogWindowOpening;
-            _frmSplash.SetAction("Loading Docking Settings");
-            _deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
-            _frmSplash.SetAction("Loading User Settings");
-            Log("Loading User Settings");
-            UserSettingsIo.LoadUser();
-            toolStripMenuItemUserName.Text = UserModel.UserName;
-            toolStripMenuItemComPort.Text = "Port " + CurrentProjectModel.ComPort;
         }
 
-        #region USB
         //TODO: Use this http://www.codeproject.com/Articles/60579/A-USB-Library-to-Detect-USB-Devices
         private void DriveDetector_QueryRemove(object sender, DriveDetectorEventArgs e)
         {
@@ -71,8 +104,15 @@ namespace IDA
             Log("Device Added " + e.Drive);
         }
         #endregion
-        
+
         #region Docking
+
+        private void DeserialiseContent()
+        {
+        _deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+        }
+
+
         private IDockContent GetContentFromPersistString(string persistString)
         {
             if (persistString == typeof(FrmLog).ToString())
@@ -132,7 +172,13 @@ namespace IDA
 
         #endregion
 
-        #region Log
+        #region Logging
+
+        private void LogWindowEventSubscriptions()
+        {
+            _frmLog.LogWindowClosing += _frmLog_LogWindowClosing;
+            _frmLog.LogWindowOpening += _frmLog_LogWindowOpening;
+        }
 
         private void _frmLog_LogWindowOpening()
         {
@@ -268,7 +314,7 @@ namespace IDA
             sp = null; // Not really necessary
         }
 
-     
+
 
         private void _frmCodeEditor_EditorClean(string name)
         {
@@ -322,7 +368,15 @@ namespace IDA
         }
         #endregion
 
-        #region User Editor
+        #region User Editor and Settings
+
+        private void LoadUser()
+        {
+Log("Loading User Settings");
+            UserSettingsIo.LoadUser();
+            toolStripMenuItemUserName.Text = UserModel.UserName;
+        }
+
         private void userEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Log("Loading User Editor");
@@ -333,7 +387,13 @@ namespace IDA
 
         #endregion
 
-        #region Com Port Selector
+        #region Com Port Selector and Settings
+
+        private void DisplaySelectedComPort()
+        {
+toolStripMenuItemComPort.Text = "Port " + CurrentProjectModel.ComPort;
+        }
+
         // COM PORT SELECTOR DIALOG
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -343,7 +403,7 @@ namespace IDA
             toolStripMenuItemComPort.Text = "Port " + CurrentProjectModel.ComPort;
         }
         #endregion
-        
+
         #region Compile
         private void btnCompile_Click(object sender, EventArgs e)
         {
@@ -381,7 +441,7 @@ namespace IDA
             exec.ExecuteSerialWriter();
         }
         #endregion
-        
+
         #region Save Project
         private void saveToolStripButton_Click(object sender, EventArgs e)
         {
@@ -477,14 +537,18 @@ namespace IDA
 
 
 
+        #region Utilities
 
         private string GetProjectName(string projectName)
         {
             return projectName.Split('\\')[projectName.Split('\\').Length - 1];
         }
 
-       
+        #endregion
 
-       
+
+
+
+
     }
 }
