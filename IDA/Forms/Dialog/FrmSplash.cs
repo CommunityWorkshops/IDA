@@ -15,6 +15,7 @@ namespace IDA.Forms.Dialog
         public void SetAction(string Action)
         {
             lblAction.Text = Action;
+            lblAction.Refresh();
         }
 
         private string GetVersion()

@@ -198,11 +198,10 @@ namespace IDA
 
             // Open Code Window
             var _frmCodeEditor = new FrmCodeEditor(name);
-            _frmCodeEditor.EditorDirty += _frmCodeEditor_EditorDirty;
-            _frmCodeEditor.EditorClean += _frmCodeEditor_EditorClean;
-
 
             _frmCodeEditor.Show(dockPanel1, DockState.Document);
+            _frmCodeEditor.EditorDirty += _frmCodeEditor_EditorDirty;
+            _frmCodeEditor.EditorClean += _frmCodeEditor_EditorClean;
             _frmCodeEditor.Parent.Text = name;
             _frmCodeEditor.Tag = name;
 
@@ -219,6 +218,8 @@ namespace IDA
 
             // Load Appropriate Toolbox
             // Load Project Explorer
+            _frmProjectExplorer.LoadProject(CurrentProjectModel.ProjectBasePath);
+            _frmProjectExplorer.ProjectExplorerLog += _frmProjectExplorer_ProjectExplorerLog;
 
             // Save Project Configuration File
             Log("Saving Configuration File");
@@ -227,6 +228,11 @@ namespace IDA
             sp.SaveProjectConfiguration();
             sp.OnLog -= Sp_Log;
             sp = null; // Not really necessary
+        }
+
+        private void _frmProjectExplorer_ProjectExplorerLog(string message)
+        {
+            Log(message);
         }
 
         private void Sp_Log(string message)
@@ -238,11 +244,19 @@ namespace IDA
         {
             foreach (Control ctrl in dockPanel1.Documents)
             {
-                if (ctrl.Tag.ToString() == name)
+                try
                 {
-                    ctrl.Text = name;
-                    saveToolStripButton.Enabled = false;
+                    if (ctrl.Tag.ToString() == name)
+                    {
+                        ctrl.Text = name;
+                        saveToolStripButton.Enabled = false;
+                    }
                 }
+                catch (Exception ex)
+                {
+                    Log("Error " + ex.Message);
+                }
+
             }
         }
 
@@ -250,11 +264,19 @@ namespace IDA
         {
             foreach (Control ctrl in dockPanel1.Documents)
             {
-                if (ctrl.Tag.ToString() == name)
+                try
                 {
-                    ctrl.Text = name + " *";
-                    saveToolStripButton.Enabled = true;
+                    if (ctrl.Tag.ToString() == name)
+                    {
+                        ctrl.Text = name + " *";
+                        saveToolStripButton.Enabled = true;
+                    }
                 }
+                catch (Exception ex)
+                {
+                    Log("Error: " + ex.Message);
+                }
+
             }
         }
 
@@ -377,33 +399,58 @@ namespace IDA
                     {
                         foreach (Control ctrl in dockPanel1.Documents)
                         {
-                            if (ctrl.Tag.ToString() == CurrentProjectModel.Name)
+                            try
                             {
-                                FrmCodeEditor fce = (FrmCodeEditor)ctrl;
-                                fce.Save();
-                                ctrl.Text = CurrentProjectModel.Name;
-                                saveToolStripButton.Enabled = false;
+                                if (ctrl.Tag.ToString() == CurrentProjectModel.Name)
+                                {
+                                    FrmCodeEditor fce = (FrmCodeEditor)ctrl;
+                                    fce.Save();
+                                    ctrl.Text = CurrentProjectModel.Name;
+                                    saveToolStripButton.Enabled = false;
+                                }
                             }
+                            catch (Exception ex2)
+                            {
+                                Log("Error: " + ex2.Message);
+                            }
+
                         }
                         sp.SaveProjectConfiguration();
                     }
+                    CloseDocuments();
+                    CurrentProjectModel.Reset();
                 }
 
-                CloseDocuments();
-                CurrentProjectModel.Reset();
-
                 // Now open the project
-                CurrentProjectModel.ProjectBasePath = op.ProjectBasePath;
-                CurrentProjectModel.Name = GetProjectName(CurrentProjectModel.ProjectBasePath);
-                OpenProject oProj = new OpenProject();
-                oProj.Log += OProj_Log;
-                oProj.LoadProjectConfiguration();
+                if (!string.IsNullOrEmpty(op.ProjectBasePath))
+                {
+                    CurrentProjectModel.ProjectBasePath = op.ProjectBasePath;
+                    CurrentProjectModel.Name = GetProjectName(CurrentProjectModel.ProjectBasePath);
+                    OpenProject oProj = new OpenProject();
+                    oProj.Log += OProj_Log;
+                    oProj.LoadProjectConfiguration();
+                    FrmCodeEditor codeEditor = new FrmCodeEditor();
+                    codeEditor.Show(dockPanel1, DockState.Document);
+                    codeEditor.EditorDirty += _frmCodeEditor_EditorDirty;
+                    codeEditor.EditorClean += _frmCodeEditor_EditorClean;                    
+                    codeEditor.Tag = CurrentProjectModel.Name;
+                    codeEditor.Open(CurrentProjectModel.ProjectBasePath);                   
+                    codeEditor.Parent.Text = CurrentProjectModel.Name;
+                    // Load Project Explorer
+                    _frmProjectExplorer.LoadProject(CurrentProjectModel.ProjectBasePath);
+                    _frmProjectExplorer.ProjectExplorerLog += _frmProjectExplorer_ProjectExplorerLog1;
+                }
             }
+        }
+
+        private void _frmProjectExplorer_ProjectExplorerLog1(string message)
+        {
+            Log(message);
         }
 
         private string GetProjectName(string projectName)
         {
-            return projectName.Split('\\')[projectName.Split('\\').Length -1];
+            return projectName.Split('\\')[projectName.Split('\\').Length - 1];
         }
 
         private void Op_Log(string message)
@@ -418,9 +465,9 @@ namespace IDA
 
         private void CloseDocuments()
         {
-            foreach (var doc in dockPanel1.Documents)
+            foreach (IDockContent document in dockPanel1.DocumentsToArray())
             {
-                doc.DockHandler.Close();
+                document.DockHandler.Close();
             }
         }
     }

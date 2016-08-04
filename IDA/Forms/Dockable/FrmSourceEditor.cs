@@ -4,6 +4,7 @@ using System.Drawing;
 using ScintillaNET;
 using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
+using IDA.Models;
 
 namespace IDA.Forms.Dockable
 {
@@ -19,6 +20,8 @@ namespace IDA.Forms.Dockable
         public FrmCodeEditor()
         {
             InitializeComponent();
+            Name = CurrentProjectModel.Name;
+            Tag = Name;
             Initialise();
         }
 
@@ -72,8 +75,6 @@ namespace IDA.Forms.Dockable
 
 
         }
-
-
 
         public void Save()
         {
@@ -142,8 +143,7 @@ namespace IDA.Forms.Dockable
                 editor.AddText(line + Environment.NewLine);
             }
         }
-
-
+        
         internal void AddPlatformCode(List<string> code)
         {
             if (code == null) return;
@@ -154,9 +154,7 @@ namespace IDA.Forms.Dockable
             foreach (var line in code)
             {
                 editor.AddText(line + Environment.NewLine);
-            }
-
-
+            }            
         }
 
 
@@ -179,6 +177,30 @@ namespace IDA.Forms.Dockable
             const int padding = 2;
             editor.Margins[0].Width = editor.TextWidth(Style.LineNumber, new string('9', maxLineNumberCharLength + 1)) + padding;
             this.maxLineNumberCharLength = maxLineNumberCharLength;
+        }
+
+        internal void Open(string projectBasePath)
+        {
+            var projSourceName = projectBasePath.Split('\\')[projectBasePath.Split('\\').Length - 1] + ".c";
+            var sourceLocation = Path.Combine(projectBasePath, projSourceName);
+            
+            IDA.Controllers.IO.LoadSourceFile lsf = new Controllers.IO.LoadSourceFile(sourceLocation);
+
+            var lines = lsf.LoadSource();
+            var firstBlank = true;
+            foreach (var line in lines)
+            {
+                if(string.IsNullOrEmpty(line) && firstBlank)
+                {
+                    // Ignore extra lines.
+                    firstBlank = false;
+                }
+                else
+                {
+                    firstBlank = true;
+                    editor.AddText(line + Environment.NewLine);
+                }                
+            }
         }
     }
 }

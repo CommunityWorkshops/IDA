@@ -32,7 +32,7 @@ namespace IDA.Forms.Wizards
 
             foreach (var project in path)
             {
-                // If they contain a .ida file that is the same name as the directory then add to the list of projects
+                // If they contain an .ida file that is the same name as the directory then add to the list of projects
                 var projName = project.Split('\\')[project.Split('\\').Count() - 1];
                 var configName = projName + ".ida";
                 var ConfigurationPath = Path.Combine(project, configName);
@@ -43,6 +43,7 @@ namespace IDA.Forms.Wizards
                     psc.DoLog += Psc_DoLog;
                     psc.ProjectSelection(GetPlatform(ConfigurationPath), project);
                     flpPreviousProjects.Controls.Add(psc);
+                    psc.Tag = CurrentProjectModel.Name;
                 }
             }
         }
@@ -68,6 +69,7 @@ namespace IDA.Forms.Wizards
         {
             DoLog("Selected Project " + ProjectName);
             ProjectBasePath = ProjectName; 
+            
         }
 
         private void DoLog(string message)

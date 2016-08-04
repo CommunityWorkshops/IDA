@@ -31,35 +31,7 @@ namespace IDA.Forms.Wizards
             // folder for the first Platform is platforms[0]
             string[] platforms = Directory.GetDirectories("Templates\\Platforms\\");
             string[] versions = Directory.GetDirectories(Path.Combine(platforms[0], "versions"));
-
-            foreach (var folder in versions)
-            {
-                NewProjectSelectionControl npsc = new NewProjectSelectionControl();
-                npsc.ThisIsSelected += Npsc_ThisIsSelected;
-                npsc.Name = folder.Replace("\\", " ").Split(' ')[folder.Replace("\\", " ").Split(' ').Length - 1].Trim(); //TODO: FIX THIS Horrible :P
-
-                if (_firstVersion) _versionType = npsc.Name;
-                _firstVersion = false;
-
-                try
-                {
-                    var imageNames = Directory.EnumerateFiles(Path.Combine(folder, "Images"));
-                    foreach (var imageName in imageNames)
-                    {
-                        if (imageName.ToLower().Contains("version")) npsc.SetImage(imageName);
-                    }
-
-                    _versionType = npsc.Name;
-                    npsc.SetTitle(npsc.Name);
-                }
-                catch (Exception)
-                {
-                    //TODO: This should be sent to Main for the Log
-                    throw;
-                }
-
-                flpVersion.Controls.Add(npsc);
-            }
+            LoadVersions(versions);
         }
 
         private void Npsc_ThisIsSelected(string name)
@@ -109,35 +81,8 @@ namespace IDA.Forms.Wizards
             try
             {
                 string[] versions = Directory.GetDirectories("Templates\\Platforms\\" + Path.Combine(name, "versions"));
+                LoadVersions(versions);
 
-                foreach (var folder in versions)
-                {
-                    NewProjectSelectionControl npsc = new NewProjectSelectionControl();
-                    npsc.ThisIsSelected += Npsc_ThisIsSelected;
-                    npsc.Name = folder.Replace("\\", " ").Split(' ')[folder.Replace("\\", " ").Split(' ').Length - 1].Trim(); //TODO: FIX THIS Horrible :P
-
-                    if (_firstVersion) _versionType = npsc.Name;
-                    _firstVersion = false;
-
-                    try
-                    {
-                        var imageNames = Directory.EnumerateFiles(Path.Combine(folder, "Images"));
-                        foreach (var imageName in imageNames)
-                        {
-                            if (imageName.ToLower().Contains("version")) npsc.SetImage(imageName);
-                        }
-
-                        _versionType = npsc.Name;
-                        npsc.SetTitle(npsc.Name);
-                    }
-                    catch (Exception)
-                    {
-                        //TODO: This should be sent to Main for the Log
-                        throw;
-                    }
-
-                    flpVersion.Controls.Add(npsc);
-                }
             }
             catch (Exception)
             {
@@ -147,6 +92,39 @@ namespace IDA.Forms.Wizards
                 flpVersion.Text = "No Versions Available";
             }
 
+        }
+
+        private void LoadVersions(string[] versions)
+        {
+            foreach (var folder in versions)
+            {
+                NewProjectSelectionControl npsc = new NewProjectSelectionControl();
+                npsc.ThisIsSelected += Npsc_ThisIsSelected;
+                npsc.Name = folder.Replace("\\", " ").Split(' ')[folder.Replace("\\", " ").Split(' ').Length - 1].Trim(); //TODO: FIX THIS Horrible :P
+
+                if (_firstVersion) _versionType = npsc.Name;
+                _firstVersion = false;
+
+                try
+                {
+                    var imageNames = Directory.EnumerateFiles(Path.Combine(folder, "Images"));
+                    foreach (var imageName in imageNames)
+                    {
+                        if (imageName.ToLower().Contains("version")) npsc.SetImage(imageName);
+                    }
+
+                    _versionType = npsc.Name;
+                    npsc.SetTitle(npsc.Name);
+                }
+                catch (Exception)
+                {
+                    //TODO: This should be sent to Main for the Log
+                    throw;
+                }
+
+                flpVersion.Controls.Add(npsc);
+
+            }
         }
 
         private bool _firstPlatform = true;

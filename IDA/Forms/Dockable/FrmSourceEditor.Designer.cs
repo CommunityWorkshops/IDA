@@ -80,6 +80,7 @@
             this.editor.CaretWidth = 2;
             this.editor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.editor.EdgeColor = System.Drawing.Color.Black;
+            this.editor.EolMode = ScintillaNET.Eol.Lf;
             this.editor.IdleStyling = ScintillaNET.IdleStyling.All;
             this.editor.IndentationGuides = ScintillaNET.IndentView.LookBoth;
             this.editor.IndentWidth = 4;
