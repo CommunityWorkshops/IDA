@@ -81,6 +81,12 @@
     <Compile Include="Controllers\IO\SaveProject.cs" />
     <Compile Include="Controllers\IO\UserSettingsIO.cs" />
     <Compile Include="Controllers\Project\NewProjectManager.cs" />
+    <Compile Include="Controls\ComponentsSelectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ComponentsSelectionControl.Designer.cs">
+      <DependentUpon>ComponentsSelectionControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NewProjectSelectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -141,11 +147,11 @@
     <Compile Include="Forms\Dockable\FrmScintillaTest.Designer.cs">
       <DependentUpon>FrmScintillaTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Dockable\FrmSourceEditor.cs">
+    <Compile Include="Forms\Dockable\FrmFileEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Dockable\FrmSourceEditor.Designer.cs">
-      <DependentUpon>FrmSourceEditor.cs</DependentUpon>
+    <Compile Include="Forms\Dockable\FrmFileEditor.Designer.cs">
+      <DependentUpon>FrmFileEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Wizards\FrmNewProject.cs">
       <SubType>Form</SubType>
@@ -166,10 +172,14 @@
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\CurrentProjectModel.cs" />
+    <Compile Include="Models\CurrentFileEditorSettings.cs" />
     <Compile Include="Models\SystemModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\ComponentsSelectionControl.resx">
+      <DependentUpon>ComponentsSelectionControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\NewProjectSelectionControl.resx">
       <DependentUpon>NewProjectSelectionControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -201,8 +211,8 @@
     <EmbeddedResource Include="Forms\Dockable\FrmScintillaTest.resx">
       <DependentUpon>FrmScintillaTest.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Dockable\FrmSourceEditor.resx">
-      <DependentUpon>FrmSourceEditor.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Dockable\FrmFileEditor.resx">
+      <DependentUpon>FrmFileEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Wizards\FrmNewProject.resx">
       <DependentUpon>FrmNewProject.cs</DependentUpon>

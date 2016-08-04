@@ -8,7 +8,7 @@ using IDA.Models;
 
 namespace IDA.Forms.Dockable
 {
-    public partial class FrmCodeEditor : DockContent
+    public partial class FrmFileEditor : DockContent
     {
 
         public delegate void EditorDirtyHandler(string name);
@@ -17,7 +17,7 @@ namespace IDA.Forms.Dockable
         public delegate void EditorCleanHandler(string name);
         public event EditorCleanHandler EditorClean;
 
-        public FrmCodeEditor()
+        public FrmFileEditor()
         {
             InitializeComponent();
             Name = CurrentProjectModel.Name;
@@ -25,7 +25,7 @@ namespace IDA.Forms.Dockable
             Initialise();
         }
 
-        public FrmCodeEditor(string name)
+        public FrmFileEditor(string name)
         {
             InitializeComponent();
             Name = name;

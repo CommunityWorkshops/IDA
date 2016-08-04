@@ -123,7 +123,7 @@ namespace IDA
                 return _frmProjectExplorer;
             else if (persistString == typeof(FrmComponentToolbox).ToString())
                 return _frmToolbox;
-            else if (persistString == typeof(FrmCodeEditor).ToString())
+            else if (persistString == typeof(FrmFileEditor).ToString())
                 return null;
 
             return null;
@@ -280,7 +280,7 @@ namespace IDA
             CurrentProjectModel.ProjectBasePath = PathsGenerator.CreateBasePath(name);
 
             // Open Code Window
-            OpenCodeEditor(name);
+            OpenFileEditor(name);
 
 
             // Load Appropriate Toolbox
@@ -300,16 +300,22 @@ namespace IDA
 
 
 
-        private void OpenCodeEditor(string name)
-        {
-            var _frmCodeEditor = new FrmCodeEditor(name);
 
-            _frmCodeEditor.Show(dockPanel1, DockState.Document);
-            _frmCodeEditor.EditorDirty += _frmCodeEditor_EditorDirty;
-            _frmCodeEditor.EditorClean += _frmCodeEditor_EditorClean;
-            _frmCodeEditor.Parent.Text = GetProjectName(name);
-            _frmCodeEditor.Tag = name;
-            _frmCodeEditor.Open(name);
+
+
+        #endregion
+
+        #region Code Editor
+        private void OpenFileEditor(string name)
+        {
+            var _frmFileEditor = new FrmFileEditor(name);
+
+            _frmFileEditor.Show(dockPanel1, DockState.Document);
+            _frmFileEditor.EditorDirty += _frmFileEditor_EditorDirty;
+            _frmFileEditor.EditorClean += _frmFileEditor_EditorClean;
+            _frmFileEditor.Parent.Text = GetProjectName(name);
+            _frmFileEditor.Tag = name;
+            _frmFileEditor.Open(name);
 
             //// Load Appropriate Keywords For Code Completion
             //Log("Load Code Completion");
@@ -323,15 +329,15 @@ namespace IDA
             //_frmCodeEditor.AddPlatformCode(LoadDefaultPlatformCode.Load());
         }
 
-        private void _frmCodeEditor_EditorClean(string name)
+        private void _frmFileEditor_EditorClean(string name)
         {
             foreach (Control ctrl in dockPanel1.Documents)
             {
                 try
                 {
                     if (ctrl.Tag.ToString() == name)
-                    {
-                        ctrl.Text = name;
+                    {                        
+                        ctrl.Text = GetProjectName(name);
                         saveToolStripButton.Enabled = false;
                     }
                 }
@@ -343,7 +349,7 @@ namespace IDA
             }
         }
 
-        private void _frmCodeEditor_EditorDirty(string name)
+        private void _frmFileEditor_EditorDirty(string name)
         {
             foreach (Control ctrl in dockPanel1.Documents)
             {
@@ -351,7 +357,7 @@ namespace IDA
                 {
                     if (ctrl.Tag.ToString() == name)
                     {
-                        ctrl.Text = name + " *";
+                        ctrl.Text = GetProjectName(name) + " *";
                         saveToolStripButton.Enabled = true;
                     }
                 }
@@ -362,8 +368,6 @@ namespace IDA
 
             }
         }
-
-
         #endregion
 
         #region Licence Editor
@@ -420,7 +424,7 @@ namespace IDA
             {
                 if (ctrl.Tag.ToString() == CurrentProjectModel.Name)
                 {
-                    FrmCodeEditor fce = (FrmCodeEditor)ctrl;
+                    FrmFileEditor fce = (FrmFileEditor)ctrl;
                     fce.Save();
                     ctrl.Text = CurrentProjectModel.Name;
                     saveToolStripButton.Enabled = false;
@@ -463,7 +467,7 @@ namespace IDA
             {
                 if(dockPanel1.ActiveDocument == ctrl)
                 {                 
-                    FrmCodeEditor fce = (FrmCodeEditor)ctrl;
+                    FrmFileEditor fce = (FrmFileEditor)ctrl;
                     fce.Save();
                     ctrl.Text = CurrentProjectModel.Name;
                     saveToolStripButton.Enabled = false;
@@ -496,7 +500,7 @@ namespace IDA
         private void _frmProjectExplorer_ProjectExplorerOpenDocument(string path)
         {
             Log("Opening file " + path);
-            OpenCodeEditor(path);
+            OpenFileEditor(path);
         }
 
         /// <summary>
@@ -546,7 +550,7 @@ namespace IDA
                             {
                                 if (ctrl.Tag.ToString() == CurrentProjectModel.Name)
                                 {
-                                    FrmCodeEditor fce = (FrmCodeEditor)ctrl;
+                                    FrmFileEditor fce = (FrmFileEditor)ctrl;
                                     fce.Save();
                                     ctrl.Text = CurrentProjectModel.Name;
                                     saveToolStripButton.Enabled = false;
@@ -572,10 +576,10 @@ namespace IDA
                     OpenProject oProj = new OpenProject();
                     oProj.Log += OProj_Log;
                     oProj.LoadProjectConfiguration();
-                    FrmCodeEditor codeEditor = new FrmCodeEditor();
+                    FrmFileEditor codeEditor = new FrmFileEditor();
                     codeEditor.Show(dockPanel1, DockState.Document);
-                    codeEditor.EditorDirty += _frmCodeEditor_EditorDirty;
-                    codeEditor.EditorClean += _frmCodeEditor_EditorClean;
+                    codeEditor.EditorDirty += _frmFileEditor_EditorDirty;
+                    codeEditor.EditorClean += _frmFileEditor_EditorClean;
                     codeEditor.Tag = CurrentProjectModel.ProjectBasePath;
                     codeEditor.OpenProjectMain(CurrentProjectModel.ProjectBasePath);
                     codeEditor.Parent.Text =  CurrentProjectModel.Name;

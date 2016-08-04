@@ -17,5 +17,10 @@ namespace IDA.Forms.Dockable
         {
             InitializeComponent();
         }
+
+        private void lvComponents_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
