@@ -69,11 +69,9 @@
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.defaultWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.codeEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.licenseEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.scintillaTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.projectExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.resetAllViewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,7 +84,9 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.btnCompile = new System.Windows.Forms.ToolStripSplitButton();
             this.vS2013BlueTheme1 = new WeifenLuo.WinFormsUI.Docking.VS2013BlueTheme();
-            this.vS2013BlueTheme2 = new WeifenLuo.WinFormsUI.Docking.VS2013BlueTheme();
+            this.toolboxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vS2012LightTheme1 = new WeifenLuo.WinFormsUI.Docking.VS2012LightTheme();
+            this.vS2003Theme1 = new WeifenLuo.WinFormsUI.Docking.VS2003Theme();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -133,7 +133,7 @@
             this.dockPanel1.ShowDocumentIcon = true;
             this.dockPanel1.Size = new System.Drawing.Size(919, 538);
             this.dockPanel1.TabIndex = 1;
-            this.dockPanel1.Theme = this.vS2013BlueTheme2;
+            this.dockPanel1.Theme = this.vS2012LightTheme1;
             // 
             // statusStrip1
             // 
@@ -417,12 +417,11 @@
             // 
             this.defaultWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.logToolStripMenuItem,
-            this.codeEditorToolStripMenuItem,
             this.licenseEditorToolStripMenuItem,
             this.userEditorToolStripMenuItem,
             this.toolStripSeparator9,
-            this.scintillaTestToolStripMenuItem,
-            this.projectExplorerToolStripMenuItem});
+            this.projectExplorerToolStripMenuItem,
+            this.toolboxToolStripMenuItem});
             this.defaultWindowsToolStripMenuItem.Name = "defaultWindowsToolStripMenuItem";
             this.defaultWindowsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.defaultWindowsToolStripMenuItem.Text = "Default Windows";
@@ -433,11 +432,6 @@
             this.logToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.logToolStripMenuItem.Text = "Log";
             this.logToolStripMenuItem.Click += new System.EventHandler(this.logToolStripMenuItem_Click);
-            // 
-            // codeEditorToolStripMenuItem
-            // 
-            this.codeEditorToolStripMenuItem.Name = "codeEditorToolStripMenuItem";
-            this.codeEditorToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             // 
             // licenseEditorToolStripMenuItem
             // 
@@ -457,7 +451,6 @@
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
             this.toolStripSeparator9.Size = new System.Drawing.Size(153, 6);
-            
             // 
             // projectExplorerToolStripMenuItem
             // 
@@ -549,6 +542,13 @@
             this.btnCompile.Text = "Compile";
             this.btnCompile.Click += new System.EventHandler(this.btnCompile_Click);
             // 
+            // toolboxToolStripMenuItem
+            // 
+            this.toolboxToolStripMenuItem.Name = "toolboxToolStripMenuItem";
+            this.toolboxToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.toolboxToolStripMenuItem.Text = "Toolbox";
+            this.toolboxToolStripMenuItem.Click += new System.EventHandler(this.toolboxToolStripMenuItem_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -623,12 +623,10 @@
         private System.Windows.Forms.ToolStripMenuItem logToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripMenuItem resetAllViewsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem codeEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem licenseEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem userEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox toolStripMenuItemUserName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-        private System.Windows.Forms.ToolStripMenuItem scintillaTestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemComPort;
@@ -637,7 +635,9 @@
         private System.Windows.Forms.ToolStripMenuItem projectExplorerToolStripMenuItem;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private WeifenLuo.WinFormsUI.Docking.VS2013BlueTheme vS2013BlueTheme2;
+        private System.Windows.Forms.ToolStripMenuItem toolboxToolStripMenuItem;
+        private WeifenLuo.WinFormsUI.Docking.VS2012LightTheme vS2012LightTheme1;
+        private WeifenLuo.WinFormsUI.Docking.VS2003Theme vS2003Theme1;
     }
 }
 

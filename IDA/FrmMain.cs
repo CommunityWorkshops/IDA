@@ -29,6 +29,7 @@ namespace IDA
         private readonly FrmSplash _frmSplash = new FrmSplash();
         private FrmLog _frmLog = new FrmLog();
         private FrmProjectExplorer _frmProjectExplorer = new FrmProjectExplorer();
+        private FrmComponentToolbox _frmToolbox = new FrmComponentToolbox();
         #endregion
 
 
@@ -120,6 +121,8 @@ namespace IDA
                 return _frmLog;
             else if (persistString == typeof(FrmProjectExplorer).ToString())
                 return _frmProjectExplorer;
+            else if (persistString == typeof(FrmComponentToolbox).ToString())
+                return _frmToolbox;
             else if (persistString == typeof(FrmCodeEditor).ToString())
                 return null;
 
@@ -583,7 +586,14 @@ namespace IDA
         }
         #endregion
 
+        #region Toolbox
 
+        private void toolboxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _frmToolbox.Show(dockPanel1, DockState.DockLeft);
+        }
+
+        #endregion
 
 
 
@@ -595,11 +605,12 @@ namespace IDA
             return projectName.Split('\\')[projectName.Split('\\').Length - 1];
         }
 
+
+
+
+
         #endregion
 
-
-
-
-
+      
     }
 }
