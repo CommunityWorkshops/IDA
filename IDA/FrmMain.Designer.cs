@@ -457,13 +457,7 @@
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
             this.toolStripSeparator9.Size = new System.Drawing.Size(153, 6);
-            // 
-            // scintillaTestToolStripMenuItem
-            // 
-            this.scintillaTestToolStripMenuItem.Name = "scintillaTestToolStripMenuItem";
-            this.scintillaTestToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.scintillaTestToolStripMenuItem.Text = "Scintilla Test";
-            this.scintillaTestToolStripMenuItem.Click += new System.EventHandler(this.scintillaTestToolStripMenuItem_Click);
+            
             // 
             // projectExplorerToolStripMenuItem
             // 

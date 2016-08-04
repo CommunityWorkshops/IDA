@@ -19,6 +19,8 @@ namespace IDA.Forms.Dockable
 
         public delegate void LogHandler(string message);
         public event LogHandler ProjectExplorerLog;
+        public delegate void OpenDocumentHandler(string path);
+        public event OpenDocumentHandler ProjectExplorerOpenDocument;
 
         public void Log(string message)
         {
@@ -93,7 +95,8 @@ namespace IDA.Forms.Dockable
 
         private void ProjectView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            Log("Double Click " + e.Node.Tag);
+            Log("Opening File " + e.Node.Tag);
+            ProjectExplorerOpenDocument(e.Node.Tag.ToString());
         }
 
         private void ProjectView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)

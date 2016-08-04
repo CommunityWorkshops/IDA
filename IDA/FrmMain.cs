@@ -51,7 +51,7 @@ namespace IDA
             toolStripMenuItemComPort.Text = "Port " + CurrentProjectModel.ComPort;
         }
 
-
+        #region USB
         //TODO: Use this http://www.codeproject.com/Articles/60579/A-USB-Library-to-Detect-USB-Devices
         private void DriveDetector_QueryRemove(object sender, DriveDetectorEventArgs e)
         {
@@ -70,7 +70,8 @@ namespace IDA
             // If we recognise this device then we should add it?
             Log("Device Added " + e.Drive);
         }
-
+        #endregion
+        
         #region Docking
         private IDockContent GetContentFromPersistString(string persistString)
         {
@@ -83,8 +84,15 @@ namespace IDA
 
             return null;
         }
-        #endregion
 
+        private void CloseDocuments()
+        {
+            foreach (IDockContent document in dockPanel1.DocumentsToArray())
+            {
+                document.DockHandler.Close();
+            }
+        }
+        #endregion
 
         #region Views
         private void resetAllViewsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -166,6 +174,36 @@ namespace IDA
             _frmLog.Log(message);
         }
 
+        private void _frmProjectExplorer_ProjectExplorerLog(string message)
+        {
+            Log(message);
+        }
+
+        private void Sp_Log(string message)
+        {
+            Log(message);
+        }
+
+        private void Exec_Log(string message)
+        {
+            Log(message);
+        }
+
+        private void _frmProjectExplorer_ProjectExplorerLog1(string message)
+        {
+            Log(message);
+        }
+
+        private void Op_Log(string message)
+        {
+            Log(message);
+        }
+
+        private void OProj_Log(string message)
+        {
+            Log(message);
+        }
+
         #endregion
 
         #region New Project
@@ -230,15 +268,7 @@ namespace IDA
             sp = null; // Not really necessary
         }
 
-        private void _frmProjectExplorer_ProjectExplorerLog(string message)
-        {
-            Log(message);
-        }
-
-        private void Sp_Log(string message)
-        {
-            Log(message);
-        }
+     
 
         private void _frmCodeEditor_EditorClean(string name)
         {
@@ -303,12 +333,7 @@ namespace IDA
 
         #endregion
 
-        private void scintillaTestToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FrmScintillaTest st = new FrmScintillaTest();
-            st.Show(dockPanel1, DockState.Document);
-        }
-
+        #region Com Port Selector
         // COM PORT SELECTOR DIALOG
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -317,7 +342,9 @@ namespace IDA
             cps.ShowDialog();
             toolStripMenuItemComPort.Text = "Port " + CurrentProjectModel.ComPort;
         }
-
+        #endregion
+        
+        #region Compile
         private void btnCompile_Click(object sender, EventArgs e)
         {
             // Save the Project.
@@ -353,12 +380,9 @@ namespace IDA
             Log("Writing Embedded Code");
             exec.ExecuteSerialWriter();
         }
-
-        private void Exec_Log(string message)
-        {
-            Log(message);
-        }
-
+        #endregion
+        
+        #region Save Project
         private void saveToolStripButton_Click(object sender, EventArgs e)
         {
             Log("Saving File");
@@ -373,13 +397,17 @@ namespace IDA
                 }
             }
         }
+        #endregion
 
+        #region Project Explorer
         private void projectExplorerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmProjectExplorer pe = new Forms.Dockable.FrmProjectExplorer();
             pe.Show(dockPanel1, DockState.DockRight);
         }
+        #endregion
 
+        #region Open Project
         // Open a previously created project.
         private void openToolStripButton_Click(object sender, EventArgs e)
         {
@@ -432,9 +460,9 @@ namespace IDA
                     FrmCodeEditor codeEditor = new FrmCodeEditor();
                     codeEditor.Show(dockPanel1, DockState.Document);
                     codeEditor.EditorDirty += _frmCodeEditor_EditorDirty;
-                    codeEditor.EditorClean += _frmCodeEditor_EditorClean;                    
+                    codeEditor.EditorClean += _frmCodeEditor_EditorClean;
                     codeEditor.Tag = CurrentProjectModel.Name;
-                    codeEditor.Open(CurrentProjectModel.ProjectBasePath);                   
+                    codeEditor.Open(CurrentProjectModel.ProjectBasePath);
                     codeEditor.Parent.Text = CurrentProjectModel.Name;
                     // Load Project Explorer
                     _frmProjectExplorer.LoadProject(CurrentProjectModel.ProjectBasePath);
@@ -442,33 +470,21 @@ namespace IDA
                 }
             }
         }
+        #endregion
 
-        private void _frmProjectExplorer_ProjectExplorerLog1(string message)
-        {
-            Log(message);
-        }
+
+
+
+
+
 
         private string GetProjectName(string projectName)
         {
             return projectName.Split('\\')[projectName.Split('\\').Length - 1];
         }
 
-        private void Op_Log(string message)
-        {
-            Log(message);
-        }
+       
 
-        private void OProj_Log(string message)
-        {
-            Log(message);
-        }
-
-        private void CloseDocuments()
-        {
-            foreach (IDockContent document in dockPanel1.DocumentsToArray())
-            {
-                document.DockHandler.Close();
-            }
-        }
+       
     }
 }
