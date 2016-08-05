@@ -298,10 +298,7 @@ namespace IDA
             sp = null; // Not really necessary
         }
 
-
-
-
-
+        
 
         #endregion
 

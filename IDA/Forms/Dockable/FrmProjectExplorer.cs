@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
-using Furty.Windows.Forms;
 using IDA.Models;
 using System.IO;
 
