@@ -7,15 +7,17 @@
 //Template License=Creative Commons Attribution
 //Source Code License=Public Domain
 
+START
+
 Versions=Uno
 Name=Pin 13
 Description=Controls the onboard debug LED attached to Pin 13.
-Options=
-Setup=pinMode(13,OUTPUT);
-Loop=digitalWrite(13, HIGH);    // turn the LED on (HIGH is the voltage level)
-Loop=delay(1000);               // wait for 1 second (1000ms)
-Loop=digitalWrite(13, LOW);     // turn the LED off by making the voltage LOW
-Loop=delay(1000);               // wait for 1 second
+Options=Digital
+Digital Setup=pinMode(13,OUTPUT);
+Digital Loop=digitalWrite(13, HIGH);    // turn the LED on (HIGH is the voltage level)
+Digital Loop=delay(1000);               // wait for 1 second (1000ms)
+Digital Loop=digitalWrite(13, LOW);     // turn the LED off by making the voltage LOW
+Digital Loop=delay(1000);               // wait for 1 second
 
 Versions=Uno
 Name=Serial Input
@@ -23,13 +25,13 @@ Description=Allows the board to RECIEVE serial input.
 Options=Analog,Digital
 Images=SerialInput
 Setup=Serial.begin(9600);                       // initialize serial communication at 9600 bits per second:
-Digital Setup= pinMode(pushButton, INPUT);      // make the pushbutton's pin an input:
+Digital Setup= pinMode(pushButton, INPUT);                // make the pushbutton's pin an input:
 Analog Loop=int sensorValue = analogRead(A0);   // read the input on analog pin 0:
 Analog Loop=Serial.println(sensorValue);        // print out the value you read:
 Analog Loop=delay(1);                           // delay in between reads for stability
-Digital Loop=int buttonState = digitalRead(pushButton);  // read the input pin:
-Digital Loop=Serial.println(buttonState);       // print out the state of the button:
-Digital Loop=delay(1);                          // delay in between reads for stability
+Digital Loop=int buttonState = digitalRead(pushButton);   // read the input pin:
+Digital Loop=Serial.println(buttonState);                 // print out the state of the button:
+Digital Loop=delay(1);                                    // delay in between reads for stability
 
 Versions=Uno
 Name=Serial Output
@@ -42,7 +44,7 @@ Analog Global=const int analogOutPin = 9;                       // Analog output
 Analog Global=
 Analog Global=int sensorValue = 0;                              // value read from the pot
 Analog Global=int outputValue = 0;                              // value output to the PWM (analog out)
-Setup=Serial.begin(9600);                                       // initialize serial communication at 9600 bits per second:
+Analog Setup=Serial.begin(9600);                                // initialize serial communication at 9600 bits per second:
 Analog Loop=sensorValue = analogRead(analogInPin);              // read the analog in value:
 Analog Loop=outputValue = map(sensorValue, 0, 1023, 0, 255);    // map it to the range of the analog out:
 Analog Loop=analogWrite(analogOutPin, outputValue);             // change the analog out value:
@@ -54,3 +56,31 @@ Analog Loop=Serial.println(outputValue);                        // print the res
 Analog Loop=
 Analog Loop=delay(2);                                           // wait 2 milliseconds before the next loop for the analog-to-digital converter to settle after the last reading:
 
+END
+
+// Version History
+// Template format 1.2
+// Version = comma list of platform versions that this template belongs to.
+// Name = Displayed in the Toolbox
+// Description = Displayed at the bottom of the toolbox
+// Options = Comma list of which type of IO is available currently only Analog and Digital
+// Images = the Root folder to Schematic and Layout images in subfolder of Analog or Digital
+// Global = Global settings used in all examples
+// Analog Global = Global settings used in Analog Only Examples
+// Digital Global = Global settings used in Digital only examples
+// Setup = Code used in the Setup function required by all examples
+// Analog Setup = Code used in the Setup function required by analog examples
+// Digital Setup = Code used in the Setup function required by digital examples
+// Loop = Code used in the Loop function required by all examples
+// Analog Loop = Code used in the Loop function required by analog examples
+// Digital Loop = Code used in the Loop function required by digital examples
+//
+// Notes: 
+// The template parser: 
+//    ignores all lines starting with //
+//    splits parsed lines on the = sign
+//    Blank lines have no content after the = sign                    
+//    Ignores case in the tag prior to the = sign
+//    the content after the = sign is case sensitive
+//    Parser stops reading the document when it finds a line starting with END in capitals
+//    Parser starts reading the document when it finds a line starting with START in capitals
