@@ -1,4 +1,4 @@
-﻿//Template Version=1.02
+﻿//Template Version=1.03
 //Author=Dave Gordon
 //Email=dave@community-workshops.com
 //Website=Community-Workshops.com
@@ -13,6 +13,7 @@ Versions=Uno
 Name=Pin 13
 Description=Controls the onboard debug LED attached to Pin 13.
 Options=Digital
+Icon=led.png
 Digital Setup=pinMode(13,OUTPUT);
 Digital Loop=digitalWrite(13, HIGH);    // turn the LED on (HIGH is the voltage level)
 Digital Loop=delay(1000);               // wait for 1 second (1000ms)
@@ -23,6 +24,7 @@ Versions=Uno
 Name=Serial Input
 Description=Allows the board to RECIEVE serial input.
 Options=Analog,Digital
+Icon=serial-port.png
 Images=SerialInput
 Setup=Serial.begin(9600);                       // initialize serial communication at 9600 bits per second:
 Digital Setup= pinMode(pushButton, INPUT);                // make the pushbutton's pin an input:
@@ -37,6 +39,7 @@ Versions=Uno
 Name=Serial Output
 Description=Allows the board to SEND data via the Serial Port (USB Port)
 Options=Analog,Digital
+Icon=serial-port.png
 Images=SerialOutput
 Analog Global=                                                  // These constants won't change.  They're used to give names to the pins used:
 Analog Global=const int analogInPin = A0;                       // Analog input pin that the potentiometer is attached to
@@ -59,7 +62,12 @@ Analog Loop=delay(2);                                           // wait 2 millis
 END
 
 // Version History
-// Template format 1.2
+// Template Format 1.03
+// Added Icon
+// Icon = The path to the image which is displayed in the toolbox for this component
+
+
+// Template format 1.02
 // Version = comma list of platform versions that this template belongs to.
 // Name = Displayed in the Toolbox
 // Description = Displayed at the bottom of the toolbox
