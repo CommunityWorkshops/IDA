@@ -82,11 +82,11 @@
     <Compile Include="Controllers\IO\SaveProject.cs" />
     <Compile Include="Controllers\IO\UserSettingsIO.cs" />
     <Compile Include="Controllers\Project\NewProjectManager.cs" />
-    <Compile Include="Controls\ComponentsSelectionControl.cs">
+    <Compile Include="Controls\ComponentSelectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ComponentsSelectionControl.Designer.cs">
-      <DependentUpon>ComponentsSelectionControl.cs</DependentUpon>
+    <Compile Include="Controls\ComponentSelectionControl.Designer.cs">
+      <DependentUpon>ComponentSelectionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\NewProjectSelectionControl.cs">
       <SubType>UserControl</SubType>
@@ -179,8 +179,8 @@
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\ComponentsSelectionControl.resx">
-      <DependentUpon>ComponentsSelectionControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\ComponentSelectionControl.resx">
+      <DependentUpon>ComponentSelectionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\NewProjectSelectionControl.resx">
       <DependentUpon>NewProjectSelectionControl.cs</DependentUpon>
@@ -6596,13 +6596,36 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Settings\User.dat" />
-    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\Icons\led.png" />
-    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\Icons\Serial-port.png" />
-    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\SerialInput\Digital\layout.png" />
-    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\SerialInput\Digital\schematic.png" />
-    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\SerialOutput\Analog\layout.png" />
-    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\SerialOutput\Analog\schematic.png" />
-    <Content Include="Templates\Platforms\Arduino\Components\InternalComponents.txt" />
+    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\Icons\led.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\Icons\Serial-port.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\SerialInput\Digital\layout.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\SerialInput\Digital\schematic.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\SerialOutput\Analog\layout.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\SerialOutput\Analog\schematic.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Platforms\Arduino\Components\InternalComponents.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Templates\Platforms\Arduino\Versions\Uno\Components\Internal\SerialOutput.icl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Platforms\Arduino\Versions\Uno\Components\Internal\Pin13.icl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Platforms\Arduino\Versions\Uno\Components\Internal\SerialInput.icl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -6981,8 +7004,12 @@
     <Content Include="Templates\Platforms\Arduino\Versions\Mega\Images\Version.PNG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\SerialInput\Analog\layout.png" />
-    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\SerialInput\Analog\schematic.png" />
+    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\SerialInput\Analog\layout.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\SerialInput\Analog\schematic.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\Platforms\Arduino\Versions\Uno\Images\Version.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

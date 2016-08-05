@@ -1,0 +1,10 @@
+﻿Version=Uno
+Name=Pin 13
+Description=Controls the onboard debug LED attached to Pin 13.
+Options=Digital
+Icon=led.png
+Digital Setup=pinMode(13,OUTPUT);
+Digital Loop=digitalWrite(13, HIGH);    // turn the LED on (HIGH is the voltage level)
+Digital Loop=delay(1000);               // wait for 1 second (1000ms)
+Digital Loop=digitalWrite(13, LOW);     // turn the LED off by making the voltage LOW
+Digital Loop=delay(1000);               // wait for 1 second

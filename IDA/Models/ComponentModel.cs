@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace IDA.Models
 {
     [Serializable]
-    class ComponentModel
+   public class ComponentModel
     {
         public enum Options
         {

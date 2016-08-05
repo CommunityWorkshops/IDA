@@ -581,9 +581,17 @@ namespace IDA
                     codeEditor.OpenProjectMain(CurrentProjectModel.ProjectBasePath);
                     codeEditor.Parent.Text =  CurrentProjectModel.Name;
                     // Load Project Explorer
-                    _frmProjectExplorer.LoadProject(CurrentProjectModel.ProjectBasePath);                    
+                    _frmProjectExplorer.LoadProject(CurrentProjectModel.ProjectBasePath);
+                    ComponentTemplateLoader ctl = new Controllers.IO.ComponentTemplateLoader();
+                    ctl.ComponentTemplateLoaderLog += Ctl_ComponentTemplateLoaderLog;                  
+                    _frmToolbox.LoadComponents(ctl.LoadComponents());                    
                 }
             }
+        }
+
+        private void Ctl_ComponentTemplateLoaderLog(string message)
+        {
+            Log(message);
         }
         #endregion
 

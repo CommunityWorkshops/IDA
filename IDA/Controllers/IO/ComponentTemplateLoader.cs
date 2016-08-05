@@ -15,9 +15,10 @@ namespace IDA.Controllers.IO
         public delegate void LogHandler(string message);
         public event LogHandler ComponentTemplateLoaderLog;
 
-        public ComponentModel LoadComponents()
+        public List<ComponentModel> LoadComponents()
         {
-            ComponentModel cm = new Models.ComponentModel();
+
+            List<ComponentModel> cmList = new List<Models.ComponentModel>();
             var platformPath = @"templates\platforms\" + CurrentProjectModel.Platform + @"\components\";
             FileStream fs = null;
             StreamReader sr = null;
@@ -30,13 +31,15 @@ namespace IDA.Controllers.IO
 
                 while(!sr.EndOfStream)
                 {
+                    
                     var line = sr.ReadLine();
                     if(!line.StartsWith(@"//") && line.Contains("="))
                     {
+                        ComponentModel cm = new Models.ComponentModel();
                         string[] lineParts = line.Split('=');
                         switch (lineParts[0].ToLower())
                         {
-                            case "version":
+                            case "versions":
                                 if(lineParts[1].ToLower() == CurrentProjectModel.Version.ToLower())
                                 {
                                     var versionLine = sr.ReadLine();
@@ -105,7 +108,9 @@ namespace IDA.Controllers.IO
                             default:
                                 break;
                         }
+                        cmList.Add(cm);
                     }
+                   
                 }
 
                 sr?.Close();
@@ -124,7 +129,7 @@ namespace IDA.Controllers.IO
             }
 
 
-            return cm;
+            return cmList;
         }
 
         private void OnLog(string message)
