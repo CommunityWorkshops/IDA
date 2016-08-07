@@ -30,7 +30,7 @@ namespace IDA.Controllers.IO
 
         private static List<string> LoadLicenceTemplate()
         {
-            List<string> LicenceTemplate = new List<string>();
+            var LicenceTemplate = new List<string>();
 
             FileStream fs = null;
             StreamReader sr = null;
@@ -42,7 +42,7 @@ namespace IDA.Controllers.IO
 
                 while (!sr.EndOfStream)
                 {
-                    string line = sr.ReadLine();
+                    var line = sr.ReadLine();
                     if (line != null && line.StartsWith("//"))
                     {
                         LicenceTemplate.Add(ConvertTemplateLine(line));

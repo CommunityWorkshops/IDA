@@ -151,7 +151,7 @@ namespace Dolinay
         /// </summary>
         public DriveDetector()
         {
-            DetectorForm  frm = new DetectorForm(this);
+            var  frm = new DetectorForm(this);
             frm.Show(); // will be hidden immediatelly
             Init(frm, null);
         }
@@ -333,10 +333,10 @@ namespace Dolinay
                             //
                             // We should create copy of the event before testing it and
                             // calling the delegate - if any
-                            DriveDetectorEventHandler tempDeviceArrived = DeviceArrived;
+                            var tempDeviceArrived = DeviceArrived;
                             if ( tempDeviceArrived != null )
                             {
-                                DriveDetectorEventArgs e = new DriveDetectorEventArgs();
+                                var e = new DriveDetectorEventArgs();
                                 e.Drive = c + ":\\";
                                 tempDeviceArrived(this, e);
                                 
@@ -380,10 +380,10 @@ namespace Dolinay
                             //
                             // Call the event handler in client
                             //
-                            DriveDetectorEventHandler tempQuery = QueryRemove;
+                            var tempQuery = QueryRemove;
                             if (tempQuery != null)
                             {
-                                DriveDetectorEventArgs e = new DriveDetectorEventArgs();
+                                var e = new DriveDetectorEventArgs();
                                 e.Drive = mCurrentDrive;        // drive which is hooked
                                 tempQuery(this, e);
 
@@ -425,10 +425,10 @@ namespace Dolinay
                                 //
                                 // Call the client event handler
                                 //
-                                DriveDetectorEventHandler tempDeviceRemoved = DeviceRemoved;
+                                var tempDeviceRemoved = DeviceRemoved;
                                 if (tempDeviceRemoved != null)
                                 {
-                                    DriveDetectorEventArgs e = new DriveDetectorEventArgs();
+                                    var e = new DriveDetectorEventArgs();
                                     e.Drive = c + ":\\";
                                     tempDeviceRemoved(this, e);
                                 }
@@ -500,7 +500,7 @@ namespace Dolinay
         /// <param name="drive">drive for which to register. </param>
         private void RegisterQuery(string drive)
         {
-            bool register = true;
+            var register = true;
 
             if (mFileToOpen == null)
             {
@@ -518,8 +518,8 @@ namespace Dolinay
                 // with the rest of the path.
                 if (mFileToOpen.Contains(":"))
                 {
-                    string tmp = mFileToOpen.Substring(3);
-                    string root = Path.GetPathRoot(drive);
+                    var tmp = mFileToOpen.Substring(3);
+                    var root = Path.GetPathRoot(drive);
                     mFileToOpen = Path.Combine(root, tmp);
                 }
                 else
@@ -569,7 +569,7 @@ namespace Dolinay
         /// <param name="dirPath">e.g. C:\\dir</param>
         private void RegisterForDeviceChange(string dirPath)
         {
-            IntPtr handle = Native.OpenDirectory(dirPath);
+            var handle = Native.OpenDirectory(dirPath);
             if (handle == IntPtr.Zero)
             {
                 mDeviceNotifyHandle = IntPtr.Zero;
@@ -579,7 +579,7 @@ namespace Dolinay
                 mDirHandle = handle;    // save handle for closing it when unregistering
 
             // Register for handle
-            DEV_BROADCAST_HANDLE data = new DEV_BROADCAST_HANDLE();
+            var data = new DEV_BROADCAST_HANDLE();
             data.dbch_devicetype = DBT_DEVTYP_HANDLE;
             data.dbch_reserved = 0;
             data.dbch_nameoffset = 0;
@@ -587,9 +587,9 @@ namespace Dolinay
             //data.dbch_eventguid = 0;
             data.dbch_handle = handle;
             data.dbch_hdevnotify = (IntPtr)0;
-            int size = Marshal.SizeOf(data);
+            var size = Marshal.SizeOf(data);
             data.dbch_size = size;
-            IntPtr buffer = Marshal.AllocHGlobal(size);
+            var buffer = Marshal.AllocHGlobal(size);
             Marshal.StructureToPtr(data, buffer, true);
 
             mDeviceNotifyHandle = Native.RegisterDeviceNotification(mRecipientHandle, buffer, 0);
@@ -607,7 +607,7 @@ namespace Dolinay
             if (register)
             {
                 // Register for handle
-                DEV_BROADCAST_HANDLE data = new DEV_BROADCAST_HANDLE();
+                var data = new DEV_BROADCAST_HANDLE();
                 data.dbch_devicetype = DBT_DEVTYP_HANDLE;
                 data.dbch_reserved = 0;
                 data.dbch_nameoffset = 0;
@@ -615,9 +615,9 @@ namespace Dolinay
                 //data.dbch_eventguid = 0;
                 data.dbch_handle = fileHandle.DangerousGetHandle(); //Marshal. fileHandle; 
                 data.dbch_hdevnotify = (IntPtr)0;
-                int size = Marshal.SizeOf(data);
+                var size = Marshal.SizeOf(data);
                 data.dbch_size = size;
-                IntPtr buffer = Marshal.AllocHGlobal(size);
+                var buffer = Marshal.AllocHGlobal(size);
                 Marshal.StructureToPtr(data, buffer, true);
 
                 mDeviceNotifyHandle = Native.RegisterDeviceNotification(mRecipientHandle, buffer, 0);
@@ -661,12 +661,12 @@ namespace Dolinay
         private static char DriveMaskToLetter(int mask)
         {
             char letter;
-            string drives = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            var drives = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             // 1 = A
             // 2 = B
             // 4 = C...
-            int cnt = 0;
-            int pom = mask / 2;     
+            var cnt = 0;
+            var pom = mask / 2;     
             while (pom != 0)
             {
                 // while there is any bit set in the mask
@@ -759,7 +759,7 @@ namespace Dolinay
             static public IntPtr OpenDirectory(string dirPath)
             {
                 // open the existing file for reading          
-                IntPtr handle = CreateFile(
+                var handle = CreateFile(
                       dirPath,
                       GENERIC_READ,
                       FILE_SHARE_READ | FILE_SHARE_WRITE,

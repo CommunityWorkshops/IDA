@@ -29,8 +29,8 @@ namespace IDA.Forms.Wizards
         private void LoadFirstPlatformVersions()
         {
             // folder for the first Platform is platforms[0]
-            string[] platforms = Directory.GetDirectories("Templates\\Platforms\\");
-            string[] versions = Directory.GetDirectories(Path.Combine(platforms[0], "versions"));
+            var platforms = Directory.GetDirectories("Templates\\Platforms\\");
+            var versions = Directory.GetDirectories(Path.Combine(platforms[0], "versions"));
             LoadVersions(versions);
         }
 
@@ -80,7 +80,7 @@ namespace IDA.Forms.Wizards
             flpVersion.Controls.Clear();
             try
             {
-                string[] versions = Directory.GetDirectories("Templates\\Platforms\\" + Path.Combine(name, "versions"));
+                var versions = Directory.GetDirectories("Templates\\Platforms\\" + Path.Combine(name, "versions"));
                 LoadVersions(versions);
 
             }
@@ -98,7 +98,7 @@ namespace IDA.Forms.Wizards
         {
             foreach (var folder in versions)
             {
-                NewProjectSelectionControl npsc = new NewProjectSelectionControl();
+                var npsc = new NewProjectSelectionControl();
                 npsc.ThisIsSelected += Npsc_ThisIsSelected;
                 npsc.Name = folder.Replace("\\", " ").Split(' ')[folder.Replace("\\", " ").Split(' ').Length - 1].Trim(); //TODO: FIX THIS Horrible :P
 
@@ -131,10 +131,10 @@ namespace IDA.Forms.Wizards
         private void LoadPlatforms()
         {
             // Load images from the Templates Platform folders
-            string[] platforms = Directory.GetDirectories("Templates\\Platforms\\");
+            var platforms = Directory.GetDirectories("Templates\\Platforms\\");
             foreach (var folder in platforms)
             {
-                NewProjectSelectionControl npsc = new NewProjectSelectionControl();
+                var npsc = new NewProjectSelectionControl();
                 npsc.ThisIsSelected += Npsc_PlatformIsSelected;
                 npsc.Name = folder.Replace("\\", " ").Split(' ')[folder.Replace("\\", " ").Split(' ').Length - 1].Trim(); //TODO: FIX THIS Horrible :P
 

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmNewProject));
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmNewProject));
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.flpPlatform = new System.Windows.Forms.FlowLayoutPanel();

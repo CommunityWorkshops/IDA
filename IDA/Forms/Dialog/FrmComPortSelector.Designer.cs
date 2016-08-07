@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmComPortSelector));
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmComPortSelector));
             this.btnUse = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.dgvComPorts = new System.Windows.Forms.DataGridView();

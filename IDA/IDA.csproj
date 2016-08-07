@@ -142,12 +142,6 @@
     <Compile Include="Forms\Dockable\FrmProjectExplorer.Designer.cs">
       <DependentUpon>FrmProjectExplorer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Dockable\FrmScintillaTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Dockable\FrmScintillaTest.Designer.cs">
-      <DependentUpon>FrmScintillaTest.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Dockable\FrmFileEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,9 +203,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dockable\FrmProjectExplorer.resx">
       <DependentUpon>FrmProjectExplorer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Dockable\FrmScintillaTest.resx">
-      <DependentUpon>FrmScintillaTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dockable\FrmFileEditor.resx">
       <DependentUpon>FrmFileEditor.cs</DependentUpon>
@@ -6596,34 +6587,31 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Settings\User.dat" />
-    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\Icons\led.png">
+    <Content Include="Templates\Platforms\Arduino\Versions\Uno\Components\Internal\Pin13\pin13.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\Icons\Serial-port.png">
+    <Content Include="Templates\Platforms\Arduino\Versions\Uno\Components\Internal\SerialOutput\SerialOutput.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\SerialInput\Digital\layout.png">
+    <Content Include="Templates\Platforms\Arduino\Versions\Uno\Components\Internal\SerialInput\Digital\layout.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\SerialInput\Digital\schematic.png">
+    <Content Include="Templates\Platforms\Arduino\Versions\Uno\Components\Internal\SerialInput\Digital\schematic.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\SerialOutput\Analog\layout.png">
+    <Content Include="Templates\Platforms\Arduino\Versions\Uno\Components\Internal\SerialOutput\Analog\layout.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\SerialOutput\Analog\schematic.png">
+    <Content Include="Templates\Platforms\Arduino\Versions\Uno\Components\Internal\SerialOutput\Analog\schematic.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Platforms\Arduino\Components\InternalComponents.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="Templates\Platforms\Arduino\Versions\Uno\Components\Internal\SerialOutput.icl">
+    <None Include="Templates\Platforms\Arduino\Versions\Uno\Components\Internal\SerialOutput\SerialOutput.icl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Templates\Platforms\Arduino\Versions\Uno\Components\Internal\Pin13.icl">
+    <None Include="Templates\Platforms\Arduino\Versions\Uno\Components\Internal\Pin13\Pin13.icl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Templates\Platforms\Arduino\Versions\Uno\Components\Internal\SerialInput.icl">
+    <None Include="Templates\Platforms\Arduino\Versions\Uno\Components\Internal\SerialInput\SerialInput.icl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -7004,10 +6992,13 @@
     <Content Include="Templates\Platforms\Arduino\Versions\Mega\Images\Version.PNG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\SerialInput\Analog\layout.png">
+    <Content Include="Templates\Platforms\Arduino\Versions\Uno\Components\Internal\SerialInput\Analog\layout.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Platforms\Arduino\Components\Images\Internal\SerialInput\Analog\schematic.png">
+    <Content Include="Templates\Platforms\Arduino\Versions\Uno\Components\Internal\SerialInput\Analog\schematic.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Platforms\Arduino\Versions\Uno\Components\Internal\SerialInput\SerialInput.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Platforms\Arduino\Versions\Uno\Images\Version.jpg">
@@ -7062,10 +7053,6 @@
     <ProjectReference Include="..\..\..\..\Documents\Dependencies\FastColoredTextBox\FastColoredTextBox.csproj">
       <Project>{6dd14a85-ccfc-4774-bd26-0f5772512319}</Project>
       <Name>FastColoredTextBox</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Documents\Dependencies\ScintillaNET-master\ScintillaNET-master\src\ScintillaNET\ScintillaNET.csproj">
-      <Project>{22AE2386-60F1-476E-9303-61CDB0AAC4CF}</Project>
-      <Name>ScintillaNET</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\Documents\Dependencies\dockpanelsuite-master\WinFormsUI\ThemeVS2013Blue.csproj">
       <Project>{245E07F6-10D5-4CFA-B003-0DEB06B223DA}</Project>

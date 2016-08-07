@@ -32,7 +32,7 @@ namespace IDA.Controllers.IO
 
         private static List<string> LoadCodeTemplate()
         {
-            List<string> codeTemplate = new List<string>();
+            var codeTemplate = new List<string>();
 
             FileStream fs = null;
             StreamReader sr = null;
@@ -44,7 +44,7 @@ namespace IDA.Controllers.IO
 
                 while (!sr.EndOfStream)
                 {
-                    string line = sr.ReadLine();
+                    var line = sr.ReadLine();
                     codeTemplate.Add(line);
                 }
 

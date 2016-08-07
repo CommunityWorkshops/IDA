@@ -15,9 +15,9 @@ namespace IDA.Controllers.IO
 
         internal List<string> LoadSource()
         {
-            List<string> lines = new List<string>();
-            FileStream fs = new FileStream(projSourceName, FileMode.Open, FileAccess.Read, FileShare.Read);
-            StreamReader sr = new StreamReader(fs);
+            var lines = new List<string>();
+            var fs = new FileStream(projSourceName, FileMode.Open, FileAccess.Read, FileShare.Read);
+            var sr = new StreamReader(fs);
 
             while(!sr.EndOfStream)
             {

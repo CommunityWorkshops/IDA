@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOpenProject));
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOpenProject));
             this.flpPreviousProjects = new System.Windows.Forms.FlowLayoutPanel();
             this.btnOpen = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();

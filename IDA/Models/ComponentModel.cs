@@ -16,23 +16,23 @@ namespace IDA.Models
             Digital
         };
 
-        public string componentName { get; set; }
-        public string componentDescription { get; set; }
-        public List<Options> componentOptions { get; set; }
-        public Image componentSchematic { get; set; }
-        public Image componentLayout { get; set; }
-        public List<string> componentGlobal { get; set; }
-        public List<string> componentAnalogGlobal { get; set; }
-        public List<string> componentDigitalGlobal { get; set; }
-        public List<string> componentSetup { get; set; }
-        public List<string> componentAnalogSetup { get; set; }
-        public List<string> componentDigitalSetup { get; set; }
-        public List<string> componentLoop { get; set; }
-        public List<string> componentAnalogLoop { get; set; }
-        public List<string> componentDigitalLoop { get; set; }
+        public string ComponentName { get; set; }
+        public string ComponentDescription { get; set; }
+        public List<Options> ComponentOptions = new List<Options>(); 
+        public Image ComponentSchematic { get; set; }
+        public Image ComponentLayout { get; set; }
+        public List<string> ComponentGlobal = new List<string>();
+        public List<string> ComponentAnalogGlobal = new List<string>();
+        public List<string> ComponentDigitalGlobal = new List<string>();
+        public List<string> ComponentSetup = new List<string>();
+        public List<string> ComponentAnalogSetup = new List<string>();
+        public List<string> ComponentDigitalSetup = new List<string>();
+        public List<string> ComponentLoop = new List<string>();
+        public List<string> ComponentAnalogLoop = new List<string>();
+        public List<string> ComponentDigitalLoop = new List<string>();
 
         //version 1.03
-        public Image componentIcon { get; set; }
+        public Image ComponentIcon { get; set; }
 
 
     }

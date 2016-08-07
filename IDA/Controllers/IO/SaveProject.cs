@@ -1,6 +1,5 @@
 ﻿using IDA.Forms.Dockable;
 using IDA.Models;
-using ScintillaNET;
 using System;
 using System.Collections.Generic;
 using System.IO;

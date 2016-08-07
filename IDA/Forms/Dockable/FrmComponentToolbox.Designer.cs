@@ -34,20 +34,23 @@
             this.tbSearch = new System.Windows.Forms.ToolStripTextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.flpInternalComponents = new System.Windows.Forms.FlowLayoutPanel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblNumberOfInternalComponents = new System.Windows.Forms.ToolStripStatusLabel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.flpInternalComponents = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblDescription = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -95,6 +98,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.flpInternalComponents);
+            this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Controls.Add(this.statusStrip1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
@@ -103,6 +107,29 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Internal Components";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.lblNumberOfInternalComponents});
+            this.statusStrip1.Location = new System.Drawing.Point(3, 308);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(346, 22);
+            this.statusStrip1.TabIndex = 0;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(76, 17);
+            this.toolStripStatusLabel1.Text = "Components";
+            // 
+            // lblNumberOfInternalComponents
+            // 
+            this.lblNumberOfInternalComponents.Name = "lblNumberOfInternalComponents";
+            this.lblNumberOfInternalComponents.Size = new System.Drawing.Size(13, 17);
+            this.lblNumberOfInternalComponents.Text = "0";
             // 
             // groupBox2
             // 
@@ -123,16 +150,15 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(346, 372);
             this.flowLayoutPanel2.TabIndex = 0;
             // 
-            // statusStrip1
+            // panel1
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.lblNumberOfInternalComponents});
-            this.statusStrip1.Location = new System.Drawing.Point(3, 308);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(346, 22);
-            this.statusStrip1.TabIndex = 0;
-            this.statusStrip1.Text = "statusStrip1";
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.lblDescription);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(3, 278);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(346, 30);
+            this.panel1.TabIndex = 1;
             // 
             // flpInternalComponents
             // 
@@ -140,20 +166,17 @@
             this.flpInternalComponents.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpInternalComponents.Location = new System.Drawing.Point(3, 16);
             this.flpInternalComponents.Name = "flpInternalComponents";
-            this.flpInternalComponents.Size = new System.Drawing.Size(346, 292);
-            this.flpInternalComponents.TabIndex = 1;
+            this.flpInternalComponents.Size = new System.Drawing.Size(346, 262);
+            this.flpInternalComponents.TabIndex = 2;
             // 
-            // toolStripStatusLabel1
+            // lblDescription
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(76, 17);
-            this.toolStripStatusLabel1.Text = "Components";
-            // 
-            // lblNumberOfInternalComponents
-            // 
-            this.lblNumberOfInternalComponents.Name = "lblNumberOfInternalComponents";
-            this.lblNumberOfInternalComponents.Size = new System.Drawing.Size(13, 17);
-            this.lblNumberOfInternalComponents.Text = "0";
+            this.lblDescription.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.lblDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDescription.Location = new System.Drawing.Point(0, 0);
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Size = new System.Drawing.Size(346, 30);
+            this.lblDescription.TabIndex = 0;
             // 
             // FrmComponentToolbox
             // 
@@ -174,9 +197,10 @@
             this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,9 +215,11 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.FlowLayoutPanel flpInternalComponents;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblNumberOfInternalComponents;
+        private System.Windows.Forms.FlowLayoutPanel flpInternalComponents;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblDescription;
     }
 }

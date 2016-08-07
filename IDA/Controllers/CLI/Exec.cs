@@ -20,8 +20,8 @@ namespace IDA.Controllers.CLI
 
         internal void ExecuteCompiler()
         {
-            ProcessStartInfo psi = new ProcessStartInfo();
-            Process proc = new Process();
+            var psi = new ProcessStartInfo();
+            var proc = new Process();
 
             psi.WorkingDirectory = Path.Combine(System.Reflection.Assembly.GetExecutingAssembly().Location.ToLower().Replace("ida.exe",""), @"Binn\Compilers\Arduino");
             Log("Current Working Directory: " + psi.WorkingDirectory);
@@ -94,8 +94,8 @@ namespace IDA.Controllers.CLI
         {
             // C:\Program Files (x86)\Arduino\hardware\tools\avr/bin/avrdude -CC:\Program Files (x86)\Arduino\hardware\tools\avr/etc/avrdude.conf -v -patmega328p -carduino -PCOM3 -b115200 -D -Uflash:w:C:\Users\Dave\AppData\Local\Temp\build9c9ef3bdfe2fccb480bc6e4bac749e41.tmp/Blink.ino.hex:i 
 
-            ProcessStartInfo psi = new ProcessStartInfo();
-            Process serialWriterProc = new Process();
+            var psi = new ProcessStartInfo();
+            var serialWriterProc = new Process();
 
             psi.WorkingDirectory = Path.Combine(System.Reflection.Assembly.GetExecutingAssembly().Location.ToLower().Replace("ida.exe", ""), @"Binn\Compilers\Arduino\hardware\tools\avr\bin");
             var configDirectory = Path.Combine(System.Reflection.Assembly.GetExecutingAssembly().Location.ToLower().Replace("ida.exe", ""), @"Binn\Compilers\Arduino\hardware\tools\avr\etc"); ;

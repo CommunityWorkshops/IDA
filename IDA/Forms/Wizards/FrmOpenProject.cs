@@ -38,7 +38,7 @@ namespace IDA.Forms.Wizards
                 var ConfigurationPath = Path.Combine(project, configName);
                 if (File.Exists(ConfigurationPath))
                 {
-                    OpenProjectSelectionControl psc = new IDA.Controls.OpenProjectSelectionControl();
+                    var psc = new IDA.Controls.OpenProjectSelectionControl();
                     psc.SelectedProject += Psc_SelectedProject;
                     psc.DoLog += Psc_DoLog;
                     psc.ProjectSelection(GetPlatform(ConfigurationPath), project);
@@ -54,7 +54,7 @@ namespace IDA.Forms.Wizards
 
         private string GetPlatform(string project)
         {
-            Controllers.IO.OpenProject op = new Controllers.IO.OpenProject();
+            var op = new Controllers.IO.OpenProject();
             op.Log += Op_Log;
             return op.LoadProjectPlatform(project);
         }

@@ -8,7 +8,7 @@ namespace IDA.Controllers.Hardware
 
       public  static List<UsbDeviceInfo> GetUsbDevices()
         {
-            List<UsbDeviceInfo> devices = new List<UsbDeviceInfo>();
+            var devices = new List<UsbDeviceInfo>();
 
             var searcher = new ManagementObjectSearcher(@"Select * From Win32_SerialPort");
 
@@ -45,7 +45,7 @@ namespace IDA.Controllers.Hardware
         // Can be changed later.
         public static string GetUsbDevice()
         {
-            List<UsbDeviceInfo> devices = new List<UsbDeviceInfo>();
+            var devices = new List<UsbDeviceInfo>();
 
             var searcher = new ManagementObjectSearcher(@"Select * From Win32_SerialPort");
             foreach (var device in searcher.Get())

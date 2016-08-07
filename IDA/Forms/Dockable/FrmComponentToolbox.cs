@@ -17,7 +17,7 @@ namespace IDA.Forms.Dockable
     public partial class FrmComponentToolbox : DockContent
     {
 
-        public delegate void LogHandler(string name);
+        public delegate void LogHandler(string message);
         public event LogHandler FrmComponentToolboxLog;
 
         public FrmComponentToolbox()
@@ -27,20 +27,37 @@ namespace IDA.Forms.Dockable
 
         public void LoadComponents(List<ComponentModel> cmList)
         {
-            foreach(ComponentModel cm in cmList)
+            foreach(var cm in cmList)
             {
-                ComponentSelectionControl csc = new ComponentSelectionControl();
+                var csc = new ComponentSelectionControl();
                 csc.ComponentTemplateLoaderSelection += Csc_ComponentTemplateLoaderSelection;
-                csc.SetIcon(cm.componentIcon);
-                csc.SetName(cm.componentName);
+                csc.SelectedComponent += Csc_SelectedComponent;
+                csc.SetIcon(cm.ComponentIcon);
+                csc.SetName(cm.ComponentName);
+                csc.Tag = cm; // Connect the ComponentModel to the Control
                 flpInternalComponents.Controls.Add(csc);
                 lblNumberOfInternalComponents.Text = (Convert.ToInt16(lblNumberOfInternalComponents.Text) + 1).ToString();
+                csc.ResetHighlightColor();
             }
         }
 
-        private void Csc_ComponentTemplateLoaderSelection(string SelectedComponent)
+        private void Csc_SelectedComponent(ComponentSelectionControl csc)
         {
-            FrmComponentToolboxLog?.Invoke(SelectedComponent);
+            foreach (ComponentSelectionControl cc in flpInternalComponents.Controls)
+            {
+                if(cc == csc)
+                    cc.SelectHighlightColor();
+                else
+                    cc.ResetHighlightColor();
+
+                cc.Refresh();
+            }
+        }
+
+        private void Csc_ComponentTemplateLoaderSelection(string selectedComponent)
+        {            
+           Log(selectedComponent);
+            lblDescription.Text = selectedComponent;
         }
 
         private void Ctl_ComponentTemplateLoaderLog(string message)
@@ -52,6 +69,10 @@ namespace IDA.Forms.Dockable
         {
             FrmComponentToolboxLog?.Invoke(message);
         }
-                
+
+        private void flpInternalComponents_MouseDown(object sender, MouseEventArgs e)
+        {
+           // button1.DoDragDrop(button1.Text, DragDropEffects.Copy | DragDropEffects.Move);
+        }
     }
 }

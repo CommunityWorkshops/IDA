@@ -41,6 +41,7 @@
             this.pbIcon.Location = new System.Drawing.Point(3, 3);
             this.pbIcon.Name = "pbIcon";
             this.pbIcon.Size = new System.Drawing.Size(48, 42);
+            this.pbIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbIcon.TabIndex = 0;
             this.pbIcon.TabStop = false;
             this.pbIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbIcon_MouseClick);
@@ -66,6 +67,7 @@
             this.Controls.Add(this.pbIcon);
             this.Name = "ComponentSelectionControl";
             this.Size = new System.Drawing.Size(54, 71);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ComponentSelectionControl_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).EndInit();
             this.ResumeLayout(false);
 

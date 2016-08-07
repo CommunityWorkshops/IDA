@@ -46,8 +46,15 @@ namespace IDA
             DeserialiseContent();
             SplashFour();
             LoadUser();
+            SplashFive();
             DisplaySelectedComPort();
+            SplashSix();
+            ToolBoxEventSubscription();
         }
+
+        
+
+       
 
         #region SPLASH
 
@@ -71,6 +78,16 @@ namespace IDA
         private void SplashFour()
         {
             _frmSplash.SetAction("Loading User Settings");
+        }
+
+        private void SplashFive()
+        {
+            _frmSplash.SetAction("Setting Serial Communication Port");
+        }
+
+        private void SplashSix()
+        {
+            _frmSplash.SetAction("Subscribing to Toolbox Events");
         }
         #endregion
 
@@ -131,7 +148,7 @@ namespace IDA
 
         private void CloseDocuments()
         {
-            foreach (IDockContent document in dockPanel1.DocumentsToArray())
+            foreach (var document in dockPanel1.DocumentsToArray())
             {
                 document.DockHandler.Close();
             }
@@ -249,6 +266,10 @@ namespace IDA
             Log(message);
         }
 
+        private void _frmToolbox_FrmComponentToolboxLog(string message)
+        {
+            Log(message);
+        }
         #endregion
 
         #region New Project
@@ -266,7 +287,7 @@ namespace IDA
         private void NewProject()
         {
             Log("New Project");
-            FrmNewProject newProject = new FrmNewProject();
+            var newProject = new FrmNewProject();
             newProject.CreateNewProject += NewProject_CreateNewProject;
             newProject.ShowDialog();
             newProject.CreateNewProject -= NewProject_CreateNewProject;
@@ -291,7 +312,7 @@ namespace IDA
 
             // Save Project Configuration File
             Log("Saving Configuration File");
-            SaveProject sp = new SaveProject();
+            var sp = new SaveProject();
             sp.OnLog += Sp_Log;
             sp.SaveProjectConfiguration();
             sp.OnLog -= Sp_Log;
@@ -305,14 +326,15 @@ namespace IDA
         #region Code Editor
         private void OpenFileEditor(string name)
         {
-            var _frmFileEditor = new FrmFileEditor(name);
+            var frmFileEditor = new FrmFileEditor(name);
 
-            _frmFileEditor.Show(dockPanel1, DockState.Document);
-            _frmFileEditor.EditorDirty += _frmFileEditor_EditorDirty;
-            _frmFileEditor.EditorClean += _frmFileEditor_EditorClean;
-            _frmFileEditor.Parent.Text = GetProjectName(name);
-            _frmFileEditor.Tag = name;
-            _frmFileEditor.Open(name);
+            frmFileEditor.Show(dockPanel1, DockState.Document);
+            frmFileEditor.EditorDirty += _frmFileEditor_EditorDirty;
+            frmFileEditor.EditorClean += _frmFileEditor_EditorClean;
+            frmFileEditor.FrmFileEditorLog += _frmFileEditor_FrmFileEditorLog;
+            frmFileEditor.Parent.Text = GetProjectName(name);
+            frmFileEditor.Tag = name;
+            frmFileEditor.Open(name);
 
             //// Load Appropriate Keywords For Code Completion
             //Log("Load Code Completion");
@@ -326,10 +348,16 @@ namespace IDA
             //_frmCodeEditor.AddPlatformCode(LoadDefaultPlatformCode.Load());
         }
 
+        private void _frmFileEditor_FrmFileEditorLog(string message)
+        {
+            Log(message);
+        }
+
         private void _frmFileEditor_EditorClean(string name)
         {
-            foreach (Control ctrl in dockPanel1.Documents)
+            foreach (var dockContent in dockPanel1.Documents)
             {
+                var ctrl = (Control) dockContent;
                 try
                 {
                     if (ctrl.Tag.ToString() == name)
@@ -342,14 +370,14 @@ namespace IDA
                 {
                     Log("Error " + ex.Message);
                 }
-
             }
         }
 
         private void _frmFileEditor_EditorDirty(string name)
         {
-            foreach (Control ctrl in dockPanel1.Documents)
+            foreach (var dockContent in dockPanel1.Documents)
             {
+                var ctrl = (Control) dockContent;
                 try
                 {
                     if (ctrl.Tag.ToString() == name)
@@ -362,7 +390,6 @@ namespace IDA
                 {
                     Log("Error: " + ex.Message);
                 }
-
             }
         }
         #endregion
@@ -371,7 +398,7 @@ namespace IDA
         private void licenseEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Log("Loading Licence Editor");
-            FrmLicenceEditor newLicenceEditor = new FrmLicenceEditor();
+            var newLicenceEditor = new FrmLicenceEditor();
             newLicenceEditor.ShowDialog();
         }
         #endregion
@@ -388,7 +415,7 @@ namespace IDA
         private void userEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Log("Loading User Editor");
-            FrmUserEditor userEditor = new FrmUserEditor();
+            var userEditor = new FrmUserEditor();
             userEditor.ShowDialog();
         }
 
@@ -406,7 +433,7 @@ namespace IDA
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Log("Com port Selector Opening");
-            FrmComPortSelector cps = new FrmComPortSelector();
+            var cps = new FrmComPortSelector();
             cps.ShowDialog();
             toolStripMenuItemComPort.Text = "Port " + CurrentProjectModel.ComPort;
         }
@@ -421,7 +448,7 @@ namespace IDA
             {
                 if (ctrl.Tag.ToString() == CurrentProjectModel.Name)
                 {
-                    FrmFileEditor fce = (FrmFileEditor)ctrl;
+                    var fce = (FrmFileEditor)ctrl;
                     fce.Save();
                     ctrl.Text = CurrentProjectModel.Name;
                     saveToolStripButton.Enabled = false;
@@ -432,7 +459,7 @@ namespace IDA
 
             // compile the transformed files
             Log("Starting Compilation");
-            IDA.Controllers.CLI.Exec exec = new Controllers.CLI.Exec();
+            var exec = new Controllers.CLI.Exec();
             exec.Log += Exec_Log;
             exec.CompilationCompleted += Exec_CompilationCompleted;
             Log("Starting Compiler");
@@ -443,7 +470,7 @@ namespace IDA
         private void Exec_CompilationCompleted()
         {
             Log("Starting Serial Writer");
-            Controllers.CLI.Exec exec = new Controllers.CLI.Exec();
+            var exec = new Controllers.CLI.Exec();
             exec.Log += Exec_Log;
             Log("Writing Embedded Code");
             exec.ExecuteSerialWriter();
@@ -464,7 +491,7 @@ namespace IDA
             {
                 if(dockPanel1.ActiveDocument == ctrl)
                 {                 
-                    FrmFileEditor fce = (FrmFileEditor)ctrl;
+                    var fce = (FrmFileEditor)ctrl;
                     fce.Save();
                     ctrl.Text = CurrentProjectModel.Name;
                     saveToolStripButton.Enabled = false;
@@ -515,7 +542,7 @@ namespace IDA
         /// <param name="e"></param>
         private void projectExplorerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmProjectExplorer pe = new Forms.Dockable.FrmProjectExplorer();
+            var pe = new Forms.Dockable.FrmProjectExplorer();
             ProjectExplorerEvents(pe);
             pe.Show(dockPanel1, DockState.DockRight);
         }
@@ -528,26 +555,27 @@ namespace IDA
         private void openToolStripButton_Click(object sender, EventArgs e)
         {
             // If a new project is opened... do we Save and Close this project? For now we will.
-            FrmOpenProject op = new Forms.Wizards.FrmOpenProject();
+            var op = new Forms.Wizards.FrmOpenProject();
             op.Log += Op_Log;
-            DialogResult dr = op.ShowDialog();
+            var dr = op.ShowDialog();
             if (dr == DialogResult.OK)
             {
                 if (!string.IsNullOrEmpty(CurrentProjectModel.Name))
                 {
-                    SaveProject sp = new SaveProject();
+                    var sp = new SaveProject();
 
                     // Ask before saving.
-                    DialogResult dresult = MessageBox.Show("Save Project?", "Save Project", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                    var dresult = MessageBox.Show("Save Project?", "Save Project", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                     if (dresult == DialogResult.Yes)
                     {
-                        foreach (Control ctrl in dockPanel1.Documents)
+                        foreach (var dockContent in dockPanel1.Documents)
                         {
+                            var ctrl = (Control) dockContent;
                             try
                             {
                                 if (ctrl.Tag.ToString() == CurrentProjectModel.Name)
                                 {
-                                    FrmFileEditor fce = (FrmFileEditor)ctrl;
+                                    var fce = (FrmFileEditor)ctrl;
                                     fce.Save();
                                     ctrl.Text = CurrentProjectModel.Name;
                                     saveToolStripButton.Enabled = false;
@@ -557,7 +585,6 @@ namespace IDA
                             {
                                 Log("Error: " + ex2.Message);
                             }
-
                         }
                         sp.SaveProjectConfiguration();
                     }
@@ -566,26 +593,25 @@ namespace IDA
                 }
 
                 // Now open the project
-                if (!string.IsNullOrEmpty(op.ProjectBasePath))
-                {
-                    CurrentProjectModel.ProjectBasePath =  op.ProjectBasePath.Replace(op.ProjectBasePath.Split('\\')[op.ProjectBasePath.Split('\\').Length-1],"");
-                    CurrentProjectModel.ProjectConfigurationPath = op.ProjectBasePath;
-                    OpenProject oProj = new OpenProject();
-                    oProj.Log += OProj_Log;
-                    oProj.LoadProjectConfiguration();
-                    FrmFileEditor codeEditor = new FrmFileEditor();
-                    codeEditor.Show(dockPanel1, DockState.Document);
-                    codeEditor.EditorDirty += _frmFileEditor_EditorDirty;
-                    codeEditor.EditorClean += _frmFileEditor_EditorClean;
-                    codeEditor.Tag = CurrentProjectModel.ProjectBasePath;
-                    codeEditor.OpenProjectMain(CurrentProjectModel.ProjectBasePath);
-                    codeEditor.Parent.Text =  CurrentProjectModel.Name;
-                    // Load Project Explorer
-                    _frmProjectExplorer.LoadProject(CurrentProjectModel.ProjectBasePath);
-                    ComponentTemplateLoader ctl = new Controllers.IO.ComponentTemplateLoader();
-                    ctl.ComponentTemplateLoaderLog += Ctl_ComponentTemplateLoaderLog;                  
-                    _frmToolbox.LoadComponents(ctl.LoadComponents());                    
-                }
+                if (string.IsNullOrEmpty(op.ProjectBasePath)) return;
+                CurrentProjectModel.ProjectBasePath =  op.ProjectBasePath.Replace(op.ProjectBasePath.Split('\\')[op.ProjectBasePath.Split('\\').Length-1],"");
+                CurrentProjectModel.ProjectConfigurationPath = op.ProjectBasePath;
+                var oProj = new OpenProject();
+                oProj.Log += OProj_Log;
+                oProj.LoadProjectConfiguration();
+                var codeEditor = new FrmFileEditor();
+                codeEditor.Show(dockPanel1, DockState.Document);
+                codeEditor.EditorDirty += _frmFileEditor_EditorDirty;
+                codeEditor.EditorClean += _frmFileEditor_EditorClean;
+                codeEditor.FrmFileEditorLog += _frmFileEditor_FrmFileEditorLog;
+                codeEditor.Tag = CurrentProjectModel.ProjectBasePath;
+                codeEditor.OpenProjectMain(CurrentProjectModel.ProjectBasePath);
+                codeEditor.Parent.Text =  CurrentProjectModel.Name;
+                // Load Project Explorer
+                _frmProjectExplorer.LoadProject(CurrentProjectModel.ProjectBasePath);
+                var ctl = new Controllers.IO.ComponentTemplateLoader();
+                ctl.ComponentTemplateLoaderLog += Ctl_ComponentTemplateLoaderLog;                  
+                _frmToolbox.LoadComponents(ctl.LoadComponents());
             }
         }
 
@@ -602,6 +628,10 @@ namespace IDA
             _frmToolbox.Show(dockPanel1, DockState.DockLeft);
         }
 
+        private void ToolBoxEventSubscription()
+        {
+            _frmToolbox.FrmComponentToolboxLog += _frmToolbox_FrmComponentToolboxLog;
+        }
         #endregion
 
 

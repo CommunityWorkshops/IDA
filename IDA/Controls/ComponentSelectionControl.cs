@@ -7,17 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IDA.Models;
 
 namespace IDA.Controls
 {
     public partial class ComponentSelectionControl : UserControl
     {
-        public delegate void SelectionHandler(string SelectedComponent);
+        public delegate void SelectionHandler(string selectedComponent);
         public event SelectionHandler ComponentTemplateLoaderSelection;
+        public delegate void SelectedComponentHandler(ComponentSelectionControl csc);
+        public event SelectedComponentHandler SelectedComponent;
+
+        private Color bcolorDefaultColor = Control.DefaultBackColor;
 
         public ComponentSelectionControl()
         {
             InitializeComponent();
+
         }
 
         public void SetIcon(Image icon)
@@ -32,7 +38,27 @@ namespace IDA.Controls
 
         private void pbIcon_MouseClick(object sender, MouseEventArgs e)
         {
-            ComponentTemplateLoaderSelection?.Invoke(lblName.Text + " has been selected in the Toolbox");
+            
+            var cm = Tag as ComponentModel;
+            if (cm != null) ComponentTemplateLoaderSelection?.Invoke(cm.ComponentDescription);
+            SelectedComponent?.Invoke(this);
+        }
+
+        private void ComponentSelectionControl_MouseDown(object sender, MouseEventArgs e)
+        {
+           
+            var cm = Tag as ComponentModel;
+            if (cm != null) DoDragDrop(this, DragDropEffects.Copy | DragDropEffects.Move);
+        }
+
+        public void ResetHighlightColor()
+        {
+            lblName.BackColor = bcolorDefaultColor;
+        }
+
+        public void SelectHighlightColor()
+        {
+            lblName.BackColor = Color.Aqua;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace IDA.Forms.Dialog
 
             dgvComPorts.SelectionChanged += DgvComPorts_SelectionChanged;
 
-            List<Usb.UsbDeviceInfo> ports = Usb.GetUsbDevices().ToList();
+            var ports = Usb.GetUsbDevices().ToList();
 
 
             if (ports.Count == 0)
@@ -28,9 +28,9 @@ namespace IDA.Forms.Dialog
             }
 
 
-            foreach (Usb.UsbDeviceInfo port in ports)
+            foreach (var port in ports)
             {
-                DataGridViewRow row = (DataGridViewRow)dgvComPorts.Rows[0].Clone();
+                var row = (DataGridViewRow)dgvComPorts.Rows[0].Clone();
                 row.Cells[0].Value = port.DeviceId;
                 if (DeviceId == null) DeviceId = port.DeviceId;
                 row.Cells[1].Value = port.Description;
